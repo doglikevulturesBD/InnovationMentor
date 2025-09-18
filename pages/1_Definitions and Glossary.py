@@ -24,7 +24,7 @@ glossary = {
     "Return on Investment (ROI)": "A measure of profitability calculated as (gain from investment - cost) / cost.",
     "Stakeholders": "Individuals or groups with an interest or stake in the success of a project or business.",
     "Technology Readiness Level (TRL)": "A 1–9 scale indicating how mature a technology is, from basic concept (TRL 1) to fully commercial (TRL 9).",
-    "Value Proposition": "The unique benefits and value a product or service offers to its target customers."
+    "Value Proposition": "The unique benefits and value a product or service offers to its target customers.",
     "IRR (Internal Rate of Return)": "The average annual rate of return earned on an investment, based on its cashflows. It represents the discount rate at which NPV = 0.",
     "NPV (Net Present Value)": "The value of future cashflows in today's money, after discounting by the cost of capital. A positive NPV means the project is expected to create value.",
     "ROI (Return on Investment)": "A simple profitability measure: (Gain - Cost) / Cost, showing how much profit is earned for every rand invested.",
