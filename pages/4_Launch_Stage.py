@@ -1,95 +1,58 @@
+import numpy as np
 import streamlit as st
 
-st.header("🚀 Launch Stage")
-st.subheader("📦 Commercialisation Strategies")
+st.subheader("📊 Financial Metrics Demo Calculators")
 st.markdown("""
-This section introduces the core commercialisation pathways and planning elements innovators need 
-when preparing to take their technology or product to market.
-
-Expand each category to explore key concepts. You can gradually add resources, templates, 
-and videos from your Obsidian notes here.
+Understand key investment metrics used by funders, investors, and decision-makers.  
+Use the simple tools below to test how each metric responds to changes in your inputs.
 """)
 
-# -------------------------
-# 1. Product & Service Models
-# -------------------------
-with st.expander("🏗️ Product & Service Models"):
-    st.markdown("""
-**Overview:** Decide how your innovation will create and deliver value.
+# ----------------
+# ROI
+# ----------------
+with st.expander("💰 ROI (Return on Investment)"):
+    gain = st.number_input("Total Revenue (R)", value=200000, key="roi_gain")
+    cost = st.number_input("Total Cost (R)", value=100000, key="roi_cost")
+    if cost > 0:
+        roi = (gain - cost) / cost * 100
+        st.success(f"**ROI = {roi:.2f}%**\n\nROI shows how much profit you earn for every R1 invested.")
 
-**Examples:**
-- Start-up commercialisation — building a new venture
-- Product-based model — selling physical goods
-- Service-based model — consulting or expertise
-- Software/SaaS model — subscription-based software delivery
-- Hybrid models — combining services and products
+# ----------------
+# IRR
+# ----------------
+with st.expander("📈 IRR (Internal Rate of Return)"):
+    st.write("Enter cashflows including the initial investment as a negative number.")
+    flows = st.text_input("Cashflows (comma-separated)", "-100000, 20000, 30000, 50000, 70000", key="irr_flows")
+    try:
+        cashflows = [float(x.strip()) for x in flows.split(",")]
+        irr = np.irr(cashflows)
+        if irr is not None:
+            st.success(f"**IRR ≈ {irr*100:.2f}%**\n\nIRR shows the average annual growth rate of your investment.")
+    except:
+        st.error("Enter valid numbers")
 
-💡 *Later: Add case studies, model templates, and video explainers here.*
-""")
+# ----------------
+# NPV
+# ----------------
+with st.expander("💸 NPV (Net Present Value)"):
+    st.write("Enter future cashflows and a discount rate (cost of capital).")
+    cash = st.text_input("Cashflows (comma-separated)", "-100000, 20000, 30000, 50000, 70000", key="npv_flows")
+    discount = st.number_input("Discount Rate (%)", value=10.0, key="npv_rate") / 100
+    try:
+        flows = [float(x.strip()) for x in cash.split(",")]
+        years = np.arange(len(flows))
+        npv = np.sum([cf / (1+discount)**t for cf, t in zip(flows, years)])
+        st.success(f"**NPV = R{npv:,.2f}**\n\nNPV shows the value of all future profits in today’s money.")
+    except:
+        st.error("Enter valid numbers")
 
-# -------------------------
-# 2. Business & Financial Strategy
-# -------------------------
-with st.expander("💰 Business & Financial Strategy"):
-    st.markdown("""
-**Overview:** Understand your cost structure, pricing, and profitability.
-
-**Core Topics:**
-- Business model canvas / one-pager
-- Value proposition design
-- Unit economics and ROI
-- Financial forecasting and breakeven
-- Revenue streams and pricing strategy
-
-💡 *Later: Add calculators, templates, and downloadable spreadsheets here.*
-""")
-
-# -------------------------
-# 3. Legal, IP & Risk Strategies
-# -------------------------
-with st.expander("⚖️ Legal, IP & Risk Strategies"):
-    st.markdown("""
-**Overview:** Protect your intellectual property and manage risk early.
-
-**Key Actions:**
-- IP strategy (patents, trademarks, trade secrets)
-- NDAs, MoUs, licensing agreements
-- Technology roadmapping and risk registers
-- Shareholder agreements, company structure setup
-
-💡 *Later: Link to IP office resources, WIPO tools, and example agreements.*
-""")
-
-# -------------------------
-# 4. Market & Growth Pathways
-# -------------------------
-with st.expander("📈 Market & Growth Pathways"):
-    st.markdown("""
-**Overview:** Plan how you will reach customers and scale up.
-
-**Core Topics:**
-- Market validation (customer interviews, surveys)
-- Market sizing (TAM, SAM, SOM)
-- Go-to-market strategy (launch plan)
-- Sales channels and partnerships
-- Marketing & branding strategies
-
-💡 *Later: Add checklists, survey templates, and competitor analysis tools.*
-""")
-
-# -------------------------
-# 5. Investment & Funding Pathways
-# -------------------------
-with st.expander("💸 Investment & Funding Pathways"):
-    st.markdown("""
-**Overview:** Understand and access funding options.
-
-**Options:**
-- Government grants and incentives (DSI, TIA, Innovation Hub)
-- Angel investors and venture capital
-- Accelerators and incubators
-- Crowdfunding platforms
-- Investor pitching strategy and pitch deck building
-
-💡 *Later: Add a pitch deck builder, sample decks, and investor scorecard tools.*
-""")
+# ----------------
+# LCOE
+# ----------------
+with st.expander("⚡ LCOE (Levelised Cost of Energy)"):
+    st.write("For energy projects: average cost per kWh over the system's lifetime.")
+    total_costs = st.number_input("Total Lifetime Costs (R)", value=500000, key="lcoe_cost")
+    energy_output = st.number_input("Lifetime Energy Output (kWh)", value=100000, key="lcoe_output")
+    if energy_output > 0:
+        lcoe = total_costs / energy_output
+        st.success(f"**LCOE = R{lcoe:.2f} per kWh**\n\nLCOE lets you compare the cost of different energy systems fairly.")
