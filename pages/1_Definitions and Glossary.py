@@ -1,16 +1,19 @@
 import streamlit as st
 import pandas as pd
 
-from PIL import Image
-
+# ========================
+# Page Setup
+# ========================
+st.set_page_config(page_title="Innovation Mentor Glossary", layout="wide")
 st.header("📖 Innovation Mentor Glossary")
-st.markdown("Browse, search, and share key innovation terms.")
+st.markdown("Browse and search key innovation terms for innovators, entrepreneurs, and mentors.")
 
 # ========================
 # Load Glossary
 # ========================
 @st.cache_data
 def load_glossary():
+    # Ensure you have "innovation_glossary.json" in your repo
     return pd.read_json("innovation_glossary.json")
 
 glossary = load_glossary()
@@ -28,23 +31,18 @@ filtered = glossary[
 # ========================
 # Display Results
 # ========================
-for _, row in filtered.sort_values("term").iterrows():
-    with st.expander(row["term"]):
-        st.write(row["definition"])
+if filtered.empty:
+    st.warning("No terms found. Try a different search keyword.")
+else:
+    for _, row in filtered.sort_values("term").iterrows():
+        with st.expander(row["term"]):
+            st.write(row["definition"])
 
 # ========================
-# QR Code
+# Share Section
 # ========================
 st.markdown("---")
 st.subheader("📱 Share this Glossary")
+st.info("To share this glossary, copy the URL from your browser or generate a QR code offline (e.g., in Spyder).")
 
-# Replace with your deployed Streamlit app URL
-glossary_url = "https://compendiumofacuriosmind.streamlit.app/Innovation_Mentor"
-
-if st.button("Generate QR Code"):
-    qr = qrcode.QRCode(version=1, box_size=8, border=4)
-    qr.add_data(glossary_url)
-    qr.make(fit=True)
-    img = qr.make_image(fill_color="black", back_color="white")
-    st.image(img, caption="Scan to open Innovation Mentor Glossary", use_container_width=False)
 
