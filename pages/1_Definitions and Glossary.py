@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from rapidfuzz import fuzz
 
 # ========================
 # Page Setup
@@ -19,25 +18,17 @@ def load_glossary():
 glossary = load_glossary()
 
 # ========================
-# Search (with fuzzy logic)
+# Search (simple partial matching)
 # ========================
-query = st.text_input("🔍 Search a term")
+query = st.text_input("🔍 Search a term").lower().strip()
 
-def fuzzy_filter(df, query, threshold=60):
-    """Return rows where term or definition fuzzily match query."""
-    if not query.strip():
-        return df
-    query = query.lower()
-    mask = df.apply(
-        lambda row: (
-            fuzz.partial_ratio(query, str(row['term']).lower()) >= threshold or
-            fuzz.partial_ratio(query, str(row['definition']).lower()) >= threshold
-        ),
-        axis=1
-    )
-    return df[mask]
-
-filtered = fuzzy_filter(glossary, query)
+if query:
+    filtered = glossary[
+        glossary['term'].str.lower().str.contains(query, na=False) |
+        glossary['definition'].str.lower().str.contains(query, na=False)
+    ]
+else:
+    filtered = glossary
 
 # ========================
 # Display Results by Alphabet
@@ -45,7 +36,6 @@ filtered = fuzzy_filter(glossary, query)
 if filtered.empty:
     st.warning("No terms found. Try a different keyword.")
 else:
-    # Group by first letter
     filtered = filtered.sort_values("term")
     current_letter = ""
     for _, row in filtered.iterrows():
@@ -62,5 +52,4 @@ else:
 st.markdown("---")
 st.subheader("📱 Share this Glossary")
 st.info("To share this glossary, copy the URL from your browser or generate a QR code offline (e.g., in Spyder).")
-
 
