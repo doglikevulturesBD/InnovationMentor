@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import qrcode
+
 from PIL import Image
 
 st.header("📖 Innovation Mentor Glossary")
