@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from rapidfuzz import fuzz
 
 # ========================
 # Page Setup
@@ -13,28 +14,45 @@ st.markdown("Browse and search key innovation terms for innovators, entrepreneur
 # ========================
 @st.cache_data
 def load_glossary():
-    # Ensure you have "innovation_glossary.json" in your repo
     return pd.read_json("innovation_glossary.json")
 
 glossary = load_glossary()
 
 # ========================
-# Search
+# Search (with fuzzy logic)
 # ========================
 query = st.text_input("🔍 Search a term")
 
-filtered = glossary[
-    glossary['term'].str.contains(query, case=False, na=False) |
-    glossary['definition'].str.contains(query, case=False, na=False)
-]
+def fuzzy_filter(df, query, threshold=60):
+    """Return rows where term or definition fuzzily match query."""
+    if not query.strip():
+        return df
+    query = query.lower()
+    mask = df.apply(
+        lambda row: (
+            fuzz.partial_ratio(query, str(row['term']).lower()) >= threshold or
+            fuzz.partial_ratio(query, str(row['definition']).lower()) >= threshold
+        ),
+        axis=1
+    )
+    return df[mask]
+
+filtered = fuzzy_filter(glossary, query)
 
 # ========================
-# Display Results
+# Display Results by Alphabet
 # ========================
 if filtered.empty:
-    st.warning("No terms found. Try a different search keyword.")
+    st.warning("No terms found. Try a different keyword.")
 else:
-    for _, row in filtered.sort_values("term").iterrows():
+    # Group by first letter
+    filtered = filtered.sort_values("term")
+    current_letter = ""
+    for _, row in filtered.iterrows():
+        first_letter = row["term"][0].upper()
+        if first_letter != current_letter:
+            current_letter = first_letter
+            st.markdown(f"## {current_letter}")  # Section header for letter
         with st.expander(row["term"]):
             st.write(row["definition"])
 
