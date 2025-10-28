@@ -25,10 +25,7 @@ trl_descriptions = {
 }
 
 def calculate_trl(answers):
-    """
-    Calculates TRL level based on sequential yes/no answers.
-    Each 'yes' must be consistent (once 'no' appears, subsequent yeses are ignored).
-    """
+    """Stops progression at first 'No' — last confirmed Yes defines TRL."""
     score = 0
     for i, ans in enumerate(answers):
         if ans:
@@ -37,12 +34,12 @@ def calculate_trl(answers):
             break
     return score if score > 0 else 1
 
-def trl_description(level: int) -> str:
+def trl_description(level):
     return trl_descriptions.get(level, "Unknown TRL")
 
 def get_trl_level(answers):
-    """Helper for integration with other modules later."""
     return {
         "level": calculate_trl(answers),
         "description": trl_description(calculate_trl(answers))
     }
+
