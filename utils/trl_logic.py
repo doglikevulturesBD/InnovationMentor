@@ -1,37 +1,61 @@
+# utils/trl_logic.py
+
+from typing import List
+
+# Toggle: if False, the minimum returned TRL will be 1
+ALLOW_TRL_ZERO = True
+
+# Ordered, linear checkpoints for TRL 1..9
 questions = [
-    {"id": 1, "text": "Have basic scientific principles been observed and reported?"},
-    {"id": 2, "text": "Has the technology concept or application been formulated?"},
-    {"id": 3, "text": "Has analytical and experimental proof-of-concept been achieved in the lab?"},
-    {"id": 4, "text": "Have key components or processes been validated in a laboratory environment?"},
-    {"id": 5, "text": "Have integrated components or subsystems been validated in a relevant environment?"},
-    {"id": 6, "text": "Has a prototype system been demonstrated in a relevant (simulated) environment?"},
-    {"id": 7, "text": "Has the prototype or pilot system been demonstrated in an operational environment?"},
-    {"id": 8, "text": "Has the system been completed and qualified through test and demonstration?"},
-    {"id": 9, "text": "Has the actual system been proven through successful operation in its intended environment?"}
+    {"id": 1, "text": "Have basic scientific principles been observed and reported? (TRL 1)"},
+    {"id": 2, "text": "Has the technology concept/application been formulated? (TRL 2)"},
+    {"id": 3, "text": "Is there analytical & experimental proof-of-concept in the lab? (TRL 3)"},
+    {"id": 4, "text": "Have key components been validated in a laboratory environment? (TRL 4)"},
+    {"id": 5, "text": "Have integrated components/subsystems been validated in a relevant environment? (TRL 5)"},
+    {"id": 6, "text": "Has a prototype system been demonstrated in a relevant (simulated) environment? (TRL 6)"},
+    {"id": 7, "text": "Has a prototype/pilot been demonstrated in an operational environment? (TRL 7)"},
+    {"id": 8, "text": "Is the full system completed and qualified through test & demonstration? (TRL 8)"},
+    {"id": 9, "text": "Is the actual system proven in successful commercial operation? (TRL 9)"},
 ]
 
 trl_descriptions = {
+    0: "Pre-TRL: basic scientific principles not yet observed/reported.",
     1: "Basic principles observed and reported.",
-    2: "Technology concept formulated.",
-    3: "Analytical and experimental proof-of-concept achieved (lab).",
-    4: "Components validated in laboratory environment.",
-    5: "Subsystem validated in relevant environment.",
-    6: "Prototype demonstrated in relevant (simulated) environment.",
-    7: "Prototype demonstrated in operational environment (pilot).",
-    8: "System completed and qualified through demonstration.",
-    9: "System proven in successful commercial operation."
+    2: "Technology concept/application formulated.",
+    3: "Analytical & experimental proof-of-concept achieved (lab).",
+    4: "Components/breadboard validated in laboratory environment.",
+    5: "Integrated components/subsystems validated in relevant environment.",
+    6: "System/subsystem prototype demonstrated in relevant environment.",
+    7: "Prototype/pilot demonstrated in operational environment.",
+    8: "System completed & qualified through test & demonstration.",
+    9: "Actual system proven in successful commercial operation.",
 }
 
-def calculate_trl(answers):
-    """Stops at first 'No'; TRL = number of consecutive 'Yes'."""
-    trl = 0
-    for ans in answers:
-        if ans:
-            trl += 1
-        else:
-            break
-    return min(trl, 9)
+def calculate_trl(answers: List[bool]) -> int:
+    """
+    TRL = number of consecutive 'True' from the start.
+    Stops counting at the first False.
+    Examples:
+      []                     -> 0 (or 1 if ALLOW_TRL_ZERO=False)
+      [True]                 -> 1
+      [True, True, False]    -> 2
+      [False, ...]           -> 0 (or 1 if ALLOW_TRL_ZERO=False)
+      [True x 9]             -> 9
+    """
+    level = 0
+    for a in answers:
+        if a: level += 1
+        else: break
 
-def trl_description(level):
+    if level == 0 and not ALLOW_TRL_ZERO:
+        return 1
+    return max(0, min(level, 9))
+
+def trl_description(level: int) -> str:
     return trl_descriptions.get(level, "Unknown TRL")
+
+def next_trl_description(level: int) -> str:
+    if level >= 9: return "You are at the highest TRL."
+    nxt = level + 1
+    return trl_descriptions.get(nxt, "")
 
