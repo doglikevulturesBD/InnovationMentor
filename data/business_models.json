@@ -3,292 +3,34 @@
     "id": "BM01",
     "name": "SaaS Subscription",
     "description": "Recurring-access software or data platform with tiered pricing.",
-    "tags": [
-      "software",
-      "recurring",
-      "scalable",
-      "low_capex",
-      "B2B",
-      "SME"
-    ],
-    "trl_min": 4,
-    "idealConditions": [
-      "Value delivered repeatedly over time",
-      "Low marginal cost per additional user",
-      "Ability to ship updates continuously"
-    ],
-    "challenges": [
-      "Slow early revenue growth while MRR builds",
-      "Onboarding and retention discipline required",
-      "Support and reliability expectations are high"
-    ],
-    "revenueCharacteristics": [
-      "Monthly/annual recurring revenue",
-      "Tiered pricing or per-seat licensing"
-    ],
-    "unitEconomics": {
-      "revenue_unit": "per user / per month",
-      "cost_drivers": [
-        "support",
-        "cloud hosting",
-        "customer acquisition"
-      ],
-      "scaling_behavior": "marginal cost declines with scale"
-    },
-    "riskSignals": {
-      "technical": "Requires stable uptime and support processes",
-      "market": "Needs focused segment with clear adoption trigger",
-      "financial": "Revenue ramps gradually; CAC and churn critical",
-      "execution": "Smooth onboarding, documentation, and retention loops"
-    },
-    "gtmRoadmap": {
-      "phase1": [
-        "Define ICP (ideal customer profile) and buyer persona",
-        "Prototype core feature set; recruit 5–10 pilot users",
-        "Set simple pricing hypothesis (1–2 tiers)"
-      ],
-      "phase2": [
-        "Launch public beta with onboarding flows",
-        "Collect usage telemetry; ship iterative improvements",
-        "Refine pricing; add annual plan and discounts"
-      ],
-      "phase3": [
-        "Partner with 2–3 channels for distribution",
-        "Publish case studies; add upsell/expansion features",
-        "Focus on retention and LTV/CAC optimization"
-      ]
-    }
+    "tags": ["software", "recurring", "low_capex", "B2B"]
   },
   {
     "id": "BM02",
     "name": "Licensing",
-    "description": "Grant rights to use your IP to manufacturers/integrators for fees/royalties.",
-    "tags": [
-      "IP",
-      "enterprise",
-      "B2B",
-      "low_capex"
-    ],
-    "trl_min": 5,
-    "idealConditions": [
-      "Protectable IP (patentable or strong trade secrets)",
-      "Partners exist with manufacturing or route-to-market",
-      "Desire to avoid heavy capex and operations"
-    ],
-    "challenges": [
-      "Negotiation complexity; alignment on scope/territory",
-      "Royalty monitoring and enforcement",
-      "Revenue depends on licensee execution speed"
-    ],
-    "revenueCharacteristics": [
-      "Upfront fees, milestone payments, royalties (% of sales)"
-    ],
-    "unitEconomics": {
-      "revenue_unit": "royalty % per unit",
-      "cost_drivers": [
-        "legal",
-        "IP prosecution",
-        "partner management"
-      ],
-      "scaling_behavior": "high operating leverage; low marginal cost"
-    },
-    "riskSignals": {
-      "technical": "Evidence that IP is novel and defensible",
-      "market": "Clear list of target licensees/OEMs",
-      "financial": "Lag between signing and royalty inflows",
-      "execution": "Need standard license templates and audit clauses"
-    },
-    "gtmRoadmap": {
-      "phase1": [
-        "File provisional patent; prepare tech brief & demo",
-        "Identify 10–20 potential licensees; initiate conversations",
-        "Draft template license with counsel (territory, field of use)"
-      ],
-      "phase2": [
-        "Pilot integrations with 1–2 partners",
-        "Negotiate milestones and royalty structure",
-        "Establish reporting & compliance mechanisms"
-      ],
-      "phase3": [
-        "Convert provisional to PCT; pursue priority markets",
-        "Expand to additional licensees; track performance",
-        "Invest in IP enforcement and brand association"
-      ]
-    }
+    "description": "Grant rights to use your IP to manufacturers/integrators for royalties.",
+    "tags": ["IP", "enterprise", "low_capex", "B2B"]
   },
   {
     "id": "BM03",
     "name": "Reseller / Distributor Channel",
-    "description": "Use existing distributors to sell your product into established markets.",
-    "tags": [
-      "distribution",
-      "B2B",
-      "SME",
-      "enterprise"
-    ],
-    "trl_min": 6,
-    "idealConditions": [
-      "Product-market fit indicators present",
-      "Target customers reached via existing channels",
-      "You can train and support channel partners"
-    ],
-    "challenges": [
-      "Lower margins vs direct sales",
-      "Less direct access to customer feedback",
-      "Must maintain enablement materials and SLAs"
-    ],
-    "revenueCharacteristics": [
-      "Wholesale pricing or commission-based revenue"
-    ],
-    "unitEconomics": {
-      "revenue_unit": "per unit or per contract via channel",
-      "cost_drivers": [
-        "partner enablement",
-        "discounts",
-        "support"
-      ],
-      "scaling_behavior": "fast geographic reach; margin trade-off"
-    },
-    "riskSignals": {
-      "technical": "Product is stable and supportable by third parties",
-      "market": "Channel has reach into your ICP",
-      "financial": "Margin sufficient after channel discounts",
-      "execution": "Partner training, collateral, and incentives ready"
-    },
-    "gtmRoadmap": {
-      "phase1": [
-        "Identify 5–10 high-fit distributors; sign NDAs",
-        "Create partner playbook (pitch, demo, pricing, FAQs)",
-        "Run 2–3 joint demos to real prospects"
-      ],
-      "phase2": [
-        "Sign first 1–2 partners; agree on targets and incentives",
-        "Train their sales teams; set support SLAs",
-        "Launch co-marketing campaigns and webinars"
-      ],
-      "phase3": [
-        "Expand territorial coverage; add tiered incentives",
-        "Publish success stories; standardize onboarding",
-        "Introduce partner certification to maintain quality"
-      ]
-    }
+    "description": "Use distributors to sell your product into established markets.",
+    "tags": ["distribution", "B2B", "infrastructure"]
   },
   {
     "id": "BM04",
-    "name": "Pay-Per-Use (Service / IoT / Access)",
-    "description": "Customers pay when they consume usage (e.g., kWh, hours, API calls).",
-    "tags": [
-      "usage",
-      "IoT",
-      "infrastructure",
-      "B2B",
-      "government"
-    ],
-    "trl_min": 6,
-    "idealConditions": [
-      "Usage can be metered reliably",
-      "Customers value flexibility and low upfront costs",
-      "Telemetry and billing infrastructure available"
-    ],
-    "challenges": [
-      "Revenue variability; forecasting harder",
-      "Requires accurate metering and billing",
-      "Potentially higher working capital needs"
-    ],
-    "revenueCharacteristics": [
-      "Usage-based billing; minimum commitment optional"
-    ],
-    "unitEconomics": {
-      "revenue_unit": "per usage unit (e.g., kWh / hour / API call)",
-      "cost_drivers": [
-        "hardware",
-        "maintenance",
-        "data",
-        "support"
-      ],
-      "scaling_behavior": "capex heavy initially; stabilizes with utilization"
-    },
-    "riskSignals": {
-      "technical": "Telemetry accuracy and reliability",
-      "market": "Clear usage value vs alternatives",
-      "financial": "Utilization rates sufficient for breakeven",
-      "execution": "Customer onboarding, billing, and support processes"
-    },
-    "gtmRoadmap": {
-      "phase1": [
-        "Deploy 1–2 pilot sites with reliable metering",
-        "Validate billing logic and customer acceptance",
-        "Define minimum usage commitments where needed"
-      ],
-      "phase2": [
-        "Roll out to 5–10 customers; refine pricing per segment",
-        "Automate monitoring and support workflows",
-        "Secure maintenance contracts or SLAs"
-      ],
-      "phase3": [
-        "Scale via anchor clients and channel partners",
-        "Optimize utilization; introduce tiered usage bundles",
-        "Integrate with finance for asset-backed expansion"
-      ]
-    }
+    "name": "Pay-Per-Use Service",
+    "description": "Customers pay per unit of usage (kWh, hours, API calls).",
+    "tags": ["usage", "infrastructure", "IoT", "B2B"]
   },
   {
     "id": "BM05",
     "name": "Consulting-to-Product Ladder",
-    "description": "Start with paid services to learn and de-risk, then convert recurring patterns into a product.",
-    "tags": [
-      "services",
-      "transition",
-      "learning",
-      "low_capex",
-      "B2B",
-      "SME"
-    ],
-    "trl_min": 3,
-    "idealConditions": [
-      "Early uncertainty; need revenue while learning",
-      "Strong domain expertise and client access",
-      "Clear path to codify recurring problems into product"
-    ],
-    "challenges": [
-      "Time management between delivery and productization",
-      "Temptation to stay service-heavy",
-      "Requires discipline to standardize and say no"
-    ],
-    "revenueCharacteristics": [
-      "Service fees initially; product or subscription later"
-    ],
-    "unitEconomics": {
-      "revenue_unit": "day rate / project fee initially",
-      "cost_drivers": [
-        "time",
-        "senior expertise",
-        "sales"
-      ],
-      "scaling_behavior": "non-linear until productized; then scalable"
-    },
-    "riskSignals": {
-      "technical": "Ability to extract reusable components",
-      "market": "Repeated client pain points across segments",
-      "financial": "Bridge cashflow from services to product build",
-      "execution": "Roadmap and milestones for productization"
-    },
-    "gtmRoadmap": {
-      "phase1": [
-        "Close 2–3 service clients aligned to target product",
-        "Document patterns; build internal playbooks",
-        "Prototype reusable modules behind the scenes"
-      ],
-      "phase2": [
-        "Launch alpha product to existing clients",
-        "Bundle services + product to prove ROI",
-        "Collect case studies and refine features"
-      ],
-      "phase3": [
-        "Public product launch; shift sales motion",
-        "Introduce subscription or licenses",
-        "Scale via referrals and partner channels"
-      ]
+    "description": "Start with paid services, then transition to a standardized product.",
+    "tags": ["services", "learning", "low_capex", "B2B"]
+  }
+]
+
     }
   }
 ]
