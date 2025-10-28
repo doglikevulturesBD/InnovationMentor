@@ -1,47 +1,78 @@
+# app.py
 import streamlit as st
-from utils.trl_logic import questions, calculate_trl, trl_description
+from utils.trl_logic import (
+    questions, calculate_trl, trl_description,
+    trl_descriptions, next_trl_description
+)
 
 st.set_page_config(page_title="TRL Calculator", page_icon="🧪", layout="centered")
 
-# --- Initialize session state ---
-if "step" not in st.session_state:
-    st.session_state.step = 0
-if "answers" not in st.session_state:
-    st.session_state.answers = []
+# ---------- Session State ----------
+if "step" not in st.session_state:        st.session_state.step = 0
+if "answers" not in st.session_state:     st.session_state.answers = []
+if "finished" not in st.session_state:    st.session_state.finished = False
 
-# --- Helper to move to next question ---
-def next_step(answer):
+def handle_answer(answer: bool):
+    """Single-click safe: called by on_click of Yes/No buttons."""
     st.session_state.answers.append(answer)
+    if not answer:
+        # Stop immediately on 'No'
+        st.session_state.finished = True
+        return
+    # Advance to next step or finish if last
     st.session_state.step += 1
+    if st.session_state.step >= len(questions):
+        st.session_state.finished = True
 
-# --- Header ---
-st.title("🧪 TRL Calculator")
-st.caption("Estimate your Technology Readiness Level through a guided 7-step questionnaire")
+def restart():
+    st.session_state.step = 0
+    st.session_state.answers = []
+    st.session_state.finished = False
 
-# --- Progress bar ---
+# ---------- Header ----------
+st.title("🧪 Technology Readiness Level (TRL) Calculator")
+st.caption("Linear, stop-on-No questionnaire. Your TRL is the count of consecutive 'Yes' from TRL 1 upward.")
+
+# ---------- Progress ----------
 progress = st.session_state.step / len(questions)
 st.progress(progress)
 
-# --- Question flow ---
-if st.session_state.step < len(questions):
+# ---------- Flow ----------
+if not st.session_state.finished and st.session_state.step < len(questions):
     q = questions[st.session_state.step]
-    st.subheader(f"Step {st.session_state.step+1} of {len(questions)}")
+    st.subheader(f"Step {st.session_state.step + 1} of {len(questions)}")
     st.markdown(f"**{q['text']}**")
 
     col1, col2 = st.columns(2)
-    with col1:
-        if st.button("✅ Yes", key=f"yes_{st.session_state.step}"):
-            next_step(True)
-    with col2:
-        if st.button("❌ No", key=f"no_{st.session_state.step}"):
-            next_step(False)
+    col1.button("✅ Yes", key=f"yes_{st.session_state.step}", use_container_width=True,
+                on_click=handle_answer, args=(True,))
+    col2.button("❌ No", key=f"no_{st.session_state.step}", use_container_width=True,
+                on_click=handle_answer, args=(False,))
 
 else:
-    # --- Calculate TRL ---
+    # Finished or reached the end
     trl = calculate_trl(st.session_state.answers)
-    st.success(f"Your estimated TRL is **{trl}**")
-    st.markdown(f"**Description:** {trl_description(trl)}")
+    label = "TRL 0 (pre-TRL)" if trl == 0 else f"TRL {trl} / 9"
+    st.success(f"Your estimated level: **{label}**")
 
-    if st.button("🔁 Restart"):
-        st.session_state.step = 0
-        st.session_state.answers = []
+    st.markdown("### 🔍 What this means")
+    st.write(trl_description(trl))
+
+    if trl < 9:
+        st.info(f"**Next target — TRL {trl + 1}:** {next_trl_description(trl)}")
+    else:
+        st.balloons()
+        st.success("🎉 TRL 9 achieved — proven commercial operation!")
+
+    st.divider()
+    st.markdown("### 📘 TRL Reference Overview")
+    # Show from 0 (pre-TRL) through 9, highlighting current
+    for lvl in range(0, 10):
+        if lvl not in trl_descriptions: 
+            continue
+        marker = "🟩" if lvl == trl else "⬜"
+        title = "TRL 0 (pre-TRL)" if lvl == 0 else f"TRL {lvl}"
+        st.markdown(f"{marker} **{title}:** {trl_descriptions[lvl]}")
+
+    st.button("🔁 Restart", on_click=restart, use_container_width=True)
+
