@@ -1,37 +1,55 @@
-
+# pages/02_Business_Model_Selector.py
 import streamlit as st
-from utils.scoring import load_models, trl_gate, score_models
+from utils.model_logic import questions, load_models, score_models
 
-st.title("Business Model Selector (MVP)")
+st.set_page_config(page_title="Business Model Selector", page_icon="🏗️", layout="centered")
 
-trl = st.session_state.get("trl_level", 4)
-st.info(f"Current TRL: **{trl}**")
+# --- Initialize session state ---
+if "bm_step" not in st.session_state:
+    st.session_state.bm_step = 0
+if "bm_answers" not in st.session_state:
+    st.session_state.bm_answers = {}
+if "bm_done" not in st.session_state:
+    st.session_state.bm_done = False
 
-col1, col2, col3 = st.columns(3)
-with col1:
-    wants_recurring = st.toggle("Prefer recurring revenue", value=True)
-with col2:
-    customer_type = st.selectbox("Primary customer type", ["SME","enterprise","government"], index=1)
-with col3:
-    capex = st.selectbox("Capex reality", ["low","med","high"], index=0)
-partner_ready = st.toggle("Have a strong partner/channel?", value=False)
+st.title("🏗️ Business Model Selector")
+st.caption("Answer short questions to discover the best-fit business models for your innovation.")
 
-profile = {
-    "wants_recurring": wants_recurring,
-    "customer_type": customer_type,
-    "capex": capex,
-    "partner_ready": partner_ready,
-}
+# --- Questionnaire ---
+if not st.session_state.bm_done and st.session_state.bm_step < len(questions):
+    q = questions[st.session_state.bm_step]
+    st.subheader(f"Question {st.session_state.bm_step + 1} of {len(questions)}")
+    st.markdown(f"**{q['text']}**")
 
-models = trl_gate(load_models(), trl)
-top3 = score_models(profile, models)
+    col1, col2 = st.columns(2)
+    yes = col1.button("✅ Yes", key=f"yes_{st.session_state.bm_step}")
+    no = col2.button("❌ No", key=f"no_{st.session_state.bm_step}")
 
-st.subheader("Top 3 Recommendations")
-for i, item in enumerate(top3, start=1):
-    m = item["model"]
-    st.markdown(f"**{i}. {m['name']}** — Score: {item['score']}")
-    with st.expander("Details"):
-        st.write(m["description"])
+    if yes:
+        st.session_state.bm_answers[q["tag_yes"]] = True
+        st.session_state.bm_step += 1
+        st.rerun()
 
-st.session_state["top3_models"] = [t["model"]["name"] for t in top3]
-st.session_state["selected_model"] = st.selectbox("Choose one for finance/roadmap", [t["model"]["name"] for t in top3] if top3 else [])
+    elif no:
+        st.session_state.bm_step += 1
+        st.rerun()
+
+# --- Results ---
+elif st.session_state.bm_done or st.session_state.bm_step >= len(questions):
+    selected_tags = set(st.session_state.bm_answers.keys())
+    models = load_models()
+    top3 = score_models(selected_tags, models)
+
+    st.success(f"✅ Questionnaire complete! You matched **{len(selected_tags)}** characteristics.")
+    st.markdown("### 🏆 Top 3 Recommended Business Models")
+
+    for i, item in enumerate(top3, 1):
+        m = item["model"]
+        st.markdown(f"**{i}. {m['name']}** — Score: {item['score']}")
+        st.caption(f"Tags matched: {', '.join(set(m.get('tags', [])) & selected_tags)}")
+        with st.expander("View details"):
+            st.write(m["description"])
+
+    st.divider()
+    st.button("🔁 Restart", on_click=lambda: [st.session_state.update({"bm_step": 0, "bm_answers": {}, "bm_done": False}), st.rerun()])
+
