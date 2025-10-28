@@ -1,18 +1,33 @@
+# utils/trl_logic.py
+
 questions = [
-    {"id": 1, "text": "Have the basic scientific principles been observed and reported?"},
-    {"id": 2, "text": "Has a technology concept or application been formulated and validated in the lab?"},
-    {"id": 3, "text": "Have key components or processes been validated experimentally?"},
-    {"id": 4, "text": "Has a prototype been built and tested in a relevant (simulated) environment?"},
-    {"id": 5, "text": "Has the prototype been demonstrated in an operational (real-world) environment?"},
-    {"id": 6, "text": "Has the system been demonstrated under pre-commercial or pilot-scale conditions?"},
-    {"id": 7, "text": "Is the system operating commercially in its intended environment?"}
+    {"id": 1, "text": "Have basic scientific principles been observed and reported?"},
+    {"id": 2, "text": "Has the technology concept or application been formulated?"},
+    {"id": 3, "text": "Has analytical and experimental proof-of-concept been achieved in the lab?"},
+    {"id": 4, "text": "Have key components or processes been validated in a laboratory environment?"},
+    {"id": 5, "text": "Have integrated components or subsystems been validated in a relevant environment?"},
+    {"id": 6, "text": "Has a prototype system been demonstrated in a relevant (simulated) environment?"},
+    {"id": 7, "text": "Has the prototype or pilot system been demonstrated in an operational environment?"},
+    {"id": 8, "text": "Has the system been completed and qualified through test and demonstration?"},
+    {"id": 9, "text": "Has the actual system been proven through successful operation in its intended environment?"}
 ]
+
+trl_descriptions = {
+    1: "Basic principles observed and reported — fundamental research only.",
+    2: "Technology concept and/or application formulated — still theoretical but potential use identified.",
+    3: "Analytical and experimental proof-of-concept achieved — initial lab validation.",
+    4: "Component or breadboard validated in laboratory environment — small-scale prototype exists.",
+    5: "Component or breadboard validated in relevant environment — larger prototype tested under realistic conditions.",
+    6: "System/subsystem prototype demonstrated in relevant environment — nearing pre-commercial readiness.",
+    7: "System prototype demonstrated in operational environment — pilot or field test completed.",
+    8: "System completed and qualified through test and demonstration — pre-production version validated.",
+    9: "Actual system proven through successful operation — commercial deployment achieved."
+}
 
 def calculate_trl(answers):
     """
-    Simple scoring logic:
-    - Each 'Yes' increases TRL.
-    - The last 'Yes' determines the TRL level.
+    Calculates TRL level based on sequential yes/no answers.
+    Each 'yes' must be consistent (once 'no' appears, subsequent yeses are ignored).
     """
     score = 0
     for i, ans in enumerate(answers):
@@ -20,21 +35,14 @@ def calculate_trl(answers):
             score = i + 1
         else:
             break
+    return score if score > 0 else 1
 
-    # Map 1–7 answers to 1–9 TRL scale roughly
-    trl_map = [1, 2, 3, 5, 6, 8, 9]
-    return trl_map[score-1] if score > 0 else 1
+def trl_description(level: int) -> str:
+    return trl_descriptions.get(level, "Unknown TRL")
 
-def trl_description(level):
-    desc = {
-        1: "Basic principles observed and reported.",
-        2: "Technology concept and/or application formulated.",
-        3: "Analytical and experimental proof of concept achieved.",
-        4: "Component or breadboard validated in laboratory environment.",
-        5: "Component or breadboard validated in relevant environment.",
-        6: "System/subsystem model or prototype demonstrated in relevant environment.",
-        7: "Prototype demonstrated in operational environment.",
-        8: "System completed and qualified through test and demonstration.",
-        9: "Actual system proven through successful operation."
+def get_trl_level(answers):
+    """Helper for integration with other modules later."""
+    return {
+        "level": calculate_trl(answers),
+        "description": trl_description(calculate_trl(answers))
     }
-    return desc.get(level, "Unknown TRL")
