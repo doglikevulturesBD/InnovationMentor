@@ -178,9 +178,7 @@
     "name": "Incubator / Accelerator",
     "description": "Support multiple startups in exchange for equity or fees.",
     "tags": ["innovation", "finance", "services", "ecosystem"]
-  }
-]
-,
+  },
   {
     "id": "BM31",
     "name": "AI-as-a-Service",
