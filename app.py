@@ -1,25 +1,26 @@
+# app.py (replace the whole file if easier)
+
 import streamlit as st
 from utils.trl_logic import questions, calculate_trl, trl_description, trl_descriptions
 
 st.set_page_config(page_title="TRL Calculator", page_icon="🧪", layout="centered")
 
-# --- Initialize session state ---
-if "step" not in st.session_state:
-    st.session_state.step = 0
-if "answers" not in st.session_state:
-    st.session_state.answers = []
-if "done" not in st.session_state:
-    st.session_state.done = False
+if "step" not in st.session_state: st.session_state.step = 0
+if "answers" not in st.session_state: st.session_state.answers = []
+if "done" not in st.session_state: st.session_state.done = False
 
-# --- Header ---
 st.title("🧪 Technology Readiness Level (TRL) Calculator")
-st.caption("Answer the guided 9-step questionnaire to find your current TRL and next milestones.")
+st.caption("Linear, stop-on-No questionnaire. Your TRL is the count of consecutive 'Yes' from TRL1 upward.")
 
-# --- Progress bar ---
 progress = st.session_state.step / len(questions)
 st.progress(progress)
 
-# --- Questionnaire Flow ---
+def reset_radio_key():
+    key = f"q_{st.session_state.step}"
+    if key in st.session_state:
+        del st.session_state[key]
+
+# Flow
 if not st.session_state.done and st.session_state.step < len(questions):
     q = questions[st.session_state.step]
     st.subheader(f"Step {st.session_state.step + 1} of {len(questions)}")
@@ -30,40 +31,43 @@ if not st.session_state.done and st.session_state.step < len(questions):
         ["Yes", "No"],
         key=f"q_{st.session_state.step}",
         horizontal=True,
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        index=0  # default to Yes so users can move fast if appropriate
     )
 
-    if st.button("Next ➜"):
+    if st.button("Next ➜", use_container_width=True):
         st.session_state.answers.append(choice == "Yes")
         if choice == "No":
-            st.session_state.done = True  # Stop immediately
+            st.session_state.done = True
         else:
             st.session_state.step += 1
             if st.session_state.step == len(questions):
                 st.session_state.done = True
-        st.rerun()  # Forces Streamlit to refresh state immediately
+        reset_radio_key()
+        st.rerun()
 
-# --- Results ---
-elif st.session_state.done:
+else:
     trl = calculate_trl(st.session_state.answers)
     st.success(f"Your estimated TRL is **{trl} / 9**")
-    st.markdown(f"### 🔍 Description: {trl_description(trl)}")
+    st.markdown(f"### 🔍 What this means\n{trl_description(trl)}")
 
+    # Next milestone
     if trl < 9:
-        st.info(f"To reach **TRL {trl + 1}**, focus on:\n\n> {trl_descriptions[trl + 1]}")
+        nxt = trl + 1
+        st.info(f"**Next target — TRL {nxt}:** {trl_descriptions[nxt]}")
     else:
         st.balloons()
-        st.success("🎉 TRL 9 achieved — your system is proven in commercial operation!")
+        st.success("🎉 TRL 9 achieved — proven commercial operation!")
 
     st.divider()
     st.markdown("### 📊 TRL Reference Overview")
-    for lvl, desc in trl_descriptions.items():
-        highlight = "🟩" if lvl == trl else "⬜"
-        st.markdown(f"{highlight} **TRL {lvl}:** {desc}")
+    for lvl in range(0, 10):  # include TRL 0 row
+        if lvl not in trl_descriptions: continue
+        mark = "🟩" if lvl == trl else "⬜"
+        st.markdown(f"{mark} **TRL {lvl}:** {trl_descriptions[lvl]}")
 
-    if st.button("🔁 Restart"):
+    if st.button("🔁 Restart", use_container_width=True):
         st.session_state.step = 0
         st.session_state.answers = []
         st.session_state.done = False
         st.rerun()
-
