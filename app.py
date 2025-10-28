@@ -1,66 +1,55 @@
 import streamlit as st
-from utils.trl_logic import questions, calculate_trl, trl_description, trl_descriptions
 
-st.set_page_config(page_title="TRL Calculator", page_icon="🧪", layout="centered")
+st.set_page_config(
+    page_title="Innovation Mentor",
+    page_icon="🚀",
+    layout="wide"
+)
 
-# --- Initialize state ---
-if "step" not in st.session_state:
-    st.session_state.step = 0
-if "answers" not in st.session_state:
-    st.session_state.answers = []
-if "finished" not in st.session_state:
-    st.session_state.finished = False
+# ---------------------------
+# Header Section
+# ---------------------------
+st.title("🚀 Innovation Mentor Platform")
+st.caption("Integrated framework for innovators — from TRL assessment to commercialization readiness.")
 
-# --- App Header ---
-st.title("🧪 Technology Readiness Level (TRL) Calculator")
-st.caption("Answer the questions step-by-step. The questionnaire will stop once you answer 'No'.")
+st.markdown("""
+Welcome to the **Innovation Mentor App**, your one-stop tool for guiding technology projects
+from early research to market-ready commercialization.  
+Use the sidebar to navigate through each stage of development:
+""")
 
-# --- Progress bar ---
-progress = st.session_state.step / len(questions)
-st.progress(progress)
+# ---------------------------
+# Quick Navigation Cards
+# ---------------------------
+col1, col2, col3 = st.columns(3)
 
-# --- Questionnaire flow ---
-if not st.session_state.finished and st.session_state.step < len(questions):
-    q = questions[st.session_state.step]
-    st.subheader(f"Step {st.session_state.step + 1} of {len(questions)}")
-    st.markdown(f"**{q['text']}**")
+with col1:
+    st.header("📊 Assessment")
+    st.page_link("pages/01_TRL_Calculator.py", label="TRL Calculator", icon="🧪")
+    st.page_link("pages/02_Business_Model_Selector.py", label="Business Model Selector", icon="🏗️")
+    st.page_link("pages/03_Financial_Projection.py", label="Financial Projection", icon="💰")
+    st.page_link("pages/04_DCF_IRR_NPV.py", label="DCF / IRR / NPV", icon="📈")
 
-    col1, col2 = st.columns(2)
-    yes = col1.button("✅ Yes", key=f"yes_{st.session_state.step}")
-    no = col2.button("❌ No", key=f"no_{st.session_state.step}")
+with col2:
+    st.header("📚 Market & Strategy")
+    st.page_link("pages/05_Market_Study_Guide.py", label="Market Study Guide", icon="🧭")
+    st.page_link("pages/06_Marketing_Strategy.py", label="Marketing Strategy", icon="📢")
+    st.page_link("pages/09_Financing_Options.py", label="Financing Options", icon="🏦")
+    st.page_link("pages/08_IP_Management.py", label="IP Management", icon="🧩")
 
-    if yes:
-        st.session_state.answers.append(True)
-        st.session_state.step += 1
-        st.rerun()
+with col3:
+    st.header("🧠 Advanced Tools")
+    st.page_link("pages/10_MonteCarlo_Scenarios.py", label="Monte Carlo Simulator", icon="🎲")
+    st.page_link("pages/11_Risk_Dashboard.py", label="Risk Dashboard", icon="⚠️")
+    st.page_link("pages/12_Road_to_Market.py", label="Road-to-Market", icon="🛣️")
+    st.page_link("pages/07_Export_Report.py", label="Export Summary", icon="📤")
 
-    elif no:
-        st.session_state.answers.append(False)
-        st.session_state.finished = True
-        st.rerun()
-
-# --- Result Section ---
-elif st.session_state.finished or st.session_state.step >= len(questions):
-    trl = calculate_trl(st.session_state.answers)
-    st.success(f"Your estimated TRL is **{trl} / 9**")
-    st.markdown(f"### 🔍 Description\n{trl_description(trl)}")
-
-    # Show the next TRL level
-    if trl < 9:
-        st.info(f"**To reach TRL {trl + 1}:**\n\n{trl_descriptions[trl + 1]}")
-    else:
-        st.balloons()
-        st.success("🎉 You have achieved TRL 9 — proven commercial operation!")
-
-    st.divider()
-    st.markdown("### 📘 TRL Reference Overview")
-    for lvl, desc in trl_descriptions.items():
-        highlight = "🟩" if lvl == trl else "⬜"
-        st.markdown(f"{highlight} **TRL {lvl}:** {desc}")
-
-    if st.button("🔁 Restart"):
-        st.session_state.step = 0
-        st.session_state.answers = []
-        st.session_state.finished = False
-        st.rerun()
+# ---------------------------
+# Footer
+# ---------------------------
+st.divider()
+st.info("""
+💡 **Tip:** Start with the TRL Calculator to determine your technology maturity level.  
+Based on your TRL, the app will later filter suitable business models, financing types, and commercialization paths.
+""")
 
