@@ -5,6 +5,15 @@ from utils.model_logic import (
     QUESTION_BANK, load_models, accumulate_tags,
     trl_gate_score_adjustments, score_models
 )
+import streamlit as st
+if "authenticated" not in st.session_state or not st.session_state.authenticated:
+    st.warning("🔒 Please log in first.")
+    st.stop()
+
+if st.session_state.role == "Demo":
+    st.warning("🚫 This section is not available in demo mode.")
+    st.stop()
+
 
 st.set_page_config(page_title="Business Model Selector", page_icon="🏗️", layout="centered")
 
