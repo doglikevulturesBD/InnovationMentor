@@ -1,0 +1,92 @@
+{
+  "weighting_rules": [
+    {
+      "when": { "trl_max": 5 },
+      "weights": { "Technical Risk": 20 }
+    },
+    {
+      "when": { "business_model_any": ["Licensing"] },
+      "weights": { "IP / Legal Risk": 15, "Partnership Risk": 10 }
+    },
+    {
+      "when": { "funding_stage_any": ["Pre-seed", "Seed"] },
+      "weights": { "Funding / Liquidity Risk": 25 }
+    },
+    {
+      "when": { "marketing_any": ["Impact-First Branding"] },
+      "weights": { "ESG / Sustainability Risk": 10 }
+    },
+    {
+      "when": { "commercialisation_any": ["Digital Platform / Ecosystem Integration"] },
+      "weights": { "Operational Risk": 10, "ESG / Sustainability Risk": 5 }
+    },
+    {
+      "when": { "commercialisation_any": ["Public-Private Pilot"] },
+      "weights": { "IP / Legal Risk": 10, "Market Adoption Risk": 10 }
+    },
+    {
+      "when": { "marketing_any": ["Community-Powered Growth"] },
+      "weights": { "Operational Risk": 5, "Partnership Risk": 10 }
+    }
+  ],
+  "questionnaire": [
+    {
+      "id": 1,
+      "question": "How tested and validated is your technology?",
+      "options": [
+        { "text": "Still under development or lab-tested only", "adds": ["Technical Risk"] },
+        { "text": "Pilot-tested with limited users", "adds": ["Technical Risk", "Market Adoption Risk"] },
+        { "text": "Fully validated and certified", "adds": [] }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "How diverse is your customer or partner base?",
+      "options": [
+        { "text": "Relying on one main partner or client", "adds": ["Partnership Risk", "Funding / Liquidity Risk"] },
+        { "text": "A few early adopters or contracts", "adds": ["Market Adoption Risk"] },
+        { "text": "Several independent clients or markets", "adds": [] }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "How stable are your current cash flows or funding streams?",
+      "options": [
+        { "text": "Unpredictable or ad-hoc", "adds": ["Funding / Liquidity Risk"] },
+        { "text": "Moderately stable", "adds": [] },
+        { "text": "Strong and recurring", "adds": [] }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "Does your solution depend on external regulations or compliance approvals?",
+      "options": [
+        { "text": "Yes, heavily regulated", "adds": ["IP / Legal Risk"] },
+        { "text": "Somewhat regulated", "adds": ["Market Adoption Risk"] },
+        { "text": "Not regulated", "adds": [] }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "How ready is your team for scaling operations?",
+      "options": [
+        { "text": "Limited experience", "adds": ["Operational Risk"] },
+        { "text": "Some experience, moderate systems", "adds": [] },
+        { "text": "Experienced and well-prepared", "adds": [] }
+      ]
+    },
+    {
+      "id": 6,
+      "question": "What external factors could most disrupt your project?",
+      "options": [
+        { "text": "Supply chain or logistics", "adds": ["Operational Risk"] },
+        { "text": "Economic downturn", "adds": ["Funding / Liquidity Risk"] },
+        { "text": "Policy or climate risk", "adds": ["ESG / Sustainability Risk"] }
+      ]
+    }
+  ],
+  "scoring": {
+    "base_points_per_hit": 10,
+    "top_n": 5
+  }
+}
