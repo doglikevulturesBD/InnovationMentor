@@ -345,3 +345,4 @@ with st.expander("📘 Learn: What these metrics mean"):
 **Monte Carlo** — Repeats the model with random variations to estimate risk.
 """
     )
+
