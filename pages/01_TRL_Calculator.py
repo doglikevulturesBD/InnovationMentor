@@ -4,6 +4,14 @@ from utils.trl_logic import (
     questions, calculate_trl, trl_description,
     trl_descriptions, next_trl_description
 )
+import streamlit as st
+if "authenticated" not in st.session_state or not st.session_state.authenticated:
+    st.warning("🔒 Please log in first.")
+    st.stop()
+
+if st.session_state.role == "Demo":
+    st.warning("🚫 This section is not available in demo mode.")
+    st.stop()
 
 st.set_page_config(page_title="TRL Calculator", page_icon="🧪", layout="centered")
 
