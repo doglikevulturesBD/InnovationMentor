@@ -1,16 +1,13 @@
 # ============================================
 # INNOVATION MENTOR APP
 # PAGE: 05_IP_Management.py
-# Function: Intellectual Property (IP) Assistant
+# PHASE 2 – adds rationale + next-steps
 # ============================================
 
 import streamlit as st
 import json
 from pathlib import Path
 
-# ----------------------------
-# PAGE CONFIGURATION
-# ----------------------------
 st.set_page_config(page_title="IP Management", page_icon="💡")
 st.title("💡 Intellectual Property (IP) Management Assistant")
 
@@ -20,67 +17,58 @@ Answer the quick questions below, then view your recommended IP strategy.
 ---
 """)
 
-# ----------------------------
-# LOAD QUESTIONS FROM JSON
-# ----------------------------
-data_path = Path("data/ip_questionnaire.json")
-
-if not data_path.exists():
-    st.error("❌ The file 'data/ip_questionnaire.json' was not found. Please make sure it exists.")
+# ---------- Load Questions ----------
+q_path = Path("data/ip_questionnaire.json")
+if not q_path.exists():
+    st.error("❌ 'ip_questionnaire.json' not found.")
     st.stop()
+with open(q_path, "r", encoding="utf-8") as f:
+    questions = json.load(f)["questions"]
 
-with open(data_path, "r", encoding="utf-8") as f:
-    ip_data = json.load(f)
+# ---------- Load Rationale ----------
+r_path = Path("data/ip_rationale.json")
+if not r_path.exists():
+    st.error("❌ 'ip_rationale.json' not found.")
+    st.stop()
+with open(r_path, "r", encoding="utf-8") as f:
+    rationale_data = json.load(f)
 
-questions = ip_data["questions"]
+# ---------- Initialise Scores ----------
+ip_scores = {k: 0 for k in ["Patent", "Design", "Trademark", "Copyright", "Trade Secret"]}
 
-# ----------------------------
-# INITIALIZE SCORES
-# ----------------------------
-ip_scores = {
-    "Patent": 0,
-    "Design": 0,
-    "Trademark": 0,
-    "Copyright": 0,
-    "Trade Secret": 0
-}
-
-# ----------------------------
-# QUESTIONNAIRE LOOP
-# ----------------------------
+# ---------- Questionnaire ----------
 st.subheader("🧭 Questionnaire")
 
 for q in questions:
     st.markdown(f"**{q['question']}**")
     options = [opt["text"] for opt in q["options"]]
     answer = st.radio("", options, key=q["id"])
-    st.write("")  # adds spacing
-
-    # Update scores based on the selected answer
     for opt in q["options"]:
         if opt["text"] == answer:
             for ip_type in opt["adds"]:
                 ip_scores[ip_type] += 1
-
     st.divider()
 
-# ----------------------------
-# GENERATE RESULTS
-# ----------------------------
+# ---------- Results ----------
 if st.button("🔍 Generate Recommendation"):
+    st.subheader("📊 Your IP Profile")
+
     sorted_scores = sorted(ip_scores.items(), key=lambda x: x[1], reverse=True)
     top_types = [t for t, s in sorted_scores if s >= 2]
 
-    st.subheader("📊 Your IP Profile")
-
-    if top_types:
-        st.success(f"**Recommended Protection:** {', '.join(top_types)}")
-
-        st.markdown("""
-        Phase 2 will include detailed rationale, CIPC/WIPO guidance, and next-step actions
-        for each recommended IP type.
-        """)
-
-        st.markdown("You can later save your results to your Innovation Portfolio.")
-    else:
+    if not top_types:
         st.info("No strong recommendation yet — please review your answers.")
+        st.stop()
+
+    st.success(f"**Recommended Protection:** {', '.join(top_types)}")
+    st.markdown("---")
+
+    # --- Display rationale for each recommended type ---
+    for ip_type in top_types:
+        data = rationale_data[ip_type]
+        with st.expander(f"🔹 {ip_type} – click for details"):
+            st.markdown(f"**Description:** {data['description']}")
+            st.markdown("**Next Steps:**")
+            for step in data["next_steps"]:
+                st.markdown(f"- {step}")
+            st.markdown(f"**Estimated Cost:** {data['approx_cost']}")
