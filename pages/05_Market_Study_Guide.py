@@ -2,6 +2,15 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
+import streamlit as st
+if "authenticated" not in st.session_state or not st.session_state.authenticated:
+    st.warning("🔒 Please log in first.")
+    st.stop()
+
+if st.session_state.role == "Demo":
+    st.warning("🚫 This section is not available in demo mode.")
+    st.stop()
+
 
 st.set_page_config(page_title="Market Study Guide", layout="wide")
 st.title("🌍 Market Study Guide (Compact Dashboard Edition)")
