@@ -1,55 +1,37 @@
 import streamlit as st
+from utils.access_control import login
 
-st.set_page_config(
-    page_title="Innovation Mentor",
-    page_icon="🚀",
-    layout="wide"
-)
+st.set_page_config(page_title="Innovation Mentor", page_icon="💡", layout="wide")
 
-# ---------------------------
-# Header Section
-# ---------------------------
-st.title("🚀 Innovation Mentor Platform")
-st.caption("Integrated framework for innovators — from TRL assessment to commercialization readiness.")
+st.title("💡 Innovation Mentor App")
 
-st.markdown("""
-Welcome to the **Innovation Mentor App**, your one-stop tool for guiding technology projects
-from early research to market-ready commercialization.  
-Use the sidebar to navigate through each stage of development:
-""")
+role = login()
 
-# ---------------------------
-# Quick Navigation Cards
-# ---------------------------
-col1, col2, col3 = st.columns(3)
+# --- Role-based access control ---
+if role == "Admin":
+    st.success("Welcome, Admin! You have full access to all modules.")
+    st.sidebar.write("Access: All sections enabled.")
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### 📚 Full Modules:")
+    st.sidebar.write("TRL, Business Model, Financials, IP, Commercialisation, Risk, etc.")
+    st.markdown("Use the sidebar or page menu to explore all sections.")
 
-with col1:
-    st.header("📊 Assessment")
-    st.page_link("pages/01_TRL_Calculator.py", label="TRL Calculator", icon="🧪")
-    st.page_link("pages/02_Business_Model_Selector.py", label="Business Model Selector", icon="🏗️")
-    st.page_link("pages/03_Financial_Projection.py", label="Financial Projection", icon="💰")
-    st.page_link("pages/04_DCF_IRR_NPV.py", label="DCF / IRR / NPV", icon="📈")
+elif role == "Evaluator":
+    st.info("Welcome, Evaluator! You can view all pages but with limited edit capability.")
+    st.sidebar.write("Access: Read-only mode.")
+    st.sidebar.markdown("You can navigate the full app but some input widgets will be disabled.")
 
-with col2:
-    st.header("📚 Market & Strategy")
-    st.page_link("pages/05_Market_Study_Guide.py", label="Market Study Guide", icon="🧭")
-    st.page_link("pages/06_Marketing_Strategy.py", label="Marketing Strategy", icon="📢")
-    st.page_link("pages/09_Financing_Options.py", label="Financing Options", icon="🏦")
-    st.page_link("pages/08_IP_Management.py", label="IP Management", icon="🧩")
-
-with col3:
-    st.header("🧠 Advanced Tools")
-    st.page_link("pages/10_MonteCarlo_Scenarios.py", label="Monte Carlo Simulator", icon="🎲")
-    st.page_link("pages/11_Risk_Dashboard.py", label="Risk Dashboard", icon="⚠️")
-    st.page_link("pages/12_Road_to_Market.py", label="Road-to-Market", icon="🛣️")
-    st.page_link("pages/07_Export_Report.py", label="Export Summary", icon="📤")
-
-# ---------------------------
-# Footer
-# ---------------------------
-st.divider()
-st.info("""
-💡 **Tip:** Start with the TRL Calculator to determine your technology maturity level.  
-Based on your TRL, the app will later filter suitable business models, financing types, and commercialization paths.
-""")
-
+elif role == "Demo":
+    st.warning("Welcome to the Demo Version! Limited access is active.")
+    st.sidebar.write("Access: TRL, Business Model, and Commercialisation only.")
+    st.sidebar.markdown("Use these pages to preview app features.")
+    st.markdown("""
+    ### Demo Overview
+    This version allows:
+    - TRL Assessment
+    - Business Model Selection
+    - Commercialisation & Marketing Strategy
+    - Partial Risk Dashboard (Preview)
+    """)
+else:
+    st.error("Something went wrong — please try logging in again.")
