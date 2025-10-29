@@ -1,0 +1,48 @@
+{
+  "Patent": {
+    "description": "Patents protect inventions that are new, inventive, and useful. They give the holder exclusive rights to make, use, or sell the invention for 20 years (subject to renewal fees). A provisional patent can secure an early filing date while you refine your concept.",
+    "next_steps": [
+      "Conduct a prior-art search to confirm novelty.",
+      "Prepare a provisional patent through a registered IP attorney or CIPC e-filing.",
+      "After 12 months, file a complete or PCT application for international protection.",
+      "Maintain confidentiality until the filing date."
+    ],
+    "approx_cost": "South Africa: R 2 000 – R 6 000 (provisional filing); R 25 000 – R 60 000 (full patent)."
+  },
+  "Design": {
+    "description": "Design protection covers the aesthetic or visual appearance of a product—its shape, pattern, or configuration—rather than its function. Registered designs in South Africa last up to 15 years.",
+    "next_steps": [
+      "Prepare clear drawings or images showing the product from all angles.",
+      "File a design application at CIPC or via an IP attorney.",
+      "Keep prototypes confidential until filing to preserve novelty."
+    ],
+    "approx_cost": "South Africa: R 1 500 – R 4 000 (filing fee); renewal every 3–5 years."
+  },
+  "Trademark": {
+    "description": "Trademarks protect distinctive names, logos, and slogans that identify goods or services. They prevent others from using confusingly similar marks and can last indefinitely with renewals every 10 years.",
+    "next_steps": [
+      "Search the CIPC or WIPO database to check for similar marks.",
+      "File an application with CIPC or WIPO Madrid System for international coverage.",
+      "Use ™ before registration and ® once approved."
+    ],
+    "approx_cost": "South Africa: R 600 – R 2 000 per class; International (Madrid): R 15 000 – R 30 000 depending on countries."
+  },
+  "Copyright": {
+    "description": "Copyright automatically protects original literary, artistic, and musical works once created. It does not require registration in South Africa and usually lasts for the creator’s lifetime + 50 years.",
+    "next_steps": [
+      "Keep dated drafts or files as proof of authorship.",
+      "Use © Your Name (Year) to indicate ownership.",
+      "Register with voluntary services (e.g., South African Music Rights Organisation) if applicable."
+    ],
+    "approx_cost": "Automatic on creation; optional registration under R 1 000 for proof services."
+  },
+  "Trade Secret": {
+    "description": "Trade secrets protect confidential business information that provides a competitive advantage. Protection lasts as long as the information remains secret.",
+    "next_steps": [
+      "Use non-disclosure agreements (NDAs) with employees and partners.",
+      "Limit access and store information securely.",
+      "Document confidentiality procedures for legal evidence."
+    ],
+    "approx_cost": "Mostly legal drafting and security costs (R 2 000 – R 10 000 for NDAs and policy setup)."
+  }
+}
