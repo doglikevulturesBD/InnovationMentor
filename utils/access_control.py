@@ -39,5 +39,11 @@ def login_screen():
                 st.success(f"Welcome, {username}!")
                 st.experimental_rerun()
             else:
-                st.error("❌ Inv
+                st.error("❌ Invalid username or password")
 
+def logout_button():
+    """Add logout button visible only after login."""
+    if st.sidebar.button("Logout"):
+        for k in ["authenticated", "user", "role"]:
+            st.session_state.pop(k, None)
+        st.experimental_rerun()
