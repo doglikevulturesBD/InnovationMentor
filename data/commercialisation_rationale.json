@@ -1,0 +1,154 @@
+{
+  "Direct Sales": {
+    "description": "Sell your innovation directly to customers or organisations. You control pricing, brand experience, and feedback loops but also carry distribution and marketing costs.",
+    "next_steps": [
+      "Build a sales funnel (demo, quote, close, after-sales).",
+      "Develop key reference clients and case studies.",
+      "Secure logistics and after-sales support systems.",
+      "Scale regionally once repeat sales are proven."
+    ],
+    "cost": "Medium to high initial cost for sales team, logistics, and marketing; high return if customer base grows."
+  },
+  "Licensing": {
+    "description": "License your IP or technology to other firms for royalties or milestone payments. Ideal when manufacturing or scaling internally is costly.",
+    "next_steps": [
+      "Register and protect IP (patent, design, or copyright).",
+      "Identify potential licensees through industry networks or exhibitions.",
+      "Negotiate royalties, territories, and exclusivity terms.",
+      "Monitor licensee performance and collect royalties."
+    ],
+    "cost": "Low operational cost, moderate legal and negotiation cost; steady recurring revenue if licensees perform."
+  },
+  "Joint Venture / Strategic Partnership": {
+    "description": "Form an alliance with one or more organisations to co-develop, co-finance, or co-market your product. Ideal for complex value chains or entering new markets.",
+    "next_steps": [
+      "Define roles, equity, and deliverables for each partner.",
+      "Draft MoUs or JV agreements aligned with IP ownership.",
+      "Pilot the partnership with a limited project.",
+      "Share market data and align branding efforts."
+    ],
+    "cost": "Medium setup and coordination cost; reduces scaling risk and accelerates market access."
+  },
+  "Franchising / Replication Model": {
+    "description": "Replicate your proven business concept by allowing partners to operate under your brand with training, supply, and quality control.",
+    "next_steps": [
+      "Standardise operating manuals and brand assets.",
+      "Develop a training programme for franchisees.",
+      "Set franchise fees and royalty structure.",
+      "Select early franchisees in high-demand regions."
+    ],
+    "cost": "Moderate administrative cost; scalable income stream through royalties."
+  },
+  "Open-Innovation / Co-Development": {
+    "description": "Engage external partners, researchers, or customers to co-develop your innovation. Encourages rapid iteration and broader ownership of success.",
+    "next_steps": [
+      "Host innovation challenges or design sprints.",
+      "Collaborate with universities, startups, or user groups.",
+      "Manage IP and confidentiality through NDAs.",
+      "Publish joint outcomes to build ecosystem credibility."
+    ],
+    "cost": "Low to medium; mainly coordination and facilitation costs. Generates high innovation velocity."
+  },
+  "Public-Private Pilot": {
+    "description": "Validate your technology through demonstration projects with government, municipalities, or public utilities. Builds credibility and data for investors.",
+    "next_steps": [
+      "Prepare a pilot proposal highlighting public benefits.",
+      "Secure letters of intent or MoUs with implementing agencies.",
+      "Collect technical and socio-economic impact data.",
+      "Translate pilot outcomes into commercial offers."
+    ],
+    "cost": "Medium; mostly project management and compliance costs; strong reputational return."
+  },
+  "Digital Platform / Ecosystem Integration": {
+    "description": "Embed your solution into digital platforms, apps, or marketplaces. Ideal for data-driven, network-effect business models.",
+    "next_steps": [
+      "Develop APIs or integration layers.",
+      "Partner with existing digital ecosystems for visibility.",
+      "Use analytics to personalise customer experience.",
+      "Automate onboarding, billing, and support."
+    ],
+    "cost": "Medium-high development cost; scalable revenue with minimal marginal cost."
+  },
+
+  "Product Differentiation": {
+    "description": "Emphasise unique features, performance, or technology to stand out from competitors.",
+    "tactics": [
+      "Highlight R&D story and technical validation.",
+      "Use demonstrations and comparisons.",
+      "Develop premium branding and design consistency."
+    ],
+    "innovation": "Combine scientific storytelling with visual design (infographics, interactive dashboards)."
+  },
+  "Cost / Value Leadership": {
+    "description": "Compete on affordability and efficiency while maintaining acceptable quality.",
+    "tactics": [
+      "Streamline supply chain and production.",
+      "Use transparent pricing communication.",
+      "Leverage economies of scale or digital efficiencies."
+    ],
+    "innovation": "Use digital tools to showcase lifecycle cost savings or pay-as-you-go models."
+  },
+  "Niche / Community Focus": {
+    "description": "Serve a specific, well-defined customer segment with tailored messaging and offerings.",
+    "tactics": [
+      "Build micro-communities or ambassador networks.",
+      "Create specialised versions of your product.",
+      "Engage directly through workshops or local events."
+    ],
+    "innovation": "Use community data and co-creation feedback loops to refine offerings continuously."
+  },
+  "Partnership & Co-Creation": {
+    "description": "Collaborate with other brands, organisations, or users to design, market, and distribute together.",
+    "tactics": [
+      "Run joint campaigns with strategic partners.",
+      "Develop shared innovation labs or demo sites.",
+      "Leverage partner credibility for rapid trust-building."
+    ],
+    "innovation": "Create hybrid ecosystems where multiple brands contribute to shared storytelling."
+  },
+  "Experience & Engagement": {
+    "description": "Focus on customer emotion, storytelling, and memorable interactions.",
+    "tactics": [
+      "Use immersive demos, testimonials, or virtual tours.",
+      "Invest in content that humanises the innovation.",
+      "Celebrate customer success stories."
+    ],
+    "innovation": "Apply gamification and narrative marketing to simplify complex tech topics."
+  },
+  "Digital-First / Data-Driven": {
+    "description": "Prioritise online presence, analytics, and automation to reach customers efficiently.",
+    "tactics": [
+      "Optimise SEO, social media, and targeted ads.",
+      "Use CRM and analytics dashboards to track leads.",
+      "Automate engagement through email or chatbots."
+    ],
+    "innovation": "Integrate AI content tools or predictive analytics for smarter customer targeting."
+  },
+  "Impact-First Branding": {
+    "description": "Position the brand around sustainability, inclusivity, or social value.",
+    "tactics": [
+      "Communicate SDG or carbon-impact metrics.",
+      "Publish transparent sustainability reports.",
+      "Collaborate with NGOs or impact investors."
+    ],
+    "innovation": "Use carbon and SDG badges verified via blockchain or registries."
+  },
+  "Community-Powered Growth": {
+    "description": "Leverage grassroots ambassadors, local champions, and word-of-mouth for expansion.",
+    "tactics": [
+      "Create referral or ambassador programmes.",
+      "Host local demo events or hackathons.",
+      "Empower community influencers."
+    ],
+    "innovation": "Use token-based or rewards-driven systems for engagement."
+  },
+  "Ecosystem Storytelling": {
+    "description": "Tell the story of collaboration, value chains, and broader impact rather than just the product.",
+    "tactics": [
+      "Map and visualise the full ecosystem of partners.",
+      "Publish joint case studies or press features.",
+      "Show system-level benefits instead of single-use cases."
+    ],
+    "innovation": "Use interactive network maps or AR visuals to illustrate ecosystem impact."
+  }
+}
