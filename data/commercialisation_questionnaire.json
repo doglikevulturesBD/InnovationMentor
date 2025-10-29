@@ -1,0 +1,139 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What stage is your innovation currently in?",
+      "options": [
+        {"text": "Early concept or prototype (TRL 3–5)", "adds": {"commercialisation": ["Public-Private Pilot", "Licensing"], "marketing": ["Niche / Community Focus", "Impact-First Branding"]}},
+        {"text": "Validated and tested prototype (TRL 6–7)", "adds": {"commercialisation": ["Public-Private Pilot", "Joint Venture / Strategic Partnership"], "marketing": ["Partnership & Co-Creation", "Experience & Engagement"]}},
+        {"text": "Market-ready or pre-commercial product (TRL 8–9)", "adds": {"commercialisation": ["Direct Sales", "Franchising / Replication Model"], "marketing": ["Product Differentiation", "Digital-First / Data-Driven"]}}
+      ]
+    },
+    {
+      "id": 2,
+      "question": "What is your primary commercial goal for the next 12 months?",
+      "options": [
+        {"text": "Validate technology through pilots or demonstrations", "adds": {"commercialisation": ["Public-Private Pilot"], "marketing": ["Impact-First Branding", "Community-Powered Growth"]}},
+        {"text": "Enter the market with first customers", "adds": {"commercialisation": ["Direct Sales", "Joint Venture / Strategic Partnership"], "marketing": ["Experience & Engagement", "Digital-First / Data-Driven"]}},
+        {"text": "Scale through partnerships or replication", "adds": {"commercialisation": ["Franchising / Replication Model", "Licensing"], "marketing": ["Partnership & Co-Creation", "Ecosystem Storytelling"]}}
+      ]
+    },
+    {
+      "id": 3,
+      "question": "Who are your primary target customers?",
+      "options": [
+        {"text": "Government or public institutions", "adds": {"commercialisation": ["Public-Private Pilot"], "marketing": ["Impact-First Branding", "Experience & Engagement"]}},
+        {"text": "Businesses and industry clients (B2B)", "adds": {"commercialisation": ["Licensing", "Joint Venture / Strategic Partnership"], "marketing": ["Product Differentiation", "Partnership & Co-Creation"]}},
+        {"text": "General consumers or small businesses (B2C)", "adds": {"commercialisation": ["Direct Sales", "Franchising / Replication Model"], "marketing": ["Digital-First / Data-Driven", "Community-Powered Growth"]}}
+      ]
+    },
+    {
+      "id": 4,
+      "question": "What is your strongest asset right now?",
+      "options": [
+        {"text": "Technology or proprietary IP", "adds": {"commercialisation": ["Licensing", "Open-Innovation / Co-Development"], "marketing": ["Product Differentiation", "Ecosystem Storytelling"]}},
+        {"text": "Customer relationships or community networks", "adds": {"commercialisation": ["Direct Sales", "Franchising / Replication Model"], "marketing": ["Community-Powered Growth", "Experience & Engagement"]}},
+        {"text": "Partnerships and industry collaborations", "adds": {"commercialisation": ["Joint Venture / Strategic Partnership"], "marketing": ["Partnership & Co-Creation", "Impact-First Branding"]}}
+      ]
+    },
+    {
+      "id": 5,
+      "question": "How innovative or disruptive is your solution compared to competitors?",
+      "options": [
+        {"text": "Highly novel or disruptive", "adds": {"commercialisation": ["Open-Innovation / Co-Development", "Direct Sales"], "marketing": ["Product Differentiation", "Ecosystem Storytelling"]}},
+        {"text": "Moderately innovative but proven", "adds": {"commercialisation": ["Joint Venture / Strategic Partnership"], "marketing": ["Experience & Engagement", "Partnership & Co-Creation"]}},
+        {"text": "Incremental improvement or cost advantage", "adds": {"commercialisation": ["Franchising / Replication Model"], "marketing": ["Cost / Value Leadership", "Digital-First / Data-Driven"]}}
+      ]
+    },
+    {
+      "id": 6,
+      "question": "What level of investment or funding do you currently have access to?",
+      "options": [
+        {"text": "Limited seed or grant funding", "adds": {"commercialisation": ["Public-Private Pilot", "Licensing"], "marketing": ["Impact-First Branding", "Community-Powered Growth"]}},
+        {"text": "Moderate private or institutional funding", "adds": {"commercialisation": ["Joint Venture / Strategic Partnership"], "marketing": ["Digital-First / Data-Driven", "Experience & Engagement"]}},
+        {"text": "Strong commercial or venture funding", "adds": {"commercialisation": ["Direct Sales", "Franchising / Replication Model"], "marketing": ["Product Differentiation", "Partnership & Co-Creation"]}}
+      ]
+    },
+    {
+      "id": 7,
+      "question": "How complex is your value chain or ecosystem?",
+      "options": [
+        {"text": "Simple – we handle production and sales directly", "adds": {"commercialisation": ["Direct Sales"], "marketing": ["Digital-First / Data-Driven", "Experience & Engagement"]}},
+        {"text": "Moderate – we depend on a few suppliers or partners", "adds": {"commercialisation": ["Joint Venture / Strategic Partnership"], "marketing": ["Partnership & Co-Creation", "Community-Powered Growth"]}},
+        {"text": "Highly complex – success depends on collaboration or licensing", "adds": {"commercialisation": ["Licensing", "Open-Innovation / Co-Development"], "marketing": ["Ecosystem Storytelling", "Impact-First Branding"]}}
+      ]
+    },
+    {
+      "id": 8,
+      "question": "What best describes your intended market expansion approach?",
+      "options": [
+        {"text": "Scale locally before expanding internationally", "adds": {"commercialisation": ["Direct Sales", "Franchising / Replication Model"], "marketing": ["Community-Powered Growth", "Experience & Engagement"]}},
+        {"text": "Form partnerships abroad or license technology internationally", "adds": {"commercialisation": ["Licensing", "Joint Venture / Strategic Partnership"], "marketing": ["Ecosystem Storytelling", "Partnership & Co-Creation"]}},
+        {"text": "Build a global digital platform presence", "adds": {"commercialisation": ["Digital Platform / Ecosystem Integration"], "marketing": ["Digital-First / Data-Driven", "Product Differentiation"]}}
+      ]
+    },
+    {
+      "id": 9,
+      "question": "What drives your brand the most?",
+      "options": [
+        {"text": "Impact and sustainability", "adds": {"commercialisation": ["Public-Private Pilot", "Open-Innovation / Co-Development"], "marketing": ["Impact-First Branding", "Ecosystem Storytelling"]}},
+        {"text": "Technology and performance", "adds": {"commercialisation": ["Licensing", "Direct Sales"], "marketing": ["Product Differentiation", "Digital-First / Data-Driven"]}},
+        {"text": "Affordability and accessibility", "adds": {"commercialisation": ["Franchising / Replication Model"], "marketing": ["Cost / Value Leadership", "Community-Powered Growth"]}}
+      ]
+    },
+    {
+      "id": 10,
+      "question": "How do you currently reach or plan to reach customers?",
+      "options": [
+        {"text": "Through online channels or apps", "adds": {"commercialisation": ["Digital Platform / Ecosystem Integration"], "marketing": ["Digital-First / Data-Driven", "Experience & Engagement"]}},
+        {"text": "Through physical stores, resellers, or partners", "adds": {"commercialisation": ["Direct Sales", "Franchising / Replication Model"], "marketing": ["Partnership & Co-Creation", "Community-Powered Growth"]}},
+        {"text": "Through institutional networks or public programs", "adds": {"commercialisation": ["Public-Private Pilot", "Joint Venture / Strategic Partnership"], "marketing": ["Impact-First Branding", "Ecosystem Storytelling"]}}
+      ]
+    },
+    {
+      "id": 11,
+      "question": "What level of customer engagement do you envision?",
+      "options": [
+        {"text": "Transactional – once-off sales or contracts", "adds": {"commercialisation": ["Licensing", "Direct Sales"], "marketing": ["Cost / Value Leadership"]}},
+        {"text": "Relational – recurring customers, subscriptions", "adds": {"commercialisation": ["Franchising / Replication Model"], "marketing": ["Experience & Engagement", "Digital-First / Data-Driven"]}},
+        {"text": "Collaborative – users co-create or shape the product", "adds": {"commercialisation": ["Open-Innovation / Co-Development"], "marketing": ["Partnership & Co-Creation", "Community-Powered Growth"]}}
+      ]
+    },
+    {
+      "id": 12,
+      "question": "What kind of partnerships do you already have or plan to build?",
+      "options": [
+        {"text": "Academic or research partnerships", "adds": {"commercialisation": ["Public-Private Pilot", "Licensing"], "marketing": ["Impact-First Branding", "Ecosystem Storytelling"]}},
+        {"text": "Corporate or industrial partnerships", "adds": {"commercialisation": ["Joint Venture / Strategic Partnership"], "marketing": ["Partnership & Co-Creation", "Product Differentiation"]}},
+        {"text": "Community or local business collaborations", "adds": {"commercialisation": ["Franchising / Replication Model"], "marketing": ["Community-Powered Growth", "Experience & Engagement"]}}
+      ]
+    },
+    {
+      "id": 13,
+      "question": "How important is data, digital tools, or automation in your model?",
+      "options": [
+        {"text": "Critical – our business depends on data and automation", "adds": {"commercialisation": ["Digital Platform / Ecosystem Integration"], "marketing": ["Digital-First / Data-Driven", "Product Differentiation"]}},
+        {"text": "Helpful but not core", "adds": {"commercialisation": ["Direct Sales"], "marketing": ["Experience & Engagement"]}},
+        {"text": "Minimal or not relevant", "adds": {"commercialisation": ["Public-Private Pilot"], "marketing": ["Impact-First Branding"]}}
+      ]
+    },
+    {
+      "id": 14,
+      "question": "What kind of story do you want your brand to tell?",
+      "options": [
+        {"text": "Innovation and technology leadership", "adds": {"commercialisation": ["Licensing", "Digital Platform / Ecosystem Integration"], "marketing": ["Product Differentiation", "Ecosystem Storytelling"]}},
+        {"text": "Social or environmental impact", "adds": {"commercialisation": ["Public-Private Pilot", "Joint Venture / Strategic Partnership"], "marketing": ["Impact-First Branding", "Community-Powered Growth"]}},
+        {"text": "Accessibility and local empowerment", "adds": {"commercialisation": ["Franchising / Replication Model"], "marketing": ["Cost / Value Leadership", "Experience & Engagement"]}}
+      ]
+    },
+    {
+      "id": 15,
+      "question": "How do you plan to scale your innovation regionally or globally?",
+      "options": [
+        {"text": "License or partner with established players", "adds": {"commercialisation": ["Licensing", "Joint Venture / Strategic Partnership"], "marketing": ["Ecosystem Storytelling", "Partnership & Co-Creation"]}},
+        {"text": "Replicate through franchise or social enterprise model", "adds": {"commercialisation": ["Franchising / Replication Model"], "marketing": ["Community-Powered Growth", "Impact-First Branding"]}},
+        {"text": "Develop a digital marketplace or integration platform", "adds": {"commercialisation": ["Digital Platform / Ecosystem Integration"], "marketing": ["Digital-First / Data-Driven", "Product Differentiation"]}}
+      ]
+    }
+  ]
+}
