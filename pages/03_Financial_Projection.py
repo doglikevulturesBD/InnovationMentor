@@ -2,346 +2,265 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import io
-import json
 from datetime import datetime
 
 st.set_page_config(page_title="Financial Projection (Scenarios)", layout="wide")
-st.title("💰 Financial Projection — Baseline / Optimistic / Pessimistic (v2.0)")
+st.title("💰 Financial Projection — Baseline / Optimistic / Pessimistic (v2.1)")
 
-# =============================
-# Sidebar: Global Assumptions
-# =============================
+# ------------------------
+# Sidebar Inputs
+# ------------------------
 st.sidebar.header("Global Assumptions")
-
 years = st.sidebar.slider("Projection Years", 5, 15, 10)
-discount = st.sidebar.slider("Discount Rate (%)", 0.00, 0.30, 0.10, step=0.005)
+discount = st.sidebar.slider("Discount Rate (%)", 0.0, 0.3, 0.1, step=0.005)
 
 st.sidebar.markdown("---")
 st.sidebar.caption("Unit Economics (Baseline)")
-units_y1 = st.sidebar.number_input("Units sold (Year 1)", 0, 10_000_000, 1_000, step=50)
-price = st.sidebar.number_input("Price per unit (R)", 0, 10_000_000, 5_000, step=50)
-cogs = st.sidebar.number_input("COGS per unit (R)", 0, 10_000_000, 3_000, step=50)
+units_y1 = st.sidebar.number_input("Units sold (Year 1)", 0, 10_000_000, 1000, step=50)
+price = st.sidebar.number_input("Price per unit (R)", 0, 10_000_000, 5000, step=50)
+cogs = st.sidebar.number_input("COGS per unit (R)", 0, 10_000_000, 3000, step=50)
 opex_fixed = st.sidebar.number_input("Fixed OPEX per year (R)", 0, 20_000_000, 200_000, step=10_000)
 capex_y1 = st.sidebar.number_input("CAPEX (Year 1) (R)", 0, 100_000_000, 1_000_000, step=50_000)
-annual_units_growth = st.sidebar.slider("Units Growth per year (%)", 0.0, 1.0, 0.10, step=0.01)
+growth = st.sidebar.slider("Units Growth per year (%)", 0.0, 1.0, 0.10, step=0.01)
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Scenario Sensitivity (applied before random variation)")
+st.sidebar.caption("Scenario Sensitivity")
 rev_up = st.sidebar.slider("Optimistic: Revenue +%", 0.0, 0.5, 0.20, step=0.01)
 cost_down = st.sidebar.slider("Optimistic: Costs -%", 0.0, 0.5, 0.10, step=0.01)
 rev_down = st.sidebar.slider("Pessimistic: Revenue -%", 0.0, 0.5, 0.20, step=0.01)
 cost_up = st.sidebar.slider("Pessimistic: Costs +%", 0.0, 0.5, 0.10, step=0.01)
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Success Probability (Monte Carlo)")
-n_sims = st.sidebar.slider("Simulations per scenario", 100, 5000, 1000, step=100)
+n_sims = st.sidebar.slider("Monte Carlo Samples per scenario", 100, 5000, 1000, step=100)
 
-# =============================
-# Helpers
-# =============================
-def make_units_vector(y1_units: int, growth: float, years: int) -> np.ndarray:
-    return np.array([int(round(y1_units * (1.0 + growth)**(i))) for i in range(years)])
+# ------------------------
+# Helper functions
+# ------------------------
+def make_units(y1, growth, years):
+    return np.array([int(round(y1 * (1 + growth)**i)) for i in range(years)])
 
-def build_df_from_units(units_vec: np.ndarray,
-                        price: float,
-                        cogs: float,
-                        opex_fixed: float,
-                        capex_y1: float) -> pd.DataFrame:
-    years = len(units_vec)
-    revenue = units_vec * price
-    cogs_cost = units_vec * cogs
-    capex = np.zeros(years, dtype=float)
+def build_df(units, price, cogs, opex, capex_y1):
+    years = len(units)
+    capex = np.zeros(years)
     capex[0] = capex_y1
-    opex = np.full(years, float(opex_fixed))
-    net = revenue - cogs_cost - opex - capex
-    df = pd.DataFrame({
+    revenue = units * price
+    cogs_total = units * cogs
+    net = revenue - cogs_total - opex - capex
+    return pd.DataFrame({
         "Year": np.arange(1, years + 1),
-        "Units": units_vec,
-        "Price (R/u)": np.full(years, price, dtype=float),
-        "COGS (R/u)": np.full(years, cogs, dtype=float),
-        "Revenue (R)": revenue.astype(float),
-        "COGS (R)": cogs_cost.astype(float),
-        "OPEX (R)": opex.astype(float),
-        "CAPEX (R)": capex.astype(float),
-        "Net Cashflow (R)": net.astype(float)
+        "Units": units,
+        "Price (R/u)": price,
+        "COGS (R/u)": cogs,
+        "Revenue (R)": revenue,
+        "COGS (R)": cogs_total,
+        "OPEX (R)": opex,
+        "CAPEX (R)": capex,
+        "Net Cashflow (R)": net
     })
-    return df
 
-def recompute_from_columns(df: pd.DataFrame) -> pd.DataFrame:
+def recompute(df):
     df = df.copy()
     df["Revenue (R)"] = df["Units"] * df["Price (R/u)"]
     df["COGS (R)"] = df["Units"] * df["COGS (R/u)"]
     df["Net Cashflow (R)"] = df["Revenue (R)"] - df["COGS (R)"] - df["OPEX (R)"] - df["CAPEX (R)"]
     return df
 
-def npv(rate: float, flows: list[float]) -> float:
-    return float(np.sum([cf / (1.0 + rate)**t for t, cf in enumerate(flows, start=1)]))
+def npv(rate, flows):
+    return np.sum([cf / (1 + rate)**t for t, cf in enumerate(flows, start=1)])
 
-def irr_bisection(flows_with_y0: list[float], lo: float = -0.99, hi: float = 5.0, tol=1e-6, max_iter=200):
-    def f(r):
-        return sum(cf / ((1 + r) ** t) for t, cf in enumerate(flows_with_y0, start=0))
-    f_lo, f_hi = f(lo), f(hi)
-    if np.isnan(f_lo) or np.isnan(f_hi) or f_lo * f_hi > 0:
-        return np.nan
-    for _ in range(max_iter):
-        mid = 0.5 * (lo + hi)
-        f_mid = f(mid)
-        if abs(f_mid) < tol:
+def irr(flows):
+    lo, hi = -0.99, 5.0
+    for _ in range(200):
+        mid = (lo + hi) / 2
+        npv_mid = sum(cf / (1 + mid)**t for t, cf in enumerate(flows, start=0))
+        npv_lo = sum(cf / (1 + lo)**t for t, cf in enumerate(flows, start=0))
+        if npv_mid == 0 or abs(npv_mid) < 1e-6:
             return mid
-        if f_lo * f_mid < 0:
-            hi, f_hi = mid, f_mid
+        if npv_lo * npv_mid < 0:
+            hi = mid
         else:
-            lo, f_lo = mid, f_mid
-    return np.nan
+            lo = mid
+    return 0.0
 
-def payback_period(flows_with_y0: list[float]):
-    cum = np.cumsum(flows_with_y0)
-    for i in range(1, len(flows_with_y0)):
+def payback(flows):
+    cum = np.cumsum(flows)
+    for i in range(1, len(flows)):
         if cum[i] >= 0:
             prev = cum[i-1]
-            delta = flows_with_y0[i]
-            if delta == 0:
-                return float(i)
-            frac = 1.0 - (prev / delta)
-            return float(i - 1 + frac)
+            delta = flows[i]
+            return i - 1 + (abs(prev) / delta)
     return None
 
-def scenario_metrics(df: pd.DataFrame, discount: float) -> dict:
+def success_prob(df, discount, n):
+    base_flows = df["Net Cashflow (R)"].to_numpy()
+    rev = df["Revenue (R)"].to_numpy()
+    cost = (df["COGS (R)"] + df["OPEX (R)"] + df["CAPEX (R)"]).to_numpy()
+    rng = np.random.default_rng()
+    success = 0
+    for _ in range(n):
+        rev_mult = rng.uniform(0.8, 1.2)
+        cost_mult = rng.uniform(0.85, 1.15)
+        rate_mult = rng.uniform(0.9, 1.1)
+        sim_flows = (rev * rev_mult - cost * cost_mult)
+        if npv(discount * rate_mult, sim_flows) > 0:
+            success += 1
+    return success / n * 100
+
+def metrics(df, discount):
     flows = df["Net Cashflow (R)"].tolist()
-    irr_val = irr_bisection([0.0] + flows)
+    # Move CAPEX of Year 1 to time 0
+    irr_val = irr([-float(df["CAPEX (R)"].iloc[0])] + flows[1:])
     return {
-        "npv": npv(discount, flows),
-        "irr": irr_val,
-        "payback": payback_period([0.0] + flows),
-        "pi": (npv(discount, flows) / max(1.0, float(df["CAPEX (R)"].sum())))
+        "NPV": npv(discount, flows),
+        "IRR": irr_val,
+        "Payback": payback([-float(df["CAPEX (R)"].iloc[0])] + flows[1:]),
+        "PI": npv(discount, flows) / max(1, df["CAPEX (R)"].sum())
     }
 
-def success_probability(df: pd.DataFrame, discount: float, n_sims: int) -> float:
-    """
-    Lightweight Monte Carlo: vary revenue, costs, and growth around current table values.
-    For simplicity, apply random multipliers per year consistently within each simulation.
-    """
-    flows_base = df["Net Cashflow (R)"].to_numpy()
-    rev_base = df["Revenue (R)"].to_numpy()
-    cost_base = (df["COGS (R)"] + df["OPEX (R)"] + df["CAPEX (R)"]).to_numpy()
-
-    success = 0
-    rng = np.random.default_rng()
-    for _ in range(n_sims):
-        # Variation ranges (tweak as needed)
-        rev_mult = rng.uniform(0.80, 1.20)    # ±20% revenue
-        cost_mult = rng.uniform(0.85, 1.15)   # ±15% costs
-        rate_mult = rng.uniform(0.90, 1.10)   # ±10% discount
-
-        sim_rev = rev_base * rev_mult
-        sim_cost = cost_base * cost_mult
-        sim_flows = sim_rev - sim_cost
-        if npv(discount * rate_mult, sim_flows.tolist()) > 0:
-            success += 1
-    return (success / n_sims) * 100.0
-
-def apply_scenario(df: pd.DataFrame, kind: str, rev_up=0.20, cost_down=0.10, rev_down=0.20, cost_up=0.10) -> pd.DataFrame:
+def scenario(df, mode):
     df = df.copy()
-    if kind == "optimistic":
-        df["Price (R/u)"] *= (1.0 + rev_up)
-        df["COGS (R/u)"] *= (1.0 - cost_down)
-    elif kind == "pessimistic":
-        df["Price (R/u)"] *= (1.0 - rev_down)
-        df["COGS (R/u)"] *= (1.0 + cost_up)
-    # Recompute revenue/COGS/net
-    return recompute_from_columns(df)
+    if mode == "optimistic":
+        df["Price (R/u)"] *= (1 + rev_up)
+        df["COGS (R/u)"] *= (1 - cost_down)
+    elif mode == "pessimistic":
+        df["Price (R/u)"] *= (1 - rev_down)
+        df["COGS (R/u)"] *= (1 + cost_up)
+    return recompute(df)
 
-# =============================
-# Build Baseline DF
-# =============================
-units_vec = make_units_vector(units_y1, annual_units_growth, years)
-baseline_df_default = build_df_from_units(units_vec, price, cogs, opex_fixed, capex_y1)
-optimistic_df_default = apply_scenario(baseline_df_default, "optimistic", rev_up, cost_down, rev_down, cost_up)
-pessimistic_df_default = apply_scenario(baseline_df_default, "pessimistic", rev_up, cost_down, rev_down, cost_up)
+# ------------------------
+# Default dataframes
+# ------------------------
+units = make_units(units_y1, growth, years)
+baseline_default = build_df(units, price, cogs, opex_fixed, capex_y1)
+optimistic_default = scenario(baseline_default, "optimistic")
+pessimistic_default = scenario(baseline_default, "pessimistic")
 
-# Keep editable copies in session_state (one per scenario)
-if "df_baseline" not in st.session_state:
-    st.session_state.df_baseline = baseline_df_default.copy()
-if "df_optimistic" not in st.session_state:
-    st.session_state.df_optimistic = optimistic_df_default.copy()
-if "df_pessimistic" not in st.session_state:
-    st.session_state.df_pessimistic = pessimistic_df_default.copy()
-
-# If years changed -> rebuild defaults & replace session copies to keep shapes aligned
-for key, default_df in [
-    ("df_baseline", baseline_df_default),
-    ("df_optimistic", optimistic_df_default),
-    ("df_pessimistic", pessimistic_df_default),
+# Ensure state
+for key, df_default in [
+    ("df_base", baseline_default),
+    ("df_opt", optimistic_default),
+    ("df_pes", pessimistic_default)
 ]:
-    if len(st.session_state[key]) != years:
-        st.session_state[key] = default_df.copy()
+    if key not in st.session_state or len(st.session_state[key]) != years:
+        st.session_state[key] = df_default.copy()
 
-# =============================
-# Tabs UI
-# =============================
 tabs = st.tabs(["Baseline", "Optimistic", "Pessimistic", "Summary"])
 
-def scenario_tab(label: str, key: str, default_df: pd.DataFrame):
+# ------------------------
+# Scenario tab component
+# ------------------------
+def scenario_tab(label, key, default_df):
     st.markdown(f"### {label} Scenario")
-    c1, c2, c3 = st.columns([1,1,2])
+    c1, c2 = st.columns([1,1])
     with c1:
         if st.button("🔄 Refill from assumptions", key=f"refill_{key}"):
             st.session_state[key] = default_df.copy()
     with c2:
-        if st.button("♻️ Reset (zeros except Year 1 CAPEX)", key=f"reset_{key}"):
-            df = st.session_state[key].copy()
+        if st.button("♻️ Reset table", key=f"reset_{key}"):
+            df = default_df.copy()
             df["Units"] = 0
-            df["Price (R/u)"] = 0.0
-            df["COGS (R/u)"] = 0.0
-            df["Revenue (R)"] = 0.0
-            df["COGS (R)"] = 0.0
-            df["OPEX (R)"] = 0.0
-            df["CAPEX (R)"] = 0.0
-            df.loc[df.index[0], "CAPEX (R)"] = capex_y1
-            df["Net Cashflow (R)"] = -df["CAPEX (R)"]
+            df["Price (R/u)"] = 0
+            df["COGS (R/u)"] = 0
+            df["OPEX (R)"] = 0
+            df["Revenue (R)"] = 0
+            df["COGS (R)"] = 0
+            df["Net Cashflow (R)"] = 0
+            df["CAPEX (R)"].iloc[0] = capex_y1
             st.session_state[key] = df
 
-    st.caption("Edit any values directly. Net Cashflow updates when you change Units/Price/COGS/OPEX/CAPEX.")
-    edited = st.data_editor(
-        st.session_state[key],
-        num_rows="fixed",
-        use_container_width=True,
-        hide_index=True
-    )
-    edited = recompute_from_columns(edited)
+    st.caption("Edit Units, Price, COGS, OPEX, and CAPEX only. Net Cashflow is calculated automatically.")
 
-    # Persist
+    df = st.session_state[key]
+    editable_cols = [c for c in df.columns if c != "Net Cashflow (R)"]
+    edited = st.data_editor(
+        df,
+        use_container_width=True,
+        num_rows="fixed",
+        hide_index=True,
+        disabled=["Net Cashflow (R)"]
+    )
+
+    edited = recompute(edited)
     st.session_state[key] = edited.copy()
 
-    # Metrics
-    mets = scenario_metrics(edited, discount)
-    success_prob = success_probability(edited, discount, n_sims)
+    mets = metrics(edited, discount)
+    prob = success_prob(edited, discount, n_sims)
 
-    m1, m2, m3, m4, m5 = st.columns(5)
-    m1.metric("NPV (R)", f"{mets['npv']:,.0f}")
-    m2.metric("IRR (%)", f"{(mets['irr']*100 if not np.isnan(mets['irr']) else 0):.1f}")
-    m3.metric("Payback (yrs)", f"{mets['payback']:.1f}" if mets['payback'] is not None else "—")
-    m4.metric("Profitability Index", f"{mets['pi']:,.2f}")
-    m5.metric("Success Prob. (%)", f"{success_prob:.1f}")
+    c1, c2, c3, c4, c5 = st.columns(5)
+    c1.metric("NPV (R)", f"{mets['NPV']:,.0f}")
+    c2.metric("IRR (%)", f"{mets['IRR']*100:.1f}")
+    c3.metric("Payback (yrs)", f"{mets['Payback']:.1f}" if mets['Payback'] else "—")
+    c4.metric("PI", f"{mets['PI']:.2f}")
+    c5.metric("Success Prob. (%)", f"{prob:.1f}")
 
-    with st.expander("🧠 What this means (mentor tips)"):
+    with st.expander("🧠 Mentor Tips"):
         tips = []
-        irr_val = mets['irr']
-        if np.isnan(irr_val) or irr_val < 0.08:
-            tips.append("⚠️ **IRR < 8%** — may struggle to attract investors; improve margins or reduce CAPEX.")
-        elif irr_val < 0.15:
-            tips.append("ℹ️ **IRR 8–15%** — borderline for commercial funds; blended finance may help.")
+        if mets["IRR"] < 0.08:
+            tips.append("⚠️ IRR below 8% — tough sell to investors.")
+        elif mets["IRR"] < 0.15:
+            tips.append("ℹ️ IRR 8–15% — fair; suitable for grants/blended funds.")
         else:
-            tips.append("🚀 **IRR > 15%** — attractive for many investors.")
-        if mets['payback'] is None or (mets['payback'] and mets['payback'] > 10):
-            tips.append("⏳ **Payback > 10 years** — high risk; consider phasing CAPEX or performance-based models.")
-        elif 5 < (mets['payback'] or 100) <= 10:
-            tips.append("🕐 **Payback 5–10 years** — acceptable in infra/ESCO contexts.")
+            tips.append("🚀 IRR above 15% — attractive investment profile.")
+        if mets["Payback"] and mets["Payback"] > 10:
+            tips.append("⏳ Payback >10 years — consider phasing CAPEX.")
+        elif mets["Payback"] and mets["Payback"] > 5:
+            tips.append("🕐 Payback 5–10 years — typical for infra projects.")
         else:
-            tips.append("✅ **Payback < 5 years** — investor-friendly.")
-        tips.append(f"🎯 **Success probability {success_prob:.0f}%** — based on {n_sims} runs with realistic uncertainty.")
+            tips.append("✅ Payback <5 years — highly investable.")
+        tips.append(f"🎯 Success Probability {prob:.0f}% (based on {n_sims} simulations).")
         for t in tips:
             st.markdown("- " + t)
 
-    return edited, mets, success_prob
+    return edited, mets, prob
 
 with tabs[0]:
-    df_base, base_mets, base_prob = scenario_tab("Baseline", "df_baseline", baseline_df_default)
-
+    df_base, mets_base, prob_base = scenario_tab("Baseline", "df_base", baseline_default)
 with tabs[1]:
-    df_opt, opt_mets, opt_prob = scenario_tab("Optimistic", "df_optimistic", optimistic_df_default)
-
+    df_opt, mets_opt, prob_opt = scenario_tab("Optimistic", "df_opt", optimistic_default)
 with tabs[2]:
-    df_pes, pes_mets, pes_prob = scenario_tab("Pessimistic", "df_pessimistic", pessimistic_df_default)
+    df_pes, mets_pes, prob_pes = scenario_tab("Pessimistic", "df_pes", pessimistic_default)
 
-# =============================
-# Summary tab
-# =============================
+# ------------------------
+# Summary
+# ------------------------
 with tabs[3]:
-    st.markdown("### 📊 Scenario Summary")
-    summary_df = pd.DataFrame([
-        {"Scenario": "Baseline", "NPV (R)": base_mets["npv"], "IRR (%)": (base_mets["irr"]*100 if not np.isnan(base_mets["irr"]) else np.nan),
-         "Payback (yrs)": base_mets["payback"], "PI": base_mets["pi"], "Success Prob. (%)": base_prob},
-        {"Scenario": "Optimistic", "NPV (R)": opt_mets["npv"], "IRR (%)": (opt_mets["irr"]*100 if not np.isnan(opt_mets["irr"]) else np.nan),
-         "Payback (yrs)": opt_mets["payback"], "PI": opt_mets["pi"], "Success Prob. (%)": opt_prob},
-        {"Scenario": "Pessimistic", "NPV (R)": pes_mets["npv"], "IRR (%)": (pes_mets["irr"]*100 if not np.isnan(pes_mets["irr"]) else np.nan),
-         "Payback (yrs)": pes_mets["payback"], "PI": pes_mets["pi"], "Success Prob. (%)": pes_prob},
-    ])
-    st.dataframe(summary_df.style.format({
+    st.subheader("📊 Scenario Summary")
+    summary = pd.DataFrame([
+        ["Baseline", mets_base["NPV"], mets_base["IRR"]*100, mets_base["Payback"], mets_base["PI"], prob_base],
+        ["Optimistic", mets_opt["NPV"], mets_opt["IRR"]*100, mets_opt["Payback"], mets_opt["PI"], prob_opt],
+        ["Pessimistic", mets_pes["NPV"], mets_pes["IRR"]*100, mets_pes["Payback"], mets_pes["PI"], prob_pes]
+    ], columns=["Scenario", "NPV (R)", "IRR (%)", "Payback (yrs)", "PI", "Success Prob. (%)"])
+    st.dataframe(summary.style.format({
         "NPV (R)": "{:,.0f}",
         "IRR (%)": "{:.1f}",
         "Payback (yrs)": "{:.1f}",
         "PI": "{:.2f}",
         "Success Prob. (%)": "{:.1f}"
-    }), use_container_width=True, hide_index=True)
+    }), hide_index=True, use_container_width=True)
 
-    # ---------- PDF / HTML export ----------
-    st.markdown("#### 📄 Export Summary")
+    # --- PDF export ---
+    from reportlab.lib.pagesizes import A4
+    from reportlab.pdfgen import canvas
+    from reportlab.lib.units import cm
 
-    def build_summary_text() -> str:
-        lines = []
-        lines.append(f"Financial Projection Summary — {datetime.now().strftime('%Y-%m-%d %H:%M')}")
-        lines.append("")
-        lines.append(f"Years: {years}, Discount rate: {discount*100:.1f}%")
-        lines.append("")
-        for row in summary_df.itertuples(index=False):
-            lines.append(f"{row[0]}: NPV R{row[1]:,.0f} | IRR {row[2]:.1f}% | Payback {row[3] if row[3] is not None else '—'} yrs | PI {row[4]:.2f} | Success {row[5]:.1f}%")
-        lines.append("")
-        lines.append("Notes:")
-        lines.append("• Success probability is based on 1,000-run sensitivity around current table values.")
-        lines.append("• IRR is annualized; Payback is fractional years to breakeven.")
-        return "\n".join(lines)
+    def make_pdf():
+        buf = io.BytesIO()
+        c = canvas.Canvas(buf, pagesize=A4)
+        width, height = A4
+        t = c.beginText(2*cm, height - 2*cm)
+        t.setFont("Helvetica", 10)
+        t.textLine(f"Financial Projection Summary — {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+        t.textLine("")
+        for row in summary.itertuples(index=False):
+            t.textLine(f"{row[0]}: NPV R{row[1]:,.0f} | IRR {row[2]:.1f}% | Payback {row[3]:.1f} yrs | PI {row[4]:.2f} | Success {row[5]:.1f}%")
+        c.drawText(t)
+        c.showPage()
+        c.save()
+        pdf = buf.getvalue()
+        buf.close()
+        return pdf
 
-    # Try PDF via reportlab; fallback to HTML
-    try:
-        from reportlab.lib.pagesizes import A4
-        from reportlab.pdfgen import canvas
-        from reportlab.lib.units import cm
-
-        def make_pdf_bytes() -> bytes:
-            buf = io.BytesIO()
-            c = canvas.Canvas(buf, pagesize=A4)
-            width, height = A4
-            textobj = c.beginText(2*cm, height - 2*cm)
-            textobj.setFont("Helvetica", 10)
-            for line in build_summary_text().splitlines():
-                textobj.textLine(line)
-            c.drawText(textobj)
-            c.showPage()
-            c.save()
-            return buf.getvalue()
-
-        pdf_bytes = make_pdf_bytes()
-        st.download_button(
-            "⬇️ Download PDF Summary",
-            data=pdf_bytes,
-            file_name="financial_projection_summary.pdf",
-            mime="application/pdf",
-            use_container_width=True
-        )
-    except Exception:
-        # Fallback: simple HTML download
-        html = f"""
-        <html><body>
-        <pre style="font-family:Inter,ui-sans-serif;white-space:pre-wrap">{build_summary_text()}</pre>
-        </body></html>
-        """
-        st.download_button(
-            "⬇️ Download Summary (HTML fallback)",
-            data=html.encode("utf-8"),
-            file_name="financial_projection_summary.html",
-            mime="text/html",
-            use_container_width=True
-        )
-
-    with st.expander("🧠 How to use this in a pitch / application"):
-        st.markdown(
-            """
-- Lead with **Baseline**: show NPV, IRR, Payback, and **Success Probability**.
-- Use **Optimistic** to demonstrate upside; use **Pessimistic** to show risk awareness.
-- Tie back to your **Business Model** (subscription vs. ESCO/BOOT influences payback and success odds).
-- Add **ask & use of funds** (what CAPEX covers; expected runway to breakeven).
-            """
-        )
-
-
+    st.download_button("⬇️ Download PDF Summary", make_pdf(),
+                       file_name="financial_projection_summary.pdf",
+                       mime="application/pdf",
+                       use_container_width=True)
