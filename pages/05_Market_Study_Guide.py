@@ -1,11 +1,10 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import io
 from datetime import datetime
 
 st.set_page_config(page_title="Market Study Guide", layout="wide")
-st.title("🌍 Market Study Guide (Phase 1.5)")
+st.title("🌍 Market Study Guide (Compact Dashboard Edition)")
 
 st.markdown("""
 This guided worksheet helps you define and validate your **market** before finalizing your financials.  
@@ -45,16 +44,18 @@ with col3:
 
 growth_rate = st.slider("Expected Annual Market Growth (%)", 0.0, 0.3, 0.08, step=0.01)
 
-# --- TAM–SAM–SOM pyramid ---
+# --- Smaller TAM–SAM–SOM pyramid ---
 st.subheader("Market Size Visualisation (TAM–SAM–SOM Pyramid)")
-fig, ax = plt.subplots(figsize=(4, 4))
+fig, ax = plt.subplots(figsize=(2.5, 2.5))
 ax.barh(["TAM", "SAM", "SOM"], [tam, sam, som], color=["#c7d6f9", "#89b4f8", "#4178e0"])
-ax.set_xlabel("Market Size (R)")
+ax.set_xlabel("Market Size (R)", fontsize=8)
+ax.tick_params(axis="y", labelsize=8)
+ax.tick_params(axis="x", labelsize=8)
 ax.invert_yaxis()
-ax.grid(axis="x", linestyle="--", alpha=0.5)
+ax.grid(axis="x", linestyle="--", alpha=0.4)
 for i, v in enumerate([tam, sam, som]):
-    ax.text(v, i, f"R{v:,.0f}", va="center", ha="left")
-st.pyplot(fig)
+    ax.text(v, i, f"R{v/1_000_000:.1f}M", va="center", ha="left", fontsize=7)
+st.pyplot(fig, use_container_width=False, width=300)
 
 # ----------------------------
 # 3️⃣ Competition Mapping
@@ -125,14 +126,15 @@ st.header("7. Market vs Financial Readiness")
 
 financial_readiness = st.slider("Estimate your Financial Readiness (%)", 0, 100, 70)
 
-fig2, ax2 = plt.subplots(figsize=(5, 4))
-ax2.bar(["Market", "Financial"], [score, financial_readiness], color=["#4a90e2", "#f5a623"])
+fig2, ax2 = plt.subplots(figsize=(2.5, 2.5))
+ax2.bar(["Market", "Financial"], [score, financial_readiness], color=["#4a90e2", "#f5a623"], width=0.5)
 ax2.set_ylim(0, 100)
-ax2.set_ylabel("Readiness (%)")
-ax2.set_title("Comparison of Market and Financial Readiness")
+ax2.set_ylabel("Readiness (%)", fontsize=8)
+ax2.set_title("Market vs Financial Readiness", fontsize=9)
+ax2.tick_params(axis="x", labelsize=8)
 for i, v in enumerate([score, financial_readiness]):
-    ax2.text(i, v + 2, f"{v:.0f}%", ha="center", va="bottom")
-st.pyplot(fig2)
+    ax2.text(i, v + 2, f"{v:.0f}%", ha="center", va="bottom", fontsize=8)
+st.pyplot(fig2, use_container_width=False, width=300)
 
 with st.expander("💡 Mentor Insight"):
     if score < financial_readiness - 10:
@@ -174,7 +176,6 @@ Marketing Readiness: {marketing_readiness}%
 
 Market Readiness Score: {score}% ({readiness_label})
 Financial Readiness: {financial_readiness}%
-
 """
 
 st.download_button(
