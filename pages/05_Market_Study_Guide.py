@@ -1,14 +1,15 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 import io
 from datetime import datetime
 
 st.set_page_config(page_title="Market Study Guide", layout="wide")
-st.title("🌍 Market Study Guide (Phase 1)")
+st.title("🌍 Market Study Guide (Phase 1.5)")
 
 st.markdown("""
 This guided worksheet helps you define and validate your **market** before finalizing your financials.  
-Each section contributes to an overall **Market Readiness Score**, which you can export for funding applications.
+Each section contributes to an overall **Market Readiness Score**, which can be exported or compared against financial readiness.
 """)
 
 # ----------------------------
@@ -44,11 +45,21 @@ with col3:
 
 growth_rate = st.slider("Expected Annual Market Growth (%)", 0.0, 0.3, 0.08, step=0.01)
 
+# --- TAM–SAM–SOM pyramid ---
+st.subheader("Market Size Visualisation (TAM–SAM–SOM Pyramid)")
+fig, ax = plt.subplots(figsize=(4, 4))
+ax.barh(["TAM", "SAM", "SOM"], [tam, sam, som], color=["#c7d6f9", "#89b4f8", "#4178e0"])
+ax.set_xlabel("Market Size (R)")
+ax.invert_yaxis()
+ax.grid(axis="x", linestyle="--", alpha=0.5)
+for i, v in enumerate([tam, sam, som]):
+    ax.text(v, i, f"R{v:,.0f}", va="center", ha="left")
+st.pyplot(fig)
+
 # ----------------------------
 # 3️⃣ Competition Mapping
 # ----------------------------
 st.header("3. Competition Mapping")
-
 st.caption("List your top competitors or substitutes and how you differentiate.")
 default_comp_df = pd.DataFrame({
     "Competitor / Substitute": ["ExampleCo", "LocalAlt", "DIY Methods"],
@@ -62,7 +73,6 @@ comp_df = st.data_editor(default_comp_df, use_container_width=True, num_rows="dy
 # 4️⃣ Customer Validation
 # ----------------------------
 st.header("4. Customer Validation")
-
 col1, col2 = st.columns(2)
 with col1:
     spoke_customers = st.radio("Have you spoken to potential customers?", ["Yes", "No"], index=0)
@@ -87,7 +97,7 @@ pricing_strategy = st.selectbox(
 marketing_readiness = st.slider("How ready is your marketing / branding? (%)", 0, 100, 60)
 
 # ----------------------------
-# 6️⃣ Readiness Scoring
+# 6️⃣ Market Readiness Score
 # ----------------------------
 st.header("6. Market Readiness Score")
 
@@ -99,28 +109,43 @@ score += (pilot_feedback - 1) * 5
 score += min(len(channels) * 5, 15)
 score += (marketing_readiness / 10)
 score += (growth_rate * 100) / 3
-
 score = min(round(score, 1), 100)
+
 readiness_label = (
     "🔴 Early (Below 50%)" if score < 50 else
     "🟡 Developing (50–75%)" if score < 75 else
     "🟢 Ready (Above 75%)"
 )
-
 st.metric("Market Readiness", f"{score} %", readiness_label)
 
+# ----------------------------
+# 7️⃣ Comparison with Financial Readiness
+# ----------------------------
+st.header("7. Market vs Financial Readiness")
+
+financial_readiness = st.slider("Estimate your Financial Readiness (%)", 0, 100, 70)
+
+fig2, ax2 = plt.subplots(figsize=(5, 4))
+ax2.bar(["Market", "Financial"], [score, financial_readiness], color=["#4a90e2", "#f5a623"])
+ax2.set_ylim(0, 100)
+ax2.set_ylabel("Readiness (%)")
+ax2.set_title("Comparison of Market and Financial Readiness")
+for i, v in enumerate([score, financial_readiness]):
+    ax2.text(i, v + 2, f"{v:.0f}%", ha="center", va="bottom")
+st.pyplot(fig2)
+
 with st.expander("💡 Mentor Insight"):
-    if score < 50:
-        st.info("Focus on customer discovery — validate the problem and price points before scaling.")
-    elif score < 75:
-        st.info("Good foundation — gather more pilot data and refine your channel strategy.")
+    if score < financial_readiness - 10:
+        st.info("Your financial model is ahead of your market validation — gather more customer or competitor data.")
+    elif financial_readiness < score - 10:
+        st.info("Your market validation is strong — focus on improving financial projections and funding strategy.")
     else:
-        st.success("Strong market validation — ready to support financial and funding applications.")
+        st.success("Balanced progress between market validation and financial planning.")
 
 # ----------------------------
-# 7️⃣ Export Summary
+# 8️⃣ Export Summary
 # ----------------------------
-st.header("7. Export Summary")
+st.header("8. Export Summary")
 
 summary = f"""
 Market Study Summary — {datetime.now().strftime("%Y-%m-%d %H:%M")}
@@ -148,6 +173,8 @@ Pricing Strategy: {pricing_strategy}
 Marketing Readiness: {marketing_readiness}%
 
 Market Readiness Score: {score}% ({readiness_label})
+Financial Readiness: {financial_readiness}%
+
 """
 
 st.download_button(
