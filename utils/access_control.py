@@ -37,7 +37,7 @@ def login_screen():
                 st.session_state.user = username
                 st.session_state.role = st.secrets["roles"].get(username, "Demo")
                 st.success(f"Welcome, {username}!")
-                st.experimental_rerun()
+                st.rerun()  # ✅ updated
             else:
                 st.error("❌ Invalid username or password")
 
@@ -46,4 +46,5 @@ def logout_button():
     if st.sidebar.button("Logout"):
         for k in ["authenticated", "user", "role"]:
             st.session_state.pop(k, None)
-        st.experimental_rerun()
+        st.sidebar.warning("Logged out.")
+        st.rerun()  # ✅ updated
