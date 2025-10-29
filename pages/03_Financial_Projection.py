@@ -3,6 +3,15 @@ import numpy as np
 import pandas as pd
 import io
 from datetime import datetime
+import streamlit as st
+if "authenticated" not in st.session_state or not st.session_state.authenticated:
+    st.warning("🔒 Please log in first.")
+    st.stop()
+
+if st.session_state.role == "Demo":
+    st.warning("🚫 This section is not available in demo mode.")
+    st.stop()
+
 
 st.set_page_config(page_title="Financial Projection (Scenarios)", layout="wide")
 st.title("💰 Financial Projection — Baseline / Optimistic / Pessimistic (v2.1)")
