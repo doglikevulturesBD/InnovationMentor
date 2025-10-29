@@ -1,37 +1,53 @@
 import streamlit as st
-from utils.access_control import login
+from utils.access_control import login_screen, logout_button
 
 st.set_page_config(page_title="Innovation Mentor", page_icon="💡", layout="wide")
 
-st.title("💡 Innovation Mentor App")
+# ----------------------------
+# LOGIN GATE
+# ----------------------------
+if "authenticated" not in st.session_state or not st.session_state.authenticated:
+    login_screen()
+    st.stop()
 
-role = login()
+# ----------------------------
+# POST-LOGIN INTERFACE
+# ----------------------------
+st.sidebar.title("💡 Innovation Mentor")
+st.sidebar.caption(f"Logged in as: {st.session_state.user} ({st.session_state.role})")
+logout_button()
 
-# --- Role-based access control ---
+role = st.session_state.role
+
+st.title("Welcome to the Innovation Mentor Platform")
+
 if role == "Admin":
-    st.success("Welcome, Admin! You have full access to all modules.")
-    st.sidebar.write("Access: All sections enabled.")
-    st.sidebar.markdown("---")
-    st.sidebar.markdown("### 📚 Full Modules:")
-    st.sidebar.write("TRL, Business Model, Financials, IP, Commercialisation, Risk, etc.")
-    st.markdown("Use the sidebar or page menu to explore all sections.")
+    st.success("You are in Admin mode. Full functionality enabled.")
+    st.write("Access to all tools, editors, and data export options.")
 
 elif role == "Evaluator":
-    st.info("Welcome, Evaluator! You can view all pages but with limited edit capability.")
-    st.sidebar.write("Access: Read-only mode.")
-    st.sidebar.markdown("You can navigate the full app but some input widgets will be disabled.")
+    st.info("You are in Evaluator mode (read-only). Some editing is disabled.")
+    st.write("You can review project data but cannot modify entries.")
 
 elif role == "Demo":
-    st.warning("Welcome to the Demo Version! Limited access is active.")
-    st.sidebar.write("Access: TRL, Business Model, and Commercialisation only.")
-    st.sidebar.markdown("Use these pages to preview app features.")
-    st.markdown("""
-    ### Demo Overview
-    This version allows:
-    - TRL Assessment
-    - Business Model Selection
-    - Commercialisation & Marketing Strategy
-    - Partial Risk Dashboard (Preview)
-    """)
-else:
-    st.error("Something went wrong — please try logging in again.")
+    st.warning("You are in Demo mode. Limited sections available.")
+    st.write("Use this mode to explore TRL, Business Model, and Commercialisation only.")
+
+st.markdown("---")
+st.markdown("### Quick Access Links")
+if role == "Admin":
+    st.markdown("- [TRL Assessment](./01_TRL_Assessment)")
+    st.markdown("- [Business Model](./02_Business_Model)")
+    st.markdown("- [Financial Projections](./03_Financial_Projection)")
+    st.markdown("- [IP Management](./04_IP_Management)")
+    st.markdown("- [Commercialisation Strategy](./05_Commercialisation_Strategy)")
+    st.markdown("- [Risk Dashboard](./06_Risk_Dashboard)")
+elif role == "Evaluator":
+    st.markdown("- [TRL Assessment](./01_TRL_Assessment)")
+    st.markdown("- [Business Model](./02_Business_Model)")
+    st.markdown("- [Commercialisation Strategy](./05_Commercialisation_Strategy)")
+    st.markdown("- [Risk Dashboard](./06_Risk_Dashboard)")
+elif role == "Demo":
+    st.markdown("- [TRL Assessment](./01_TRL_Assessment)")
+    st.markdown("- [Business Model](./02_Business_Model)")
+    st.markdown("- [Commercialisation Strategy](./05_Commercialisation_Strategy)")
