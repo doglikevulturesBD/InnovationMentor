@@ -1,9 +1,21 @@
 import streamlit as st
 
-def login():
-    """Simple login system using Streamlit secrets."""
-    st.sidebar.title("🔐 Login")
+def login_screen():
+    """Render login form and authenticate user."""
+    st.markdown(
+        """
+        <style>
+        div[data-testid="stSidebar"] {visibility: hidden;}
+        footer {visibility: hidden;}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
+    st.title("🔐 Innovation Mentor Login")
+    st.write("Please sign in to continue.")
+
+    # Initialize session states
     if "authenticated" not in st.session_state:
         st.session_state.authenticated = False
     if "role" not in st.session_state:
@@ -11,28 +23,21 @@ def login():
     if "user" not in st.session_state:
         st.session_state.user = None
 
-    if not st.session_state.authenticated:
-        username = st.sidebar.text_input("Username")
-        password = st.sidebar.text_input("Password", type="password")
+    # Centered layout
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        login_btn = st.button("Login")
 
-        if st.sidebar.button("Login"):
+        if login_btn:
             valid_users = st.secrets["users"]
             if username in valid_users and password == valid_users[username]:
                 st.session_state.authenticated = True
                 st.session_state.user = username
                 st.session_state.role = st.secrets["roles"].get(username, "Demo")
-                st.sidebar.success(f"✅ Logged in as {username} ({st.session_state.role})")
+                st.success(f"Welcome, {username}!")
                 st.experimental_rerun()
             else:
-                st.sidebar.error("❌ Invalid credentials")
-        st.stop()
+                st.error("❌ Inv
 
-    # Logout button
-    if st.sidebar.button("Logout"):
-        for key in ["authenticated", "role", "user"]:
-            if key in st.session_state:
-                del st.session_state[key]
-        st.sidebar.warning("Logged out.")
-        st.experimental_rerun()
-
-    return st.session_state.role
