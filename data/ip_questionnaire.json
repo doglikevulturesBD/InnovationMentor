@@ -1,0 +1,71 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What best describes your innovation?",
+      "options": [
+        {"text": "A new product or device", "adds": ["Patent", "Design"]},
+        {"text": "A new process or method", "adds": ["Patent"]},
+        {"text": "A brand name, logo, or slogan", "adds": ["Trademark"]},
+        {"text": "A creative work (book, software, art, video, etc.)", "adds": ["Copyright"]},
+        {"text": "A formula or information kept secret", "adds": ["Trade Secret"]}
+      ]
+    },
+    {
+      "id": 2,
+      "question": "Does your innovation have a unique functional or technical feature?",
+      "options": [
+        {"text": "Yes, it performs a new or improved function", "adds": ["Patent"]},
+        {"text": "No, it’s more about design or brand", "adds": []}
+      ]
+    },
+    {
+      "id": 3,
+      "question": "Is the appearance or shape of the product important to its value?",
+      "options": [
+        {"text": "Yes", "adds": ["Design"]},
+        {"text": "No", "adds": []}
+      ]
+    },
+    {
+      "id": 4,
+      "question": "Will you publicly share or market your innovation soon?",
+      "options": [
+        {"text": "Yes", "adds": ["Trademark", "Copyright"]},
+        {"text": "No, I plan to keep it confidential", "adds": ["Trade Secret"]}
+      ]
+    },
+    {
+      "id": 5,
+      "question": "Does it have a distinctive name or logo?",
+      "options": [
+        {"text": "Yes", "adds": ["Trademark"]},
+        {"text": "No", "adds": []}
+      ]
+    },
+    {
+      "id": 6,
+      "question": "Was it created through original authorship?",
+      "options": [
+        {"text": "Yes", "adds": ["Copyright"]},
+        {"text": "No", "adds": []}
+      ]
+    },
+    {
+      "id": 7,
+      "question": "Do you rely on secrecy for competitive advantage?",
+      "options": [
+        {"text": "Yes", "adds": ["Trade Secret"]},
+        {"text": "No", "adds": []}
+      ]
+    },
+    {
+      "id": 8,
+      "question": "Would you want protection in other countries?",
+      "options": [
+        {"text": "Yes", "adds": ["Patent", "Trademark", "Design"]},
+        {"text": "No", "adds": []}
+      ]
+    }
+  ]
+}
