@@ -1,0 +1,95 @@
+{
+  "Technical Risk": {
+    "description": "Uncertainty whether the technology will perform, scale, or maintain quality in real-world conditions.",
+    "indicators": [
+      "Low TRL or incomplete prototype",
+      "Limited performance data",
+      "Complex integration requirements"
+    ],
+    "mitigation": [
+      "Plan structured pilots and verification tests.",
+      "Engage independent testing partners (labs, universities).",
+      "Add QA gates and reliability checks to development."
+    ],
+    "severity": "High"
+  },
+  "Market Adoption Risk": {
+    "description": "Customers might not adopt quickly due to awareness, fit, or behaviour change barriers.",
+    "indicators": [
+      "Few reference customers",
+      "High education/behaviour change needed",
+      "Value proposition not yet crystal clear"
+    ],
+    "mitigation": [
+      "Run user trials and collect testimonials.",
+      "Refine messaging and onboarding.",
+      "Offer low-friction pilots or guarantees."
+    ],
+    "severity": "Medium"
+  },
+  "Funding / Liquidity Risk": {
+    "description": "Cash-flow shortages or insufficient funding runway to scale.",
+    "indicators": [
+      "High CAPEX or long payback period",
+      "Dependence on grants/single investor"
+    ],
+    "mitigation": [
+      "Diversify funding sources (equity, grants, revenue finance).",
+      "Phase milestones to unlock tranches.",
+      "Adopt lean operations and early revenue."
+    ],
+    "severity": "High"
+  },
+  "IP / Legal Risk": {
+    "description": "Insufficient IP protection, unclear ownership, or regulatory exposure.",
+    "indicators": [
+      "No filings yet or pending disputes",
+      "Complex licensing terms"
+    ],
+    "mitigation": [
+      "File provisional or design protection early.",
+      "Use IP attorneys for contracts/licensing.",
+      "Monitor competitor filings via WIPO/CIPC."
+    ],
+    "severity": "Medium"
+  },
+  "Partnership Risk": {
+    "description": "Over-reliance on or misalignment with key partners and stakeholders.",
+    "indicators": [
+      "Single key partner controls distribution",
+      "Unclear roles or deliverables"
+    ],
+    "mitigation": [
+      "Diversify partnerships and markets.",
+      "Formalise MoUs with SLAs and exit clauses.",
+      "Define IP ownership frameworks clearly."
+    ],
+    "severity": "Medium"
+  },
+  "Operational Risk": {
+    "description": "Internal processes, supply chains, or resources cannot meet demand reliably.",
+    "indicators": [
+      "Immature processes/QA",
+      "Fragile supply logistics"
+    ],
+    "mitigation": [
+      "Map and harden supply chains.",
+      "Introduce SOPs and monitoring dashboards.",
+      "Build redundancy and supplier alternatives."
+    ],
+    "severity": "Medium"
+  },
+  "ESG / Sustainability Risk": {
+    "description": "Environmental, social, or governance issues harm reputation, compliance, or access to capital.",
+    "indicators": [
+      "Unclear ESG disclosures",
+      "High environmental or social externalities"
+    ],
+    "mitigation": [
+      "Quantify impacts (CO₂, jobs, inclusion).",
+      "Align with SDGs and local policy.",
+      "Adopt transparent reporting and governance."
+    ],
+    "severity": "Medium"
+  }
+}
