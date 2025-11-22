@@ -3,16 +3,7 @@ from utils.access_control import login_screen, logout_button
 
 st.set_page_config(page_title="Innovation Mentor", page_icon="💡", layout="wide")
 
-# ----------------------------
-# LOGIN GATE
-# ----------------------------
-if "authenticated" not in st.session_state or not st.session_state.authenticated:
-    login_screen()
-    st.stop()
 
-# ----------------------------
-# POST-LOGIN INTERFACE
-# ----------------------------
 st.sidebar.title("💡 Innovation Mentor")
 st.sidebar.caption(f"Logged in as: {st.session_state.user} ({st.session_state.role})")
 logout_button()
