@@ -6,17 +6,6 @@ st.set_page_config(page_title="Innovation Mentor", page_icon="💡", layout="wid
 
 st.title("Welcome to the Innovation Mentor Platform")
 
-if role == "Admin":
-    st.success("You are in Admin mode. Full functionality enabled.")
-    st.write("Access to all tools, editors, and data export options.")
-
-elif role == "Evaluator":
-    st.info("You are in Evaluator mode (read-only). Some editing is disabled.")
-    st.write("You can review project data but cannot modify entries.")
-
-elif role == "Demo":
-    st.warning("You are in Demo mode. Limited sections available.")
-    st.write("Use this mode to explore TRL, Business Model, and Commercialisation only.")
 
 st.markdown("---")
 st.markdown("### Quick Access Links")
