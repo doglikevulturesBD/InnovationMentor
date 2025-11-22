@@ -64,3 +64,34 @@ This is an early release of the Innovation Mentor platform.
 Some sections are still under development and will be added over time.  
 Your feedback is welcome and helps shape future updates.
 """)
+
+
+st.markdown("---")
+
+# Disclaimer + License Section
+st.markdown("### ⚖️ Disclaimer & Licence")
+
+st.info("""
+**Prototype Version — Independent Project**
+
+This platform is an independent personal project created for educational and guidance purposes.  
+It is **not affiliated with**, **endorsed by**, or **representing** any organisation, agency, or employer.  
+All content is provided on an “as is” basis and should not be interpreted as official advice, funding guidance, or legal opinion.
+
+Use of this tool is voluntary and at your own discretion.
+""")
+
+st.markdown("""
+### 📄 Licence
+
+Unless otherwise noted, the content, logic frameworks, and structure of this platform are released under the following licence:
+
+**Creative Commons Attribution–NonCommercial 4.0 International (CC BY–NC 4.0)**  
+You may share and adapt the material for **non-commercial** purposes, provided attribution is given to the original creator.
+
+Commercial use, resale, or replication of the platform, its logic, or its tools is **not permitted** without written permission.
+
+For permissions or collaboration requests, please contact:  
+**[Your Name] – Innovation Mentor Creator**  
+""")
+
