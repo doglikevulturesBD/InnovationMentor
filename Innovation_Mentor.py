@@ -1,14 +1,8 @@
 import streamlit as st
-from utils.access_control import login_screen, logout_button
+
 
 st.set_page_config(page_title="Innovation Mentor", page_icon="💡", layout="wide")
 
-
-st.sidebar.title("💡 Innovation Mentor")
-st.sidebar.caption(f"Logged in as: {st.session_state.user} ({st.session_state.role})")
-logout_button()
-
-role = st.session_state.role
 
 st.title("Welcome to the Innovation Mentor Platform")
 
