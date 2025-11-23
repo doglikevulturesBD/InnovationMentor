@@ -44,7 +44,7 @@ marketing_scores = defaultdict(int)
 # ----------------------------
 # QUESTIONNAIRE LOOP
 # ----------------------------
-st.subheader("🧭 Questionnaire")
+st.subheader("Questionnaire")
 
 for q in questions:
     st.markdown(f"**{q['question']}**")
