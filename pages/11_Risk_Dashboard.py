@@ -68,7 +68,7 @@ with st.expander("ℹ️ Context detected from other modules (you can leave as-i
 # ----------------------------
 # Questionnaire (6 Q)
 # ----------------------------
-st.subheader("🧭 Quick Risk Questionnaire")
+st.subheader("Quick Risk Questionnaire")
 
 base_scores = defaultdict(int)
 answers = {}
@@ -138,7 +138,7 @@ for rule in weighting_rules:
 sorted_risks = sorted(weighted_scores.items(), key=lambda x: x[1], reverse=True)
 top_risks = [(r, s) for r, s in sorted_risks if s > 0][:top_n]
 
-st.subheader("📊 Top Risks")
+st.subheader("Top Risks")
 if not top_risks:
     st.info("No material risks identified yet. Adjust your answers or context.")
 else:
