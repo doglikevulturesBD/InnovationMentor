@@ -38,7 +38,7 @@ with open(r_path, "r", encoding="utf-8") as f:
 ip_scores = {k: 0 for k in ["Patent", "Design", "Trademark", "Copyright", "Trade Secret"]}
 
 # ---------- Questionnaire ----------
-st.subheader("🧭 Questionnaire")
+st.subheader("Questionnaire")
 
 for q in questions:
     st.markdown(f"**{q['question']}**")
