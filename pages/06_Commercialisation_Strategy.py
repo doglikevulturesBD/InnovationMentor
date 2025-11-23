@@ -13,7 +13,7 @@ from collections import defaultdict
 # PAGE CONFIG
 # ----------------------------
 st.set_page_config(page_title="Commercialisation & Marketing Strategy", page_icon="🚀")
-st.title("🚀 Commercialisation & Marketing Strategy Advisor")
+st.title("Commercialisation & Marketing Strategy Advisor")
 
 st.markdown("""
 This tool helps you identify **how to take your innovation to market** — by recommending the most suitable **commercialisation pathway** 
