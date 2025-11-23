@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="Innovation Mentor", page_icon="💡", layout="wide")
+st.set_page_config(page_title="Innovation Mentor", layout="wide")
 
 st.title("Innovation Mentor")
 st.markdown("Your digital guide through the innovation and commercialisation journey.")
