@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 
 
-st.set_page_config(page_title="IP Management", page_icon="💡")
+st.set_page_config(page_title="IP Management")
 st.title("Intellectual Property (IP) Management Assistant")
 
 st.markdown("""
