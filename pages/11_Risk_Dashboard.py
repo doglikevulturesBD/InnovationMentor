@@ -11,7 +11,7 @@ import pandas as pd
 import streamlit as st
 
 st.set_page_config(page_title="Risk Dashboard")
-st.title("🛡️ Innovation Risk Dashboard")
+st.title("Innovation Risk Dashboard")
 
 st.markdown("""
 This dashboard identifies your **Top Risks** by combining a short diagnostic questionnaire
@@ -182,6 +182,6 @@ if top_risks:
         })
     df = pd.DataFrame(rows)
     csv = df.to_csv(index=False).encode("utf-8")
-    st.download_button("📥 Download Risk Register (CSV)", csv, file_name="risk_register.csv", mime="text/csv")
+    st.download_button("Download Risk Register (CSV)", csv, file_name="risk_register.csv", mime="text/csv")
 
 st.caption("Tip: Other pages can set session_state keys like trl_level, selected_business_model, funding_stage, marketing_top_strategies, commercialisation_pathway to auto-inform this dashboard.")
