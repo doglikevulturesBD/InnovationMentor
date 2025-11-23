@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 st.set_page_config(page_title="Market Study Guide", layout="wide")
-st.title("🌍 Market Study Guide (Compact Dashboard Edition)")
+st.title("Market Study Guide (Compact Dashboard Edition)")
 
 st.markdown("""
 This guided worksheet helps you define and validate your **market** before finalizing your financials.  
