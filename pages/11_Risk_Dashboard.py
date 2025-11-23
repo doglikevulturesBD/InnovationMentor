@@ -10,7 +10,7 @@ from collections import defaultdict
 import pandas as pd
 import streamlit as st
 
-st.set_page_config(page_title="Risk Dashboard", page_icon="🛡️")
+st.set_page_config(page_title="Risk Dashboard")
 st.title("🛡️ Innovation Risk Dashboard")
 
 st.markdown("""
