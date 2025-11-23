@@ -31,7 +31,7 @@ def restart():
     st.session_state.bm_done = False
 
 # -------- Header --------
-st.title("🏗️ Business Model Selector — Profiler")
+st.title("Business Model Selector — Profiler")
 st.caption("Answer a 40-question wizard. We’ll compute weighted tags and recommend your top business models.")
 
 # Optional: show TRL level if present
@@ -105,7 +105,7 @@ else:
                 st.write(item["penalties"])
 
     st.divider()
-    st.markdown("### 📦 Export to next steps")
+    st.markdown("###Export to next steps")
     if names_for_next:
         sel = st.selectbox("Choose one for Financial Projection / Roadmap", names_for_next, index=0)
         st.session_state["top3_models"] = names_for_next
