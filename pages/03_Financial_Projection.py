@@ -4,11 +4,6 @@ import pandas as pd
 import io
 from datetime import datetime
 import streamlit as st
-if "authenticated" not in st.session_state or not st.session_state.authenticated:
-    st.warning("🔒 Please log in first.")
-    st.stop()
-
-
 
 # ------------------------
 # Sidebar Inputs
