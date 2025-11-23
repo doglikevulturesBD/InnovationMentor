@@ -30,31 +30,31 @@ This platform brings together industry best practices, commercialisation framewo
 
 Below is a quick overview of what each section offers:
 
-#### 🔬 TRL Calculator  
+#### TRL Calculator  
 Determine your Technology Readiness Level with a guided assessment based on international TRL frameworks. Get a clear view of your development stage and what is required to advance.
 
-#### 🧩 Business Model Selector  
+#### Business Model Selector  
 Choose the most suitable business model for your innovation. Includes templates, examples, and guiding questions.
 
-#### 📊 Financial Projections  
+#### Financial Projections  
 A starter tool to help you build simple, logic-driven revenue, cost, and cashflow projections. Ideal for early-stage financial planning.
 
-#### 🧠 Market Study Guide  
+#### Market Study Guide  
 A structured approach to understanding your market size, customers, competitors, and value proposition.
 
-#### 🧭 Commercialisation Strategy Builder  
+#### Commercialisation Strategy Builder  
 Define your route to market, identify partners, outline activities, and map out your deployment and scaling pathways.
 
-#### 🧬 IP Management & Selection  
+#### IP Management & Selection  
 Guidance on protecting your intellectual property, including patents, trademarks, copyrights, and trade secrets — with decision support.
 
-#### 💸 Financing Options Explorer  
+#### Financing Options Explorer  
 Discover suitable funding pathways including grants, venture capital, impact funding, government support, and blended finance.
 
-#### 📤 Export Report *(Coming Soon)*  
+#### Export Report *(Coming Soon)*  
 Export your full innovation report as a PDF or structured document.
 
-#### ⚠️ Risk Dashboard *(Coming Soon)*  
+#### Risk Dashboard *(Coming Soon)*  
 An integrated risk view covering technical, commercial, financial, operational, and regulatory risks.
 
 ---
@@ -69,7 +69,7 @@ Your feedback is welcome and helps shape future updates.
 st.markdown("---")
 
 # Disclaimer + License Section
-st.markdown("### ⚖️ Disclaimer & Licence")
+st.markdown("### Disclaimer & Licence")
 
 st.info("""
 **Prototype Version — Independent Project**
@@ -82,7 +82,7 @@ Use of this tool is voluntary and at your own discretion.
 """)
 
 st.markdown("""
-### 📄 Licence
+### Licence
 
 Unless otherwise noted, the content, logic frameworks, and structure of this platform are released under the following licence:
 
