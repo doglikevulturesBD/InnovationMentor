@@ -59,7 +59,7 @@ An integrated risk view covering technical, commercial, financial, operational, 
 
 ---
 
-### 🚀 MVP Notice  
+### MVP Notice  
 This is an early release of the Innovation Mentor platform.  
 Some sections are still under development and will be added over time.  
 Your feedback is welcome and helps shape future updates.
