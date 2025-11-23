@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 st.set_page_config(page_title="IP Management", page_icon="💡")
-st.title("💡 Intellectual Property (IP) Management Assistant")
+st.title("Intellectual Property (IP) Management Assistant")
 
 st.markdown("""
 This tool helps you identify which form of **Intellectual Property (IP)** protection best suits your innovation.
