@@ -12,15 +12,15 @@ from collections import defaultdict
 # ----------------------------
 # PAGE CONFIG
 # ----------------------------
-st.set_page_config(page_title="Commercialisation & Marketing Strategy")
+st.set_page_config(page_title="Commercialisation & Marketing Strategy", layout="wide")
 st.title("Commercialisation & Marketing Strategy Advisor")
+st.caption("Identify the most suitable commercialisation route and top marketing approaches to take your innovation to market.")
 
+st.markdown("---")
 st.markdown("""
-This tool helps you identify **how to take your innovation to market** — by recommending the most suitable **commercialisation pathway** 
-(e.g., Licensing, Direct Sales, Partnerships) and the top **marketing strategies** to build awareness and adoption.
-
-Answer the following questions to receive your tailored strategy mix.
----
+This compact advisor helps you narrow down **how** you should commercialise your innovation  
+(licensing, direct sales, partnerships, platform model, distributor-led, etc.)  
+and the **marketing strategies** that best match your offering, TRL, and customer readiness.
 """)
 
 # ----------------------------
@@ -29,89 +29,101 @@ Answer the following questions to receive your tailored strategy mix.
 data_path = Path("data/commercialisation_questionnaire.json")
 
 if not data_path.exists():
-    st.error("❌ The file 'commercialisation_questionnaire.json' was not found. Please ensure it exists in the /data folder.")
+    st.error("❌ Missing file: `commercialisation_questionnaire.json` in `/data` folder.")
     st.stop()
 
 with open(data_path, "r", encoding="utf-8") as f:
     questions = json.load(f)["questions"]
 
 # ----------------------------
-# INITIALIZE SCORES
+# INITIALISE SCORING BUCKETS
 # ----------------------------
 commercialisation_scores = defaultdict(int)
 marketing_scores = defaultdict(int)
 
 # ----------------------------
-# QUESTIONNAIRE LOOP
+# QUESTIONNAIRE
 # ----------------------------
-st.subheader("Questionnaire")
+st.subheader("📝 Questionnaire")
 
-for q in questions:
-    st.markdown(f"**{q['question']}**")
+for i, q in enumerate(questions, start=1):
+    st.markdown(f"**{i}. {q['question']}**")
     options = [opt["text"] for opt in q["options"]]
-    answer = st.radio("", options, key=f"q{q['id']}")
+
+    answer = st.radio(
+        label="",
+        options=options,
+        key=f"q{q['id']}",
+        horizontal=False
+    )
     st.write("")  # spacing
-    
+
+    # Map scoring to selected option
     for opt in q["options"]:
         if opt["text"] == answer:
             for c_item in opt["adds"]["commercialisation"]:
                 commercialisation_scores[c_item] += 1
             for m_item in opt["adds"]["marketing"]:
                 marketing_scores[m_item] += 1
+
     st.divider()
 
 # ----------------------------
 # GENERATE RECOMMENDATIONS
 # ----------------------------
-if st.button("🔍 Generate My Strategy Mix"):
-    st.subheader("📊 Your Commercialisation & Marketing Strategy Mix")
+if st.button("🔍 Generate My Strategy Mix", use_container_width=True):
+    st.markdown("---")
+    st.subheader("📊 Your Strategy Mix")
 
-    # --- Sort and get top results
-    sorted_commercialisation = sorted(commercialisation_scores.items(), key=lambda x: x[1], reverse=True)
-    sorted_marketing = sorted(marketing_scores.items(), key=lambda x: x[1], reverse=True)
+    # Sort scores
+    sorted_c = sorted(commercialisation_scores.items(), key=lambda x: x[1], reverse=True)
+    sorted_m = sorted(marketing_scores.items(), key=lambda x: x[1], reverse=True)
 
-    top_commercialisation = sorted_commercialisation[0][0] if sorted_commercialisation else None
-    top3_marketing = [t for t, s in sorted_marketing[:3]]
-
-    if not top_commercialisation:
-        st.info("No clear commercialisation pathway identified yet — please review your answers.")
+    if not sorted_c:
+        st.warning("No commercialisation signals detected — complete the questionnaire first.")
         st.stop()
 
-    # --- Display Results
-    st.success(f"**Recommended Commercialisation Pathway:** {top_commercialisation}")
+    top_pathway = sorted_c[0][0]
+    top3_marketing = [m for m, s in sorted_m[:3]]
+
+    # ----------------------------------
+    # DISPLAY MAIN RECOMMENDATIONS
+    # ----------------------------------
+    st.success(f"**Recommended Commercialisation Pathway:** {top_pathway}")
     st.info(f"**Top 3 Marketing Strategies:** {', '.join(top3_marketing)}")
 
     st.markdown("---")
-    st.subheader("🧩 Strategy Breakdown")
+    st.subheader("🧩 Detailed Strategy Breakdown")
 
-    # --- Load rationale JSON (Phase 2 placeholder)
+    # Load the rationale file
     rationale_path = Path("data/commercialisation_rationale.json")
+    rationale_data = {}
+
     if rationale_path.exists():
         with open(rationale_path, "r", encoding="utf-8") as f:
             rationale_data = json.load(f)
-    else:
-        rationale_data = {}
 
-    # --- Display detailed rationales
-    if top_commercialisation in rationale_data:
-        data = rationale_data[top_commercialisation]
-        with st.expander(f"🚀 {top_commercialisation} – Details & Next Steps"):
-            st.markdown(f"**Description:** {data['description']}")
+    # --- Commercialisation Pathway Breakdown ---
+    if top_pathway in rationale_data:
+        block = rationale_data[top_pathway]
+
+        with st.expander(f"🚀 {top_pathway} – Commercialisation Details"):
+            st.markdown(f"**Description:** {block['description']}")
             st.markdown("**Next Steps:**")
-            for step in data["next_steps"]:
+            for step in block["next_steps"]:
                 st.markdown(f"- {step}")
-            st.markdown(f"**Estimated Cost / Complexity:** {data['cost']}")
-            st.markdown("---")
+            st.markdown(f"**Cost / Complexity:** {block['cost']}")
 
+    # --- Marketing Strategies Breakdown ---
     for m in top3_marketing:
         if m in rationale_data:
-            data = rationale_data[m]
-            with st.expander(f"🎯 {m} – Marketing Approach"):
-                st.markdown(f"**Description:** {data['description']}")
+            blk = rationale_data[m]
+            with st.expander(f"🎯 {m} – Marketing Strategy Detail"):
+                st.markdown(f"**Description:** {blk['description']}")
                 st.markdown("**Tactics:**")
-                for t in data["tactics"]:
+                for t in blk["tactics"]:
                     st.markdown(f"- {t}")
-                st.markdown(f"**Innovation Angle:** {data['innovation']}")
-                st.markdown("---")
+                st.markdown(f"**Innovation Fit:** {blk['innovation']}")
 
-    st.caption("Phase 2 will include an exportable Go-to-Market PDF with timelines and KPI guidance.")
+    st.caption("A downloadable Go-to-Market plan (phase 2) will include timelines, positioning, and channel KPIs.")
+
