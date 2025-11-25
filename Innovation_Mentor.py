@@ -95,3 +95,13 @@ For permissions or collaboration requests, please contact:
 **[Your Name] – Innovation Mentor Creator**  
 """)
 
+
+
+st.caption(
+    "This tool stores anonymous reflections and optional comments to support learning. "
+    "No personal information is collected or linked to any reflection. "
+    "Reflections are private and visible only to the administrator. "
+    "Public comments are optional and separate. "
+    "By using this tool, you agree to the processing of anonymous insights for "
+    "improving the mentorship experience."
+)
