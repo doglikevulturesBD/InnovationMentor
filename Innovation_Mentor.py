@@ -39,49 +39,12 @@ st.info("**MVP Notice:** This is an early release. Some tools are experimental o
 st.markdown("---")
 
 # -------------------------------------------------
-# LEGAL + LICENCE
-# -------------------------------------------------
-
-st.markdown("### Disclaimer & Licence")
-
-st.info("""
-**Prototype Version — Independent Project**
-
-This platform is an independent personal project created for educational and guidance purposes.  
-It is **not affiliated with**, **endorsed by**, or **representing** any organisation, agency, or employer.
-""")
-
-st.markdown("""
-The content, frameworks, and tool structure are released under:
-
-**Creative Commons Attribution–NonCommercial 4.0 (CC BY–NC 4.0)**  
-You may share and adapt the material for **non-commercial purposes** with attribution.
-
-Commercial use or replication requires written permission.
-""")
-
-# -------------------------------------------------
-# COOKIE / SESSION NOTICE
+# LEGAL REMINDER (Clean + Short)
 # -------------------------------------------------
 
 st.caption(
-    "This platform uses temporary session cookies strictly for navigation and functionality. "
-    "No tracking, analytics, or personal identifiers are stored."
+    "Before using this platform, please review the Legal & Compliance page for terms, licence details, and POPIA information."
 )
-
-# -------------------------------------------------
-# INTEGRITY PLEDGE
-# -------------------------------------------------
-
-st.markdown("### Innovator Integrity Pledge")
-st.info("""
-By using the Innovation Mentor platform, you agree to:
-- engage honestly with reflection prompts,
-- use the platform ethically and in good faith,
-- respect intellectual property and innovation integrity,
-- avoid misrepresentation of assessments or results,
-- and commit to responsible, sustainable innovation.
-""")
 
 # -------------------------------------------------
 # FOOTER
@@ -92,11 +55,9 @@ st.markdown(
     """
     <div style='text-align: center; color: grey; font-size: 13px;'>
     Innovation Mentor – MVP Version • Created by Brandon Davoren<br>
-    <a href='./10_Legal_and_Compliance' style='color: grey;'>Legal & Compliance</a> • 
-    Session cookies only for functionality.
+    <a href='./10_Legal_and_Compliance' style='color: grey;'>Legal & Compliance</a>
     </div>
     """,
     unsafe_allow_html=True
 )
-
 
