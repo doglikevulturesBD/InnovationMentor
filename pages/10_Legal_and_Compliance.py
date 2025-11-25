@@ -25,7 +25,7 @@ The platform is designed as a personal, independent educational tool to assist i
 
 It is **not affiliated with**, **endorsed by**, or **representing** any organisation, agency, or employer.
 
-### 2. No Professional Advice
+### 2. No Professional or Official Advice
 All content is provided for general guidance and educational purposes only.  
 It does not constitute:
 - legal advice  
@@ -34,6 +34,12 @@ It does not constitute:
 - engineering guidance  
 - commercialisation decisions  
 - IP or patent advice  
+
+The platform must **not** be used for:
+- official evaluations  
+- grant/investment decisions  
+- due diligence  
+- internal or external organisational assessment  
 
 Decisions made based on the platform are solely your responsibility.
 
@@ -61,6 +67,8 @@ The creator is not liable for:
 
 ### 7. Updates to These Terms
 These Terms may be updated as the platform grows. Continued use constitutes acceptance of updated terms.
+
+© 2025 Innovation Mentor Platform — Educational use only.
 """)
 
 
@@ -81,7 +89,7 @@ You may:
 - remix educational materials  
 
 **As long as:**
-- attribution is given  
+- attribution is clear and visible  
 - usage is strictly **non-commercial**  
 
 You may **not**:
@@ -114,6 +122,8 @@ No personal identifiers are collected, including:
 - IP addresses  
 - device information  
 
+The MVP implements **no cookies**, **no tracking**, **no analytics**, and **no background monitoring**.
+
 ### Why Data is Collected
 To support:
 - reflection-based learning  
@@ -126,11 +136,13 @@ Data is stored locally in:
 - **reflections.json** (private reflections)  
 - **comments.json** (optional public comments)  
 
-These are never shared with third parties.
+All data remains local to your device unless you explicitly export or save it.
+
+These files are never shared with third parties.
 
 ### User Rights
 Because no personal data is stored, POPIA rights relating to personal information do not apply.  
-Users may request deletion of their reflections or comments if needed, even though these cannot be linked back to individuals.
+Users may request deletion of their reflections or comments if needed.
 
 ### Security
 The platform is designed to prevent:
@@ -160,7 +172,7 @@ Data is collected solely to:
 - support learning  
 - improve tool effectiveness  
 
-No secondary use exists.
+No secondary or commercial use exists.
 
 ### 3. Storage & Safeguards
 Reflections and comments are stored in isolated JSON files, not linked to any personal identity.  
@@ -195,3 +207,4 @@ As an educational MVP, the tool meets all relevant POPIA requirements under:
 
 This memo may evolve as the platform grows into a multi-user system.
 """)
+
