@@ -5,7 +5,14 @@ st.set_page_config(page_title="Innovation Mentor", layout="wide")
 # -------------------------------------------------
 # HEADER
 # -------------------------------------------------
-st.title("Innovation Mentor")
+st.title("🚀 Innovation Mentor")
+
+# Premium italic tagline
+st.markdown(
+    "<div style='font-size:16px; color: grey; font-style: italic;'>Innovating for Innovators</div>",
+    unsafe_allow_html=True
+)
+
 st.subheader("Your digital companion for navigating the innovation and commercialisation journey.")
 
 st.markdown("---")
@@ -39,11 +46,11 @@ st.info("**MVP Notice:** This is an early release. Some tools are experimental o
 st.markdown("---")
 
 # -------------------------------------------------
-# LEGAL REMINDER (Clean + Short)
+# LEGAL REMINDER
 # -------------------------------------------------
 
 st.caption(
-    "Before using this platform, please review the Legal & Compliance page for terms, licence details, and POPIA information."
+    "Before using this platform, please review the Legal & Compliance page for terms, licensing, and POPIA information."
 )
 
 # -------------------------------------------------
@@ -54,8 +61,8 @@ st.markdown("---")
 st.markdown(
     """
     <div style='text-align: center; color: grey; font-size: 13px;'>
-    Innovation Mentor – MVP Version • Created by Brandon Davoren<br>
-    <a href='./10_Legal_and_Compliance' style='color: grey;'>Legal & Compliance</a>
+        Innovation Mentor – MVP Version • Created by Brandon Davoren<br>
+        <a href='./10_Legal_and_Compliance' style='color: grey;'>Legal & Compliance</a>
     </div>
     """,
     unsafe_allow_html=True
