@@ -1,55 +1,68 @@
 import streamlit as st
+from utils.reflections_store import save_reflection
+
 
 def enforce_reflection(module_name: str):
+    """
+    Tracks full page uses of each module.
+    After 3 full uses, the user must complete a reflection before continuing.
+    Reflections are saved privately (not visible in public comments).
+    """
 
-    # Keys
+    # --- Session Keys ---
     use_key = f"use_count_{module_name}"
-    reflection_key = f"reflection_required_{module_name}"
-    acknowledged_key = f"reflection_acknowledged_{module_name}"
+    reflection_required_key = f"reflection_required_{module_name}"
+    reflection_ack_key = f"reflection_acknowledged_{module_name}"
 
-    # Initialise
+    # --- Initialise State ---
     st.session_state.setdefault(use_key, 0)
-    st.session_state.setdefault(reflection_key, False)
-    st.session_state.setdefault(acknowledged_key, False)
+    st.session_state.setdefault(reflection_required_key, False)
+    st.session_state.setdefault(reflection_ack_key, False)
 
-    # Count a full use ONLY if reflection is not pending
-    if not st.session_state[reflection_key]:
+    # --- Count FULL MODULE USE ---
+    # (Only count if a reflection is not currently required)
+    if not st.session_state[reflection_required_key]:
         st.session_state[use_key] += 1
 
-    # Trigger reflection after 3 full uses
-    if st.session_state[use_key] >= 3 and not st.session_state[reflection_key]:
-        st.session_state[reflection_key] = True
+    # --- Trigger reflection requirement after 3 full uses ---
+    if st.session_state[use_key] >= 3 and not st.session_state[reflection_required_key]:
+        st.session_state[reflection_required_key] = True
 
-    # If reflection is required → block the page until completed
-    if st.session_state[reflection_key] and not st.session_state[acknowledged_key]:
+    # --- BLOCK PAGE IF REFLECTION REQUIRED ---
+    if st.session_state[reflection_required_key] and not st.session_state[reflection_ack_key]:
+
         st.error("Reflection required before continuing 👇")
-        st.subheader("Required Reflection / Suggestion")
+        st.subheader("Mandatory Reflection / Suggestion")
 
-        response = st.text_area(
-            "Please write one suggestion, lesson, or improvement before continuing:",
+        reflection_text = st.text_area(
+            "Before continuing, please write one quick suggestion, lesson learned, or next step:",
             height=130
         )
 
         if st.button("Submit Reflection"):
-            if len(response.strip()) == 0:
+            if len(reflection_text.strip()) == 0:
                 st.warning("Please enter something meaningful before submitting.")
             else:
-                # Reset everything
-                st.session_state[use_key] = 0
-                st.session_state[reflection_key] = False
-                st.session_state[acknowledged_key] = True
+                # Save reflection privately
+                save_reflection(module_name, reflection_text.strip())
 
-                st.success("Reflection saved! You may now continue using this module.")
+                # Reset counters + flags
+                st.session_state[use_key] = 0
+                st.session_state[reflection_required_key] = False
+                st.session_state[reflection_ack_key] = True
+
+                st.success("Reflection submitted. You may now continue.")
                 st.rerun()
 
-        # Hard block the module until completed
+        # HARD BLOCK — stop all module content
         st.stop()
 
-    # Allow normal use if reflection is done
-    if st.session_state[acknowledged_key]:
-        # After the first click through, allow new cycles again
-        st.session_state[acknowledged_key] = False
+    # --- Allow normal use after user completed reflection ---
+    if st.session_state[reflection_ack_key]:
+        # Reset acknowledgement so the next cycle works cleanly
+        st.session_state[reflection_ack_key] = False
 
-    # Progress bar (optional)
-    st.progress(min(st.session_state[use_key] / 3, 1.0))
+    # --- Optional progress indicator ---
+    progress = min(st.session_state[use_key] / 3, 1.0)
+    st.progress(progress)
 
