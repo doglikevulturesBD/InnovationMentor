@@ -74,34 +74,31 @@ st.markdown("### Disclaimer & Licence")
 st.info("""
 **Prototype Version — Independent Project**
 
-This platform is an independent personal project created for educational and guidance purposes.  
-It is **not affiliated with**, **endorsed by**, or **representing** any organisation, agency, or employer.  
-All content is provided on an “as is” basis and should not be interpreted as official advice, funding guidance, or legal opinion.
-
-Use of this tool is voluntary and at your own discretion.
-""")
-
-st.markdown("""
-### Licence
-
-Unless otherwise noted, the content, logic frameworks, and structure of this platform are released under the following licence:
-
-**Creative Commons Attribution–NonCommercial 4.0 International (CC BY–NC 4.0)**  
-You may share and adapt the material for **non-commercial** purposes, provided attribution is given to the original creator.
-
-Commercial use, resale, or replication of the platform, its logic, or its tools is **not permitted** without written permission.
-
-For permissions or collaboration requests, please contact:  
-**[Your Name] – Innovation Mentor Creator**  
-""")
-
-
-
 st.caption(
-    "This tool stores anonymous reflections and optional comments to support learning. "
-    "No personal information is collected or linked to any reflection. "
-    "Reflections are private and visible only to the administrator. "
-    "Public comments are optional and separate. "
-    "By using this tool, you agree to the processing of anonymous insights for "
-    "improving the mentorship experience."
+    "This platform uses temporary session cookies strictly for navigation and tool functionality. "
+    "No tracking, analytics, or personal identifiers are stored."
 )
+
+
+st.markdown("### Innovator Integrity Pledge")
+st.info("""
+By using the Innovation Mentor platform, you affirm that you will:
+- engage honestly with each tool and reflection prompt,
+- use the platform ethically and in good faith,
+- maintain respect for intellectual property and the innovation journey,
+- avoid misrepresentation of results, assessments, or commercial potential,
+- and commit to learning, growth, and responsible innovation.
+""")
+
+
+st.markdown("---")
+st.markdown(
+    "<div style='text-align: center; color: grey; font-size: 13px;'>"
+    "Innovation Mentor – MVP Version • Created by Brandon Davoren<br>"
+    "<a href='./10_Legal_and_Compliance' style='color: grey;'>Legal & Compliance</a> • "
+    "<a href='./10_Legal_and_Compliance' style='color: grey;'>Privacy</a> • "
+    "Session cookies only for functionality, no tracking."
+    "</div>",
+    unsafe_allow_html=True
+)
+
