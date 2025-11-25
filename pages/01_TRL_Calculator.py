@@ -1,10 +1,16 @@
 # app.py
 import streamlit as st
+from utils.reflection_manager import enforce_reflection
+from utils.comments_manager import comments_box
 from utils.trl_logic import (
     questions, calculate_trl, trl_description,
     trl_descriptions, next_trl_description
 )
 
+module_name = "TRL_Assessment"
+enforce_reflection(module_name)
+
+st.title("TRL Assessment Tool")
 
 # ---------- Session State ----------
 if "step" not in st.session_state:        st.session_state.step = 0
@@ -74,4 +80,5 @@ else:
         st.markdown(f"{marker} **{title}:** {trl_descriptions[lvl]}")
 
     st.button("🔁 Restart", on_click=restart, use_container_width=True)
-
+# Optional comments section
+comments_box(module_name)
