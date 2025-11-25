@@ -1,44 +1,55 @@
 import streamlit as st
 
 def enforce_reflection(module_name: str):
-    """
-    Blocks the user after 3 uses of a module until they complete a reflection.
-    After reflection is submitted, usage resets and user may continue indefinitely.
-    """
 
+    # Keys
     use_key = f"use_count_{module_name}"
-    reflection_key = f"reflection_done_{module_name}"
+    reflection_key = f"reflection_required_{module_name}"
+    acknowledged_key = f"reflection_acknowledged_{module_name}"
 
-    # Initialise keys
+    # Initialise
     st.session_state.setdefault(use_key, 0)
     st.session_state.setdefault(reflection_key, False)
+    st.session_state.setdefault(acknowledged_key, False)
 
-    # Only increment usage if reflection is not pending
+    # Count a full use ONLY if reflection is not pending
     if not st.session_state[reflection_key]:
         st.session_state[use_key] += 1
 
-    # If 3 uses → require reflection
+    # Trigger reflection after 3 full uses
     if st.session_state[use_key] >= 3 and not st.session_state[reflection_key]:
-        st.error("Reflection required before continuing 👇")
+        st.session_state[reflection_key] = True
 
-        st.subheader("Reflection / Suggestion Before Continuing")
+    # If reflection is required → block the page until completed
+    if st.session_state[reflection_key] and not st.session_state[acknowledged_key]:
+        st.error("Reflection required before continuing 👇")
+        st.subheader("Required Reflection / Suggestion")
+
         response = st.text_area(
-            "Write a short suggestion, insight, or next step:",
+            "Please write one suggestion, lesson, or improvement before continuing:",
             height=130
         )
 
         if st.button("Submit Reflection"):
             if len(response.strip()) == 0:
-                st.warning("Please enter something before submitting.")
+                st.warning("Please enter something meaningful before submitting.")
             else:
-                st.session_state[reflection_key] = True
+                # Reset everything
                 st.session_state[use_key] = 0
-                st.success("Thank you — you can now continue using this module.")
+                st.session_state[reflection_key] = False
+                st.session_state[acknowledged_key] = True
+
+                st.success("Reflection saved! You may now continue using this module.")
                 st.rerun()
 
-        # Stop page until reflection is done
+        # Hard block the module until completed
         st.stop()
 
-    # Optional progress indicator
-    progress = min(st.session_state[use_key] / 3, 1.0)
-    st.progress(progress)
+    # Allow normal use if reflection is done
+    if st.session_state[acknowledged_key]:
+        # After the first click through, allow new cycles again
+        st.session_state[acknowledged_key] = False
+
+    # Progress bar (optional)
+    st.progress(min(st.session_state[use_key] / 3, 1.0))
+
