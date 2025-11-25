@@ -16,7 +16,7 @@ st.markdown("---")
 
 st.markdown("### 📂 Quick Access Modules")
 st.markdown("""
-- 🚦 [TRL Assessment](./01_TRL_Calculator)
+- 🚦 [TRL Assessment](./TRL_Calculator)
 - 🧩 [Business Model Selector](./02_Business_Model)
 - 📊 [Financial Projections](./03_Financial_Projection)
 - 🔐 [IP Management & Protection](./04_IP_Management)
