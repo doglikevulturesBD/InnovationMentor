@@ -7,9 +7,6 @@ from utils.trl_logic import (
     trl_descriptions, next_trl_description
 )
 
-module_name = "TRL_Assessment"
-enforce_reflection(module_name)
-
 st.title("TRL Assessment Tool")
 
 # ---------- Session State ----------
