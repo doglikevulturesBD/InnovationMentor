@@ -5,6 +5,11 @@ import io
 from datetime import datetime
 import streamlit as st
 
+# -------- Header --------
+st.title("Financial Projections")
+st.caption("Answer a 40-question wizard. We’ll compute weighted tags and recommend your top business models.")
+
+
 # ------------------------
 # Sidebar Inputs
 # ------------------------
