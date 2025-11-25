@@ -1,129 +1,150 @@
-# pages/02_Business_Model_Selector.py
+# ============================================
+# INNOVATION MENTOR APP
+# PAGE: 03_Business_Model.py
+# ============================================
+
 import streamlit as st
-from collections import Counter
 from utils.model_logic import (
-    QUESTION_BANK, load_models, accumulate_tags,
-    trl_gate_score_adjustments, score_models
+    load_models,
+    QUESTION_BANK,
+    accumulate_tags,
+    trl_gate_score_adjustments,
+    score_models,
+    apply_trl_caps,
+    find_adjacent_models
 )
-from utils.reflection_manager import enforce_reflection
+
+# -------------------------------
+# PAGE CONFIG
+# -------------------------------
+st.set_page_config(page_title="Business Model Recommender", layout="wide")
+st.title("💼 Business Model Recommender")
+st.markdown("""
+Use this structured questionnaire to identify which business model patterns  
+best align with your innovation, TRL level, revenue logic, and delivery strategy.
+---
+""")
 
 
-# -------- Session State --------
-if "bm_step" not in st.session_state: st.session_state.bm_step = 0
-if "bm_answers" not in st.session_state: st.session_state.bm_answers = {}
-if "bm_done" not in st.session_state: st.session_state.bm_done = False
+# =============================
+# Load models & initialise state
+# =============================
+models = load_models()
+
+if "bm_answers" not in st.session_state:
+    st.session_state["bm_answers"] = {}
+
+if "trl_level" not in st.session_state:
+    st.session_state["trl_level"] = None
 
 
-# -------- Navigation Logic --------
-def go_next(choice: str):
-    q = QUESTION_BANK[st.session_state.bm_step]
-    st.session_state.bm_answers[q["id"]] = choice
-    st.session_state.bm_step += 1
-    if st.session_state.bm_step >= len(QUESTION_BANK):
-        st.session_state.bm_done = True
-
-def go_back():
-    if st.session_state.bm_step == 0: 
-        return
-    st.session_state.bm_step -= 1
-    q = QUESTION_BANK[st.session_state.bm_step]
-    st.session_state.bm_answers.pop(q["id"], None)
-
-def restart():
-    st.session_state.bm_step = 0
-    st.session_state.bm_answers = {}
-    st.session_state.bm_done = False
-
-
-# -------- Header --------
-st.title("🧩 Business Model Selector — Profiler")
-st.caption("This wizard evaluates your innovation across 40 signals to recommend your best-fit business models.")
-
-# Show TRL if captured previously
-trl = st.session_state.get("trl_level", None)
-if trl is not None:
-    st.info(f"Detected from TRL page: **TRL {trl}**")
+# =============================
+# TRL INPUT (optional but powerful)
+# =============================
+st.subheader("💡 Technology Readiness Level (Optional)")
+trl = st.slider("Select TRL (1–9)", min_value=1, max_value=9, value=5)
+st.session_state["trl_level"] = trl
 
 st.markdown("---")
 
-# -------- Progress --------
-progress = st.session_state.bm_step / len(QUESTION_BANK)
-st.progress(progress)
+
+# =============================
+# QUESTIONNAIRE
+# =============================
+st.subheader("📋 Business Model Questionnaire")
+
+for q in QUESTION_BANK:
+    with st.container():
+        st.markdown(f"**{q['id']} – {q['section']}**")
+        answer = st.radio(
+            q["text"],
+            list(q["options"].keys()),
+            key=f"bm_{q['id']}"
+        )
+        st.session_state["bm_answers"][q["id"]] = answer
+
+st.markdown("---")
 
 
-# ========== Wizard Flow ==========
-if not st.session_state.bm_done and st.session_state.bm_step < len(QUESTION_BANK):
+# =============================
+# RUN ENGINE
+# =============================
+if st.button("🔍 Generate Business Model Recommendations"):
+    st.subheader("📊 Your Business Model Profile")
 
-    q = QUESTION_BANK[st.session_state.bm_step]
+    selections = {qid: ans for qid, ans in st.session_state["bm_answers"].items()}
 
-    st.markdown(f"### {q['section']} — Question {st.session_state.bm_step + 1} of {len(QUESTION_BANK)}")
-    st.markdown(f"**{q['text']}**")
+    # Step 1 – accumulate raw tag weights
+    tag_weights = accumulate_tags(selections)
 
-    # Restore previous selection if using Back
-    prev = st.session_state.bm_answers.get(q["id"], None)
-    options = list(q["options"].keys())
-    default_index = options.index(prev) if prev in options else 0
+    # Step 2 – adjust for TRL
+    tag_weights = trl_gate_score_adjustments(tag_weights, trl)
 
-    choice = st.radio(
-        "",
-        options,
-        index=default_index,
-        key=f"bm_q_{q['id']}",
-        label_visibility="collapsed"
-    )
+    # Step 3 – score
+    scored = score_models(tag_weights, models, top_k=3)
 
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        st.button("⬅ Back", on_click=go_back, disabled=(st.session_state.bm_step == 0))
-    with col2:
-        st.button("Next ➜", on_click=lambda: go_next(choice), type="primary")
+    # Step 4 – apply TRL caps
+    scored = apply_trl_caps(scored, trl)
 
-# ========== Results ==========
-else:
-    base_weights: Counter = accumulate_tags(st.session_state.bm_answers)
-    adjusted_weights = trl_gate_score_adjustments(base_weights, trl)
-
-    models = load_models()
-    top3 = score_models(adjusted_weights, models, top_k=3)
-
-    st.success(f"### 🎯 Questionnaire Complete!")
-    st.write(f"You generated **{sum(abs(v) for v in adjusted_weights.values())} weighted signals**.")
-
-    st.markdown("### 🏆 Top Recommended Business Models")
-
-    names_for_next = []
-    for i, item in enumerate(top3, start=1):
+    # ========================================
+    # DISPLAY TOP MODELS
+    # ========================================
+    for idx, item in enumerate(scored, start=1):
         m = item["model"]
-        names_for_next.append(m["name"])
-        
-        st.markdown(f"**{i}. {m['name']}** — Score: `{item['score']}`")
-        st.caption(m.get("description", ""))
+        score = item["score"]
+        matched = item["matched"]
+        penalties = item["penalties"]
 
-        with st.expander("Matched Tags"):
-            st.write(item["matched"] or "No strong positive tag matches.")
+        st.markdown(f"### {idx}. **{m['name']}**")
+        st.markdown(f"**Cluster:** {m.get('cluster', 'General')}")
+        st.markdown(f"**Score:** `{score}`")
+        st.markdown(f"**Tags:** `{', '.join(m.get('tags', []))}`")
 
-        if item["penalties"]:
-            with st.expander("Penalties / Fit Issues"):
-                st.write(item["penalties"])
+        # Description
+        with st.expander("📘 Model Description"):
+            st.markdown(m["description"])
 
-    st.divider()
+        # Matched tags
+        with st.expander("🔑 Why this model matched your inputs"):
+            if matched:
+                for t, w in matched.items():
+                    st.markdown(f"- `{t}` (weight {w})")
+            else:
+                st.markdown("_No key overlaps – recommended due to TRL logic or fallback scoring._")
 
-    # EXPORT TO NEXT MODULE
-    st.markdown("### 📤 Export to Next Steps")
-    if names_for_next:
-        selected = st.selectbox("Choose a model for financial projection:", names_for_next)
-        st.session_state["selected_model"] = selected
-        st.success(f"Saved: **{selected}** → You can now proceed to Financial Projections.")
+        # Penalties
+        if penalties:
+            with st.expander("⚠️ Penalties / Risk Misalignment"):
+                for t, w in penalties.items():
+                    st.markdown(f"- `{t}` → penalty `{w}`")
 
-    col1, col2 = st.columns([1, 1])
-    col1.button("🔁 Restart", on_click=restart)
-    col2.page_link("pages/03_Financial_Projection.py", label="➡ Go to Financial Projection", icon="💰")
+        # Similarity graph
+        sim = find_adjacent_models(m, models)
+        if sim:
+            with st.expander("🔁 Related / Similar Models"):
+                for s in sim:
+                    st.markdown(
+                        f"- **{s['model']['name']}** "
+                        f"(similarity `{s['similarity']}`)"
+                    )
 
-    st.divider()
+        st.markdown("---")
 
-    # ------- Reflection -------
-    st.markdown("### 💬 Reflection")
-    enforce_reflection("business_model")
 
+    # ========================================
+    # DISPLAY RAW TAG WEIGHT PROFILE
+    # ========================================
+    with st.expander("🧠 Your underlying tag preference profile"):
+        st.json(dict(tag_weights))
+
+
+# =============================
+# REFLECTION BOX
+# =============================
+st.markdown("## 📝 Reflection")
+st.markdown("""
+Use this space to note insights, adjustments, or ideas that came from your Business Model analysis.
+""")
+st.text_area("Your reflections:", height=150)
 
 
