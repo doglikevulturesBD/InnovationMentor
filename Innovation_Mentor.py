@@ -14,7 +14,7 @@ st.markdown("---")
 # ABOUT SECTION
 # -------------------------------------------------
 
-st.markdown("### 🌟 What This Platform Offers")
+st.markdown("### What This Platform Offers")
 
 st.markdown("""
 The **Innovation Mentor** is an integrated, lightweight toolkit designed to help innovators, founders, researchers, 
@@ -42,7 +42,7 @@ st.markdown("---")
 # LEGAL + LICENCE
 # -------------------------------------------------
 
-st.markdown("### ⚖️ Disclaimer & Licence")
+st.markdown("### Disclaimer & Licence")
 
 st.info("""
 **Prototype Version — Independent Project**
@@ -73,7 +73,7 @@ st.caption(
 # INTEGRITY PLEDGE
 # -------------------------------------------------
 
-st.markdown("### 🤝 Innovator Integrity Pledge")
+st.markdown("### Innovator Integrity Pledge")
 st.info("""
 By using the Innovation Mentor platform, you agree to:
 - engage honestly with reflection prompts,
