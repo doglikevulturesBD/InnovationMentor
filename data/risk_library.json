@@ -1,94 +1,119 @@
 {
   "Technical Risk": {
+    "category": "Technology",
     "description": "Uncertainty whether the technology will perform, scale, or maintain quality in real-world conditions.",
     "indicators": [
       "Low TRL or incomplete prototype",
-      "Limited performance data",
-      "Complex integration requirements"
+      "Limited or non-independent performance data",
+      "Integration with existing systems untested or complex"
     ],
     "mitigation": [
-      "Plan structured pilots and verification tests.",
-      "Engage independent testing partners (labs, universities).",
-      "Add QA gates and reliability checks to development."
+      "Plan structured pilots, verification tests, and stress tests.",
+      "Engage accredited independent testing partners (labs, universities).",
+      "Introduce formal QA/QC gates and reliability checkpoints at each milestone.",
+      "Prototype alternative architectures to reduce technical dependencies."
     ],
     "severity": "High"
   },
+
   "Market Adoption Risk": {
-    "description": "Customers might not adopt quickly due to awareness, fit, or behaviour change barriers.",
+    "category": "Market & Customers",
+    "description": "Customers may not adopt quickly due to awareness, poor fit, or behaviour change barriers.",
     "indicators": [
-      "Few reference customers",
-      "High education/behaviour change needed",
-      "Value proposition not yet crystal clear"
+      "Few or no reference customers",
+      "Long customer education or onboarding required",
+      "Value proposition not yet proven in real settings"
     ],
     "mitigation": [
-      "Run user trials and collect testimonials.",
-      "Refine messaging and onboarding.",
-      "Offer low-friction pilots or guarantees."
+      "Run small-scale paid pilots with tightly scoped success metrics.",
+      "Collect testimonials, case studies, and usage insights early.",
+      "Refine messaging, onboarding flow, and user journey.",
+      "Offer low-friction adoption such as trials, guarantees, or modular entry points."
     ],
     "severity": "Medium"
   },
+
   "Funding / Liquidity Risk": {
-    "description": "Cash-flow shortages or insufficient funding runway to scale.",
+    "category": "Finance",
+    "description": "Insufficient capital or unstable cash flow may limit ability to scale or complete milestones.",
     "indicators": [
-      "High CAPEX or long payback period",
-      "Dependence on grants/single investor"
+      "High CAPEX or long ROI period",
+      "Dependence on single investor, grant, or donor",
+      "Weak financial controls or irregular revenue"
     ],
     "mitigation": [
-      "Diversify funding sources (equity, grants, revenue finance).",
-      "Phase milestones to unlock tranches.",
-      "Adopt lean operations and early revenue."
+      "Diversify funding sources (grants, equity, revenue-based financing, carbon credits).",
+      "Structure phased milestones to unlock investor tranches with reduced dilution.",
+      "Adopt lean operations and validate early revenue channels.",
+      "Model 12–24 month cash runway and perform sensitivity checks."
     ],
     "severity": "High"
   },
+
   "IP / Legal Risk": {
-    "description": "Insufficient IP protection, unclear ownership, or regulatory exposure.",
+    "category": "Legal & Intellectual Property",
+    "description": "Insufficient IP protection, ownership ambiguity, or regulatory exposure.",
     "indicators": [
-      "No filings yet or pending disputes",
-      "Complex licensing terms"
+      "No provisional, design, or trademark filings yet",
+      "IP ownership unclear across co-developers or partners",
+      "Industry requires certification or compliance not yet obtained"
     ],
     "mitigation": [
-      "File provisional or design protection early.",
-      "Use IP attorneys for contracts/licensing.",
-      "Monitor competitor filings via WIPO/CIPC."
+      "File a provisional patent or design registration early.",
+      "Use an IP attorney for licensing, assignments, or co-development contracts.",
+      "Conduct an FTO (Freedom to Operate) scan using WIPO, CIPC, or commercial tools.",
+      "Map required certifications and compliance pathways early."
     ],
     "severity": "Medium"
   },
+
   "Partnership Risk": {
-    "description": "Over-reliance on or misalignment with key partners and stakeholders.",
+    "category": "Partnerships & Ecosystem",
+    "description": "Over-reliance on or misalignment with critical partners and stakeholders.",
     "indicators": [
-      "Single key partner controls distribution",
-      "Unclear roles or deliverables"
+      "Single distribution or manufacturing partner dependency",
+      "Unclear roles, responsibilities, or deliverables",
+      "Verbal-only agreements or expired MoUs"
     ],
     "mitigation": [
-      "Diversify partnerships and markets.",
-      "Formalise MoUs with SLAs and exit clauses.",
-      "Define IP ownership frameworks clearly."
+      "Diversify key partners where possible (suppliers, distributors, validators).",
+      "Replace verbal expectations with written MoUs + SLAs.",
+      "Define IP ownership, revenue share, and exit clauses in advance.",
+      "Start small with scoped pilot agreements before long-term commitments."
     ],
     "severity": "Medium"
   },
+
   "Operational Risk": {
-    "description": "Internal processes, supply chains, or resources cannot meet demand reliably.",
+    "category": "Operations & Delivery",
+    "description": "Internal processes, supply chains, or resources are not mature enough to deliver consistently.",
     "indicators": [
-      "Immature processes/QA",
-      "Fragile supply logistics"
+      "Immature SOPs and QA/QC processes",
+      "Single-point supplier dependencies",
+      "Lack of production or delivery redundancy"
     ],
     "mitigation": [
-      "Map and harden supply chains.",
-      "Introduce SOPs and monitoring dashboards.",
-      "Build redundancy and supplier alternatives."
+      "Map supply chain and identify single points of failure.",
+      "Introduce SOPs, dashboards, and rapid-response systems.",
+      "Build redundancy into suppliers, logistics, and QA checkpoints.",
+      "Run small-scale operational pilots to validate throughput."
     ],
     "severity": "Medium"
   },
+
   "ESG / Sustainability Risk": {
-    "description": "Environmental, social, or governance issues harm reputation, compliance, or access to capital.",
+    "category": "ESG & Compliance",
+    "description": "Environmental, social, or governance shortcomings may limit regulatory approval, investment, or trust.",
     "indicators": [
-      "Unclear ESG disclosures",
-      "High environmental or social externalities"
+      "Unclear ESG metrics or disclosures",
+      "High environmental impact or community risk",
+      "Potential misalignment with national or global sustainability frameworks"
     ],
     "mitigation": [
-      "Quantify impacts (CO₂, jobs, inclusion).",
-      "Align with SDGs and local policy.",
-      "Adopt transparent reporting and governance."
+      "Quantify ESG impacts (CO₂, waste, jobs, inclusion, governance).",
+      "Align with SDGs, national policy, carbon tax, and sectoral guidelines.",
+      "Introduce transparent ESG reporting, monitoring, and stakeholder engagement.",
+      "Highlight positive climate and social impacts in investment materials."
     ],
     "severity": "Medium"
   }
