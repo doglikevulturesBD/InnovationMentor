@@ -34,9 +34,8 @@ def restart():
     st.session_state.answers = []
     st.session_state.finished = False
 
-# ---------- Header ----------
-st.title("Technology Readiness Level (TRL) Calculator")
-st.caption("Linear, stop-on-No questionnaire. Your TRL is the count of consecutive 'Yes' from TRL 1 upward.")
+
+
 
 # ---------- Progress ----------
 progress = st.session_state.step / len(questions)
