@@ -191,21 +191,21 @@ def scenario_tab(label, key, default_df):
     c4.metric("PI", f"{mets['PI']:.2f}")
     c5.metric("Success Prob. (%)", f"{prob:.1f}")
 
-    with st.expander("🧠 Mentor Tips"):
+    with st.expander("Mentor Tips"):
         tips = []
         if mets["IRR"] < 0.08:
-            tips.append("⚠️ IRR below 8% — tough sell to investors.")
+            tips.append("IRR below 8% — tough sell to investors.")
         elif mets["IRR"] < 0.15:
-            tips.append("ℹ️ IRR 8–15% — fair; suitable for grants/blended funds.")
+            tips.append("IRR 8–15% — fair; suitable for grants/blended funds.")
         else:
-            tips.append("🚀 IRR above 15% — attractive investment profile.")
+            tips.append("IRR above 15% — attractive investment profile.")
         if mets["Payback"] and mets["Payback"] > 10:
-            tips.append("⏳ Payback >10 years — consider phasing CAPEX.")
+            tips.append("Payback >10 years — consider phasing CAPEX.")
         elif mets["Payback"] and mets["Payback"] > 5:
-            tips.append("🕐 Payback 5–10 years — typical for infra projects.")
+            tips.append("Payback 5–10 years — typical for infra projects.")
         else:
-            tips.append("✅ Payback <5 years — highly investable.")
-        tips.append(f"🎯 Success Probability {prob:.0f}% (based on {n_sims} simulations).")
+            tips.append("Payback <5 years — highly investable.")
+        tips.append(f"Success Probability {prob:.0f}% (based on {n_sims} simulations).")
         for t in tips:
             st.markdown("- " + t)
 
