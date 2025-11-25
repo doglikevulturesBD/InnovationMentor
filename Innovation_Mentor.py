@@ -11,25 +11,6 @@ st.subheader("Your digital companion for navigating the innovation and commercia
 st.markdown("---")
 
 # -------------------------------------------------
-# QUICK ACCESS MODULES
-# -------------------------------------------------
-
-st.markdown("### 📂 Quick Access Modules")
-st.markdown("""
-- 🚦 [TRL Assessment](./TRL_Calculator)
-- 🧩 [Business Model Selector](./02_Business_Model)
-- 📊 [Financial Projections](./03_Financial_Projection)
-- 🔐 [IP Management & Protection](./04_IP_Management)
-- 🛠️ [Commercialisation Strategy Builder](./05_Commercialisation_Strategy)
-- 📘 [Market Study Guide](./07_Market_Study)
-- 💰 [Financing Options Explorer](./08_Financing_Options)
-- 📄 [Export Report (Coming Soon)](./09_Export_Report)
-- ⚠️ [Risk Dashboard (Coming Soon)](./06_Risk_Dashboard)
-""")
-
-st.markdown("---")
-
-# -------------------------------------------------
 # ABOUT SECTION
 # -------------------------------------------------
 
