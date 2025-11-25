@@ -76,5 +76,4 @@ else:
         st.markdown(f"{marker} **{title}:** {trl_descriptions[lvl]}")
 
     st.button("🔁 Restart", on_click=restart, use_container_width=True)
-# Optional comments section
-comments_box(module_name)
+
