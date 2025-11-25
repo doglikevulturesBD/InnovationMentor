@@ -5,7 +5,7 @@ st.set_page_config(page_title="Innovation Mentor", layout="wide")
 # -------------------------------------------------
 # HEADER
 # -------------------------------------------------
-st.title("🚀 Innovation Mentor")
+st.title("Innovation Mentor")
 
 # Premium italic tagline
 st.markdown(
@@ -62,7 +62,7 @@ st.markdown(
     """
     <div style='text-align: center; color: grey; font-size: 13px;'>
         Innovation Mentor – MVP Version • Created by Brandon Davoren<br>
-        <a href='./10_Legal_and_Compliance' style='color: grey;'>Legal & Compliance</a>
+        <a href='./Legal_and_Compliance' style='color: grey;'>Legal & Compliance</a>
     </div>
     """,
     unsafe_allow_html=True
