@@ -5,7 +5,7 @@ st.set_page_config(page_title="Innovation Mentor", layout="wide")
 # -------------------------------------------------
 # HEADER
 # -------------------------------------------------
-st.title("🚀 Innovation Mentor")
+st.title("Innovation Mentor")
 st.subheader("Your digital companion for navigating the innovation and commercialisation journey.")
 
 st.markdown("---")
