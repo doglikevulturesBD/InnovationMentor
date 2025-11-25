@@ -3,104 +3,128 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-
 st.set_page_config(page_title="Market Study Guide", layout="wide")
-st.title("Market Study Guide (Compact Dashboard Edition)")
+
+# ----------------------------------------------------------
+# HEADER
+# ----------------------------------------------------------
+st.title("📊 Market Study Guide")
+st.caption("A compact, structured worksheet to validate your market before finalising commercialisation and funding plans.")
 
 st.markdown("""
-This guided worksheet helps you define and validate your **market** before finalizing your financials.  
-Each section contributes to an overall **Market Readiness Score**, which can be exported or compared against financial readiness.
+This module helps you build confidence in your **market**, your **customers**, and your **positioning**.  
+The output feeds directly into your **Commercialisation Strategy** and **Financial Projections**.
 """)
 
-# ----------------------------
-# 1️⃣ Market Definition
-# ----------------------------
+st.markdown("---")
+
+# ----------------------------------------------------------
+# 1️⃣ MARKET DEFINITION
+# ----------------------------------------------------------
 st.header("1. Market Definition")
 
 col1, col2 = st.columns(2)
 with col1:
     industry = st.text_input("Industry / Sector", "Energy & Mobility")
-    geography = st.text_input("Primary Market Geography", "South Africa")
+    geography = st.text_input("Primary Geography", "South Africa")
 with col2:
     target_customer = st.text_input("Primary Customer Type", "Municipal fleet operators")
     product_type = st.selectbox("Offering Type", ["Product", "Service", "Platform", "Hybrid"], index=0)
 
 market_problem = st.text_area(
-    "What problem are you solving, and why does it matter?",
+    "Problem Statement",
     "Example: Rising fuel costs and emissions in municipal fleets."
 )
 
-# ----------------------------
-# 2️⃣ Market Size & Growth
-# ----------------------------
+st.markdown("---")
+
+# ----------------------------------------------------------
+# 2️⃣ MARKET SIZE & GROWTH
+# ----------------------------------------------------------
 st.header("2. Market Size & Growth")
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    tam = st.number_input("Total Addressable Market (TAM, R)", 0, 1_000_000_000_000, 10_000_000, step=100_000)
+    tam = st.number_input("TAM — Total Addressable Market (R)", 0, 1_000_000_000_000, 10_000_000, step=100_000)
 with col2:
-    sam = st.number_input("Serviceable Available Market (SAM, R)", 0, 1_000_000_000_000, 5_000_000, step=100_000)
+    sam = st.number_input("SAM — Serviceable Available Market (R)", 0, 1_000_000_000_000, 5_000_000, step=100_000)
 with col3:
-    som = st.number_input("Serviceable Obtainable Market (SOM, R)", 0, 1_000_000_000_000, 1_000_000, step=50_000)
+    som = st.number_input("SOM — Serviceable Obtainable Market (R)", 0, 1_000_000_000_000, 1_000_000, step=50_000)
 
-growth_rate = st.slider("Expected Annual Market Growth (%)", 0.0, 0.3, 0.08, step=0.01)
+growth_rate = st.slider("Expected Annual Growth (%)", 0.0, 30.0, 8.0, step=0.5) / 100
 
-# --- Smaller TAM–SAM–SOM pyramid ---
-st.subheader("Market Size Visualisation (TAM–SAM–SOM Pyramid)")
+st.subheader("TAM–SAM–SOM Pyramid (Compact View)")
 fig, ax = plt.subplots(figsize=(2.5, 2.5))
 ax.barh(["TAM", "SAM", "SOM"], [tam, sam, som], color=["#c7d6f9", "#89b4f8", "#4178e0"])
 ax.set_xlabel("Market Size (R)", fontsize=8)
 ax.tick_params(axis="y", labelsize=8)
 ax.tick_params(axis="x", labelsize=8)
+ax.grid(axis="x", linestyle="--", alpha=0.3)
 ax.invert_yaxis()
-ax.grid(axis="x", linestyle="--", alpha=0.4)
 for i, v in enumerate([tam, sam, som]):
     ax.text(v, i, f"R{v/1_000_000:.1f}M", va="center", ha="left", fontsize=7)
-st.pyplot(fig, use_container_width=False, width=300)
+st.pyplot(fig, width=300)
 
-# ----------------------------
-# 3️⃣ Competition Mapping
-# ----------------------------
+st.markdown("---")
+
+# ----------------------------------------------------------
+# 3️⃣ COMPETITION MAPPING
+# ----------------------------------------------------------
 st.header("3. Competition Mapping")
-st.caption("List your top competitors or substitutes and how you differentiate.")
+st.caption("Map your competitive landscape and identify your advantages.")
+
 default_comp_df = pd.DataFrame({
     "Competitor / Substitute": ["ExampleCo", "LocalAlt", "DIY Methods"],
-    "Price Range (R)": ["10000–15000", "7000–9000", "n/a"],
-    "Key Strength": ["Brand trust", "Low cost", "Accessibility"],
-    "Your Advantage": ["Higher efficiency", "Better support", "Technology"]
+    "Price Range (R)": ["10000–15000", "7000–9000", "—"],
+    "Key Strength": ["Brand trust", "Low cost", "Convenience"],
+    "Your Advantage": ["Higher efficiency", "Better support", "Technology-based"]
 })
-comp_df = st.data_editor(default_comp_df, use_container_width=True, num_rows="dynamic")
 
-# ----------------------------
-# 4️⃣ Customer Validation
-# ----------------------------
+comp_df = st.data_editor(
+    default_comp_df,
+    use_container_width=True,
+    num_rows="dynamic"
+)
+
+st.markdown("---")
+
+# ----------------------------------------------------------
+# 4️⃣ CUSTOMER VALIDATION
+# ----------------------------------------------------------
 st.header("4. Customer Validation")
+
 col1, col2 = st.columns(2)
 with col1:
     spoke_customers = st.radio("Have you spoken to potential customers?", ["Yes", "No"], index=0)
-    num_interviews = st.number_input("How many customer interviews / surveys completed?", 0, 500, 10)
+    num_interviews = st.number_input("Customer Interviews Completed", 0, 500, 10)
 with col2:
-    pilot_done = st.radio("Have you done any pilots or demos?", ["Yes", "No"], index=1)
-    pilot_feedback = st.slider("Average customer interest (1–5)", 1, 5, 4)
+    pilot_done = st.radio("Have you run pilots or demos?", ["Yes", "No"], index=1)
+    pilot_feedback = st.slider("Avg Customer Interest (1–5)", 1, 5, 4)
 
-# ----------------------------
-# 5️⃣ Go-to-Market Strategy
-# ----------------------------
+st.markdown("---")
+
+# ----------------------------------------------------------
+# 5️⃣ GO-TO-MARKET STRATEGY
+# ----------------------------------------------------------
 st.header("5. Go-to-Market Strategy")
 
 channels = st.multiselect(
-    "Which channels will you use to reach customers?",
-    ["Direct sales", "Distributors / partners", "Online / e-commerce", "Tenders / procurement", "Franchise / licensing"]
+    "Planned Channels",
+    ["Direct sales", "Distributors / partners", "Online / e-commerce", "Tenders / procurement", "Licensing"],
 )
+
 pricing_strategy = st.selectbox(
-    "Pricing approach",
+    "Pricing Strategy",
     ["Cost-plus", "Market-based", "Value-based", "Tiered / subscription"]
 )
-marketing_readiness = st.slider("How ready is your marketing / branding? (%)", 0, 100, 60)
 
-# ----------------------------
-# 6️⃣ Market Readiness Score
-# ----------------------------
+marketing_readiness = st.slider("Marketing/Branding Readiness (%)", 0, 100, 60)
+
+st.markdown("---")
+
+# ----------------------------------------------------------
+# 6️⃣ MARKET READINESS SCORE
+# ----------------------------------------------------------
 st.header("6. Market Readiness Score")
 
 score = 0
@@ -114,40 +138,46 @@ score += (growth_rate * 100) / 3
 score = min(round(score, 1), 100)
 
 readiness_label = (
-    "🔴 Early (Below 50%)" if score < 50 else
+    "🔴 Early (<50%)" if score < 50 else
     "🟡 Developing (50–75%)" if score < 75 else
-    "🟢 Ready (Above 75%)"
+    "🟢 Ready (>75%)"
 )
-st.metric("Market Readiness", f"{score} %", readiness_label)
 
-# ----------------------------
-# 7️⃣ Comparison with Financial Readiness
-# ----------------------------
+st.metric("Market Readiness Score", f"{score}%", readiness_label)
+
+# Save for later modules
+st.session_state["market_readiness"] = score
+
+st.markdown("---")
+
+# ----------------------------------------------------------
+# 7️⃣ MARKET VS FINANCIAL READINESS
+# ----------------------------------------------------------
 st.header("7. Market vs Financial Readiness")
 
-financial_readiness = st.slider("Estimate your Financial Readiness (%)", 0, 100, 70)
+financial_readiness = st.slider("Financial Readiness (%)", 0, 100, 70)
 
 fig2, ax2 = plt.subplots(figsize=(2.5, 2.5))
 ax2.bar(["Market", "Financial"], [score, financial_readiness], color=["#4a90e2", "#f5a623"], width=0.5)
 ax2.set_ylim(0, 100)
 ax2.set_ylabel("Readiness (%)", fontsize=8)
-ax2.set_title("Market vs Financial Readiness", fontsize=9)
-ax2.tick_params(axis="x", labelsize=8)
 for i, v in enumerate([score, financial_readiness]):
     ax2.text(i, v + 2, f"{v:.0f}%", ha="center", va="bottom", fontsize=8)
-st.pyplot(fig2, use_container_width=False, width=300)
+st.pyplot(fig2)
 
 with st.expander("💡 Mentor Insight"):
     if score < financial_readiness - 10:
-        st.info("Your financial model is ahead of your market validation — gather more customer or competitor data.")
+        st.info("Your financial model is running ahead of market validation — strengthen customer discovery.")
     elif financial_readiness < score - 10:
-        st.info("Your market validation is strong — focus on improving financial projections and funding strategy.")
+        st.info("Your market validation is strong — refine financials and funding models next.")
     else:
-        st.success("Balanced progress between market validation and financial planning.")
+        st.success("Balanced progress between market and financial readiness.")
 
-# ----------------------------
-# 8️⃣ Export Summary
-# ----------------------------
+st.markdown("---")
+
+# ----------------------------------------------------------
+# 8️⃣ EXPORT SUMMARY
+# ----------------------------------------------------------
 st.header("8. Export Summary")
 
 summary = f"""
@@ -158,22 +188,23 @@ Geography: {geography}
 Customer: {target_customer}
 Offering Type: {product_type}
 
-Problem Statement:
-{market_problem}
+Problem: {market_problem}
 
-TAM: R{tam:,.0f} | SAM: R{sam:,.0f} | SOM: R{som:,.0f}
+TAM: R{tam:,}
+SAM: R{sam:,}
+SOM: R{som:,}
 Growth Rate: {growth_rate*100:.1f}%
 
 Customer Engagement:
-Spoken to customers: {spoke_customers}
-Interviews: {num_interviews}
-Pilot done: {pilot_done}
-Average interest: {pilot_feedback}/5
+- Spoke to customers: {spoke_customers}
+- Interviews: {num_interviews}
+- Pilot done: {pilot_done}
+- Avg interest: {pilot_feedback}/5
 
 Go-to-Market:
-Channels: {", ".join(channels) if channels else "—"}
-Pricing Strategy: {pricing_strategy}
-Marketing Readiness: {marketing_readiness}%
+- Channels: {", ".join(channels) if channels else "—"}
+- Pricing: {pricing_strategy}
+- Marketing readiness: {marketing_readiness}%
 
 Market Readiness Score: {score}% ({readiness_label})
 Financial Readiness: {financial_readiness}%
@@ -186,3 +217,4 @@ st.download_button(
     mime="text/plain",
     use_container_width=True
 )
+
