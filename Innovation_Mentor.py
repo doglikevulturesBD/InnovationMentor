@@ -5,7 +5,7 @@ st.set_page_config(page_title="Innovation Mentor", layout="wide")
 # -------------------------------------------------
 # HEADER
 # -------------------------------------------------
-st.title("🚀 Innovation Mentor")
+st.title("Innovation Mentor")
 
 # Premium italic tagline
 st.markdown(
@@ -35,7 +35,7 @@ funding, and commercialisation.
 # RECOMMENDED JOURNEY FLOW
 # -------------------------------------------------
 
-st.markdown("### 🧭 Recommended Journey")
+st.markdown("### Recommended Journey")
 
 st.markdown("""
 Follow the modules **from top to bottom** for the best experience and a complete innovation pathway:
@@ -51,22 +51,6 @@ Follow the modules **from top to bottom** for the best experience and a complete
 
 st.markdown("---")
 
-# -------------------------------------------------
-# MODULE LIST (WITH LINKS)
-# -------------------------------------------------
-
-st.markdown("### 📂 Quick Access Modules")
-st.markdown("""
-- 🚦 [TRL Assessment](./01_TRL_Assessment)
-- 🧩 [Business Model Selector](./02_Business_Model)
-- 📊 [Financial Projections](./03_Financial_Projection)
-- 🔐 [IP Management & Protection](./04_IP_Management)
-- 🛠️ [Commercialisation Strategy Builder](./05_Commercialisation_Strategy)
-- 📘 [Market Study Guide](./07_Market_Study)
-- 💰 [Financing Options Explorer](./08_Financing_Options)
-- 📄 [Export Report (Coming Soon)](./09_Export_Report)
-- ⚠️ [Risk Dashboard (Coming Soon)](./06_Risk_Dashboard)
-""")
 
 # -------------------------------------------------
 # MVP NOTICE
