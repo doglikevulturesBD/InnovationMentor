@@ -1,150 +1,151 @@
-# ============================================
-# INNOVATION MENTOR APP
-# PAGE: 03_Business_Model.py
-# ============================================
+# pages/02_Business_Model.py
 
+import json
 import streamlit as st
-from utils.model_logic import (
-    load_models,
-    QUESTION_BANK,
-    accumulate_tags,
-    trl_gate_score_adjustments,
-    score_models,
-    apply_trl_caps,
-    find_adjacent_models
+
+from config.business_model_questions import QUESTION_DEFS
+from utils.bm_rule_engine import load_weights, calculate_rule_scores
+from utils.bm_ai_engine import ai_scores_for_models
+from utils.bm_fusion import fuse_scores
+
+
+st.set_page_config(page_title="Business Model Selector", page_icon="🧩", layout="wide")
+
+st.title("Business Model Selector")
+st.markdown(
+    "Answer the questions below to generate a ranked list of business models "
+    "that fit your innovation. The engine uses both a structured ruleset and, "
+    "optionally, an AI pattern-matching layer."
 )
 
-# -------------------------------
-# PAGE CONFIG
-# -------------------------------
-st.set_page_config(page_title="Business Model Recommender", layout="wide")
-st.title("💼 Business Model Recommender")
-st.markdown("""
-Use this structured questionnaire to identify which business model patterns  
-best align with your innovation, TRL level, revenue logic, and delivery strategy.
----
-""")
+# --- Load business model definitions ---
+
+with open("data/business_models.json", "r") as f:
+    BM_DEFS = json.load(f)
+
+MODEL_NAMES = list(BM_DEFS.keys())
 
 
-# =============================
-# Load models & initialise state
-# =============================
-models = load_models()
+# --- Questionnaire with conditional visibility ---
 
-if "bm_answers" not in st.session_state:
-    st.session_state["bm_answers"] = {}
+st.markdown("### Step 1: Tell us about your model")
 
-if "trl_level" not in st.session_state:
-    st.session_state["trl_level"] = None
+answers = {}
+selected_features = []
 
+for q in QUESTION_DEFS:
+    # Conditional visibility
+    if "visible_if" in q:
+        cond = q["visible_if"]
+        controlling_qid = list(cond.keys())[0]
+        allowed_feature_values = cond[controlling_qid]
 
-# =============================
-# TRL INPUT (optional but powerful)
-# =============================
-st.subheader("💡 Technology Readiness Level (Optional)")
-trl = st.slider("Select TRL (1–9)", min_value=1, max_value=9, value=5)
-st.session_state["trl_level"] = trl
+        # If controlling question not yet answered, skip
+        if controlling_qid not in answers:
+            continue
 
-st.markdown("---")
+        # If current controlling answer feature not allowed, skip
+        if answers[controlling_qid] not in allowed_feature_values:
+            continue
 
+    options_labels = list(q["options"].keys())
+    default_idx = 0
 
-# =============================
-# QUESTIONNAIRE
-# =============================
-st.subheader("📋 Business Model Questionnaire")
-
-for q in QUESTION_BANK:
-    with st.container():
-        st.markdown(f"**{q['id']} – {q['section']}**")
-        answer = st.radio(
-            q["text"],
-            list(q["options"].keys()),
-            key=f"bm_{q['id']}"
-        )
-        st.session_state["bm_answers"][q["id"]] = answer
+    # Use q["id"] as Streamlit key to persist answers
+    chosen_label = st.selectbox(
+        q["label"],
+        options_labels,
+        key=q["id"],
+        index=default_idx,
+    )
+    feature_key = q["options"][chosen_label]
+    answers[q["id"]] = feature_key
+    selected_features.append(feature_key)
 
 st.markdown("---")
 
+# --- AI input text ---
 
-# =============================
-# RUN ENGINE
-# =============================
-if st.button("🔍 Generate Business Model Recommendations"):
-    st.subheader("📊 Your Business Model Profile")
+st.markdown("### Step 2: Describe your innovation (for AI layer)")
 
-    selections = {qid: ans for qid, ans in st.session_state["bm_answers"].items()}
+summary_parts = [
+    st.session_state.get("project_summary", ""),
+    st.session_state.get("value_proposition", ""),
+    st.session_state.get("customer_segment_text", ""),
+    st.session_state.get("trl_description", ""),
+]
 
-    # Step 1 – accumulate raw tag weights
-    tag_weights = accumulate_tags(selections)
+extra_text = st.text_area(
+    "Optional: add any extra context in your own words (this helps the AI refine suggestions)",
+    key="bm_ai_extra_text",
+)
 
-    # Step 2 – adjust for TRL
-    tag_weights = trl_gate_score_adjustments(tag_weights, trl)
-
-    # Step 3 – score
-    scored = score_models(tag_weights, models, top_k=3)
-
-    # Step 4 – apply TRL caps
-    scored = apply_trl_caps(scored, trl)
-
-    # ========================================
-    # DISPLAY TOP MODELS
-    # ========================================
-    for idx, item in enumerate(scored, start=1):
-        m = item["model"]
-        score = item["score"]
-        matched = item["matched"]
-        penalties = item["penalties"]
-
-        st.markdown(f"### {idx}. **{m['name']}**")
-        st.markdown(f"**Cluster:** {m.get('cluster', 'General')}")
-        st.markdown(f"**Score:** `{score}`")
-        st.markdown(f"**Tags:** `{', '.join(m.get('tags', []))}`")
-
-        # Description
-        with st.expander("📘 Model Description"):
-            st.markdown(m["description"])
-
-        # Matched tags
-        with st.expander("🔑 Why this model matched your inputs"):
-            if matched:
-                for t, w in matched.items():
-                    st.markdown(f"- `{t}` (weight {w})")
-            else:
-                st.markdown("_No key overlaps – recommended due to TRL logic or fallback scoring._")
-
-        # Penalties
-        if penalties:
-            with st.expander("⚠️ Penalties / Risk Misalignment"):
-                for t, w in penalties.items():
-                    st.markdown(f"- `{t}` → penalty `{w}`")
-
-        # Similarity graph
-        sim = find_adjacent_models(m, models)
-        if sim:
-            with st.expander("🔁 Related / Similar Models"):
-                for s in sim:
-                    st.markdown(
-                        f"- **{s['model']['name']}** "
-                        f"(similarity `{s['similarity']}`)"
-                    )
-
-        st.markdown("---")
+full_text = "\n".join([p for p in summary_parts if p] + [extra_text])
 
 
-    # ========================================
-    # DISPLAY RAW TAG WEIGHT PROFILE
-    # ========================================
-    with st.expander("🧠 Your underlying tag preference profile"):
-        st.json(dict(tag_weights))
+# --- Action button ---
 
+if st.button("Generate Business Model Recommendations"):
+    if not selected_features:
+        st.warning("Please answer at least some of the questions first.")
+    else:
+        # Load weights
+        weights = load_weights("config/business_model_weights.json")
 
-# =============================
-# REFLECTION BOX
-# =============================
-st.markdown("## 📝 Reflection")
-st.markdown("""
-Use this space to note insights, adjustments, or ideas that came from your Business Model analysis.
-""")
-st.text_area("Your reflections:", height=150)
+        # Rule-based scores
+        rule_scores = calculate_rule_scores(selected_features, weights)
+
+        # AI scores (0 if not configured yet)
+        ai_scores = ai_scores_for_models(full_text, MODEL_NAMES)
+
+        # Hybrid fusion
+        final_scores = fuse_scores(rule_scores, ai_scores, rule_weight=0.7)
+
+        # Sort and select top 3
+        ranked = sorted(final_scores.items(), key=lambda x: x[1], reverse=True)
+        top3 = [m for m, _ in ranked[:3]]
+
+        st.session_state["top3_models"] = top3
+        st.session_state["business_model_scores"] = final_scores
+
+        st.success("Top 3 business models identified.")
+
+        st.markdown("### Your Top 3 Business Models")
+
+        for model in top3:
+            info = BM_DEFS.get(model, {})
+            name = info.get("name", model)
+            desc = info.get("description", "")
+            st.subheader(f"• {name}")
+            if desc:
+                st.write(desc)
+
+        # Optional: show a table with scores
+        with st.expander("Show full model ranking (all models)"):
+            import pandas as pd
+
+            rows = []
+            for m, score in ranked:
+                info = BM_DEFS.get(m, {})
+                rows.append(
+                    {
+                        "Model ID": m,
+                        "Name": info.get("name", m),
+                        "Score (hybrid)": round(score, 2),
+                    }
+                )
+            df = pd.DataFrame(rows)
+            st.dataframe(df, use_container_width=True)
+else:
+    # If results already in session, show them
+    if "top3_models" in st.session_state:
+        st.markdown("### Current Top 3 Business Models")
+        for model in st.session_state["top3_models"]:
+            info = BM_DEFS.get(model, {})
+            name = info.get("name", model)
+            desc = info.get("description", "")
+            st.subheader(f"• {name}")
+            if desc:
+                st.write(desc)
 
 
