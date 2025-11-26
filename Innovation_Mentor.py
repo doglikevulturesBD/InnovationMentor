@@ -1,85 +1,67 @@
+FILE: app.py
 import streamlit as st
+from config.business_model_questions import QUESTION_DEFS
+from engine.scorer import rank_business_models
+import numpy as np
 
-st.set_page_config(page_title="Innovation Mentor", layout="wide")
+st.set_page_config(page_title="Business Model Selector", layout="wide")
 
-# -------------------------------------------------
-# HEADER
-# -------------------------------------------------
-st.title("Innovation Mentor")
+st.title("Business Model Selector (AI + Rules Engine)")
 
-# Premium italic tagline
-st.markdown(
-    "<div style='font-size:16px; color: grey; font-style: italic;'>Innovating for Innovators</div>",
-    unsafe_allow_html=True
-)
-
-st.subheader("Your digital companion for navigating the innovation and commercialisation journey.")
-
-st.markdown("---")
-
-# -------------------------------------------------
-# ABOUT SECTION
-# -------------------------------------------------
-
-st.markdown("### What This Platform Offers")
-
-st.markdown("""
-The **Innovation Mentor** is an integrated, lightweight toolkit designed to help innovators, founders, researchers, 
-and project teams move from idea to market with clarity and confidence.
-
-It brings together practical tools aligned with real-world evaluation frameworks used in innovation, 
-funding, and commercialisation.
-""")
-
-# -------------------------------------------------
-# RECOMMENDED JOURNEY FLOW
-# -------------------------------------------------
-
-st.markdown("### Recommended Journey")
-
-st.markdown("""
-Follow the modules **from top to bottom** for the best experience and a complete innovation pathway:
-
-1️⃣ **TRL Assessment** – Understand your readiness level  
-2️⃣ **Business Model Selector** – Shape how value is delivered  
-3️⃣ **Financial Projections** – Build your early financial logic  
-4️⃣ **IP Management** – Identify suitable protection strategies  
-5️⃣ **Commercialisation Strategy** – Define your route to market  
-6️⃣ **Market Study Guide** – Analyse market fit and context  
-7️⃣ **Financing Options** – Explore funding pathways  
-""")
-
-st.markdown("---")
+selected_answers = {}
+tag_vectors = []  # In MVP1 you can use dummy vectors or map tags → vectors later.
 
 
-# -------------------------------------------------
-# MVP NOTICE
-# -------------------------------------------------
+# ---------------------------
+# Render questions
+# ---------------------------
+st.header("Answer the 45 questions")
 
-st.info("**MVP Notice:** This is an early release. Some tools are experimental or under development.")
+for q in QUESTION_DEFS:
+    qid = q["id"]
+    label = q["label"]
+    options = list(q["options"].keys())
 
-st.markdown("---")
+    selected = st.radio(label, options, key=qid)
+    selected_answers[qid] = q["options"][selected]
 
-# -------------------------------------------------
-# LEGAL REMINDER
-# -------------------------------------------------
+# ---------------------------
+# Run scoring
+# ---------------------------
+if st.button("Compute Top Business Models"):
+    top3, full = rank_business_models(selected_answers, tag_vectors)
 
-st.caption(
-    "Before using this platform, please review the Legal & Compliance page for terms, licensing, and POPIA information."
-)
+    st.subheader("Top 3 Recommended Models")
+    for bm, score in top3:
+        st.write(f"**{bm}** — score {score:.4f}")
 
-# -------------------------------------------------
-# FOOTER
-# -------------------------------------------------
+    st.markdown("---")
 
-st.markdown("---")
-st.markdown(
-    """
-    <div style='text-align: center; color: grey; font-size: 13px;'>
-        Innovation Mentor – MVP Version • Created by Brandon Davoren<br>
-        <a href='./10_Legal_and_Compliance' style='color: grey;'>Legal & Compliance</a>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+    st.subheader("Full ranking")
+    for bm, score in full:
+        st.write(f"{bm}: {score:.4f}")
 
+
+This version already works even if the AI embeddings are empty — you can later plug in real embeddings.
+
+🎯 WHAT YOU MUST COPY–PASTE (SUMMARY)
+Copy these EXACTLY:
+Folders
+/config
+/data
+/engine
+
+Files
+config/scoring_config.json
+config/ai_config.json
+config/business_model_questions.py    ← your existing file
+
+data/business_models.json
+data/bm_rule_weights.json
+data/bm_model_vectors.json
+
+engine/rules_engine.py
+engine/ai_engine.py
+engine/scorer.py
+
+app.py
