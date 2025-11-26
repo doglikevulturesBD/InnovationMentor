@@ -1,1 +1,8 @@
+{
+  "Tech Builder": ["software", "AI", "data", "developer", "cloud"],
+  "Platform & Ecosystem": ["platform", "community", "transaction", "marketplace"],
+  "Manufacturing & Product": ["manufacturing", "hardware", "IoT", "supply_chain"],
+  "Impact & Sustainability": ["green", "impact", "sustainability", "local"],
+  "Finance & Commercialisation": ["finance", "hybrid", "early_stage", "investment"]
+}
 
