@@ -1,0 +1,32 @@
+[
+  {
+    "id": "A_SOFTWARE",
+    "name": "Software / Digital Product",
+    "description": "Primarily software, data, or AI-driven value with digital delivery.",
+    "core_tags": ["software", "AI", "data", "digital", "cloud"]
+  },
+  {
+    "id": "A_PLATFORM",
+    "name": "Platform / Ecosystem Builder",
+    "description": "Connects multiple sides of a market or orchestrates an ecosystem.",
+    "core_tags": ["platform", "marketplace", "ecosystem", "community"]
+  },
+  {
+    "id": "A_HARDWARE",
+    "name": "Hardware / Manufacturing-Centric",
+    "description": "Physical products, manufacturing, or equipment-led business models.",
+    "core_tags": ["hardware", "manufacturing", "IoT", "infrastructure"]
+  },
+  {
+    "id": "A_IMPACT",
+    "name": "Impact / Green / Community",
+    "description": "Climate, sustainability, or social-impact-first value propositions.",
+    "core_tags": ["impact", "green", "sustainability", "local", "community"]
+  },
+  {
+    "id": "A_FINANCE",
+    "name": "Finance / Funding Mechanism",
+    "description": "Innovative financial structures, funds, blended finance, or instruments.",
+    "core_tags": ["finance", "royalties", "loan", "bond"]
+  }
+]
