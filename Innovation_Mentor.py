@@ -1,4 +1,3 @@
-
 import streamlit as st
 from config.business_model_questions import QUESTION_DEFS
 from engine.scorer import rank_business_models
@@ -9,7 +8,6 @@ st.set_page_config(page_title="Business Model Selector", layout="wide")
 st.title("Business Model Selector (AI + Rules Engine)")
 
 selected_answers = {}
-tag_vectors = []  # In MVP1 you can use dummy vectors or map tags → vectors later.
 
 
 # ---------------------------
@@ -29,7 +27,8 @@ for q in QUESTION_DEFS:
 # Run scoring
 # ---------------------------
 if st.button("Compute Top Business Models"):
-    top3, full = rank_business_models(selected_answers, tag_vectors)
+    # AI disabled for now
+    top3, full = rank_business_models(selected_answers, user_vector=None)
 
     st.subheader("Top 3 Recommended Models")
     for bm, score in top3:
@@ -40,6 +39,5 @@ if st.button("Compute Top Business Models"):
     st.subheader("Full ranking")
     for bm, score in full:
         st.write(f"{bm}: {score:.4f}")
-
 
 
