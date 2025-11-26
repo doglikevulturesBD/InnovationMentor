@@ -1,4 +1,4 @@
-{"q1_customer_type": {
+{{"q1_customer_type": {
   "customer_consumers": {
     "tags": {
       "B2C": 3
@@ -46,8 +46,8 @@
       "BM70": 1
     }
   }
-}
-"q2_customer_size": {
+},
+{q2_customer_size": {
   "custsize_individual": {
     "tags": {
       "B2C": 3
@@ -95,8 +95,8 @@
       "BM67": 2
     }
   }
-}
-"q3_market_type": {
+},
+{q3_market_type": {
   "market_emerging": {
     "tags": {
       "emerging": 4,
@@ -148,8 +148,8 @@
       "BM70": 1
     }
   }
-}
-"q4_purchase_frequency": {
+},
+{q4_purchase_frequency": {
   "freq_oneoff": {
     "tags": {
       "oneoff": 4,
@@ -200,8 +200,8 @@
       "BM70": 1
     }
   }
-}
-"q5_decision_maker": {
+},
+{q5_decision_maker": {
   "decider_end_user": {
     "tags": {
       "B2C": 3,
@@ -252,8 +252,8 @@
       "BM22": 1
     }
   }
-}
-"q6_sales_cycle": {
+},
+{q6_sales_cycle": {
   "cycle_instant": {
     "tags": {
       "self_serve": 4,
@@ -306,8 +306,8 @@
       "BM22": 1
     }
   }
-}
-"q7_problem_type": {
+},
+{q7_problem_type": {
   "value_cost_reduction": {
     "tags": {
       "efficiency": 4,
@@ -366,8 +366,8 @@
       "BM49": 1
     }
   }
-}
-"q8_value_delivery": {
+},
+{q8_value_delivery": {
   "delivery_digital": {
     "tags": {
       "software": 5,
@@ -427,8 +427,8 @@
       "BM70": 1
     }
   }
-}
-"q9_customisation_level": {
+},
+{q9_customisation_level": {
   "custom_low": {
     "tags": {
       "standardised": 5,
@@ -487,8 +487,8 @@
       "BM43": 1
     }
   }
-}
-"q10_outcome_type": {
+},
+{q10_outcome_type": {
   "outcome_efficiency": {
     "tags": {
       "efficiency": 5,
@@ -548,8 +548,8 @@
       "BM38": 1
     }
   }
-}
-"q11_switching_costs": {
+},
+{q11_switching_costs": {
   "switch_low": {
     "tags": {
       "low_lockin": 5,
@@ -606,8 +606,8 @@
       "BM22": 1
     }
   }
-}
-"q12_urgency": {
+},
+{q12_urgency": {
   "urgency_low": {
     "tags": {
       "low_priority": 5,
@@ -664,8 +664,8 @@
       "BM46": 1
     }
   }
-}
-"q13_solution_form": {
+},
+{q13_solution_form": {
   "solution_software": {
     "tags": {
       "software": 5,
@@ -726,8 +726,8 @@
       "BM68": 1
     }
   }
-}
-"q14_physical_complexity": {
+},
+{q14_physical_complexity": {
   "hw_simple": {
     "tags": {
       "hardware_simple": 5,
@@ -772,8 +772,8 @@
       "BM53": 1
     }
   }
-}
-"q15_lifecycle": {
+},
+{q15_lifecycle": {
   "lifecycle_short": {
     "tags": {
       "short_lifecycle": 5,
@@ -832,8 +832,8 @@
       "BM58": 1
     }
   }
-}
-"q16_dependency_on_install": {
+},
+{q16_dependency_on_install": {
   "install_none": {
     "tags": {
       "self_serve": 5,
@@ -892,8 +892,8 @@
       "BM36": 1
     }
   }
-}
-"q17_standardisation": {
+},
+{q17_standardisation": {
   "standard_full": {
     "tags": {
       "scalable": 4,
@@ -945,8 +945,8 @@
       "BM18": 1    // Community-based / localised solutions
     }
   }
-}
-"q18_revenue_pattern": {
+},
+{q18_revenue_pattern": {
   "rev_oneoff": {
     "tags": {
       "transactional": 4,
@@ -1001,8 +1001,8 @@
       "BM22": 1    // OEM integration with service guarantees
     }
   }
-}
-"q19_price_point": {
+},
+{q19_price_point": {
   "price_micro": {
     "tags": {
       "low_ticket": 4,
@@ -1058,8 +1058,8 @@
       "BM22": 1    // OEM integrated solutions
     }
   }
-}
-"q20_payment_timing": {
+},
+{q20_payment_timing": {
   "pay_upfront": {
     "tags": {
       "cashflow_positive": 4,
@@ -1114,8 +1114,8 @@
       "BM53": 1    // Digital twin subscriptions
     }
   }
-}
-"q21_revenue_diversity": {
+},
+{q21_revenue_diversity": {
   "revstream_single": {
     "tags": {
       "focused_model": 4,
@@ -1170,8 +1170,8 @@
       "BM70": 1    // Emerging / experimental model
     }
   }
-}
-"q22_price_sensitivity": {
+},
+{q22_price_sensitivity": {
   "sensitivity_high": {
     "tags": {
       "price_sensitive": 4,
@@ -1225,8 +1225,8 @@
       "BM43": 1    // Insurance/guarantees with regulation
     }
   }
-}
-"q23_financing_needed": {
+},
+{q23_financing_needed": {
   "finance_none": {
     "tags": {
       "simple_sale": 4,
@@ -1283,8 +1283,8 @@
       "BM49": 1    // Crowdfunding equity
     }
   }
-}
-"q24_channel_type": {
+},
+{q24_channel_type": {
   "channel_online": {
     "tags": {
       "digital": 4,
@@ -1340,8 +1340,8 @@
       "BM63": 1    // Tokenized loyalty
     }
   }
-}
-"q25_sales_model": {
+},
+{q25_sales_model": {
   "sales_selfserve": {
     "tags": {
       "low_touch": 4,
@@ -1397,8 +1397,8 @@
       "BM17": 1    // Carbon credit generators (UN-linked)
     }
   }
-}
-"q26_geography": {
+},
+{q26_geography": {
   "geo_local": {
     "tags": {
       "local": 4,
@@ -1454,8 +1454,8 @@
       "BM65": 1    // Virtual experience economy
     }
   }
-}
-"q27_distribution_assets": {
+},
+{q27_distribution_assets": {
   "dist_asset_light": {
     "tags": {
       "asset_light": 5,
@@ -1511,8 +1511,8 @@
       "BM63": 1    // Tokenized loyalty
     }
   }
-}
-"q28_customer_contact": {
+},
+{q28_customer_contact": {
   "contact_rare": {
     "tags": {
       "low_touch": 4,
@@ -1568,8 +1568,8 @@
       "BM53": 1    // Digital twin (continuous data feed)
     }
   }
-}
-"q29_asset_intensity": {
+},
+{q29_asset_intensity": {
   "asset_light": {
     "tags": {
       "asset_light": 5,
@@ -1625,8 +1625,8 @@
       "BM04": 1    // DaaS
     }
   }
-}
-"q30_operational_complexity": {
+},
+{q30_operational_complexity": {
   "ops_simple": {
     "tags": {
       "low_complexity": 4,
@@ -1682,8 +1682,8 @@
       "BM68": 1    // Research-as-a-Service
     }
   }
-}
-"q31_capacity_constraint": {
+},
+{q31_capacity_constraint": {
   "cap_people": {
     "tags": {
       "people_intensive": 5,
@@ -1739,8 +1739,8 @@
       "BM55": 1    // Outcome-based healthcare (compliance heavy)
     }
   }
-}
-"q32_scaling_mode": {
+},
+{q32_scaling_mode": {
   "scale_people": {
     "tags": {
       "people_scaled": 4,
@@ -1796,8 +1796,8 @@
       "BM52": 1    // Ecosystem membership
     }
   }
-}
-"q33_servicedelivery_model": {
+},
+{q33_servicedelivery_model": {
   "delivery_121": {
     "tags": {
       "one_to_one": 5,
@@ -1854,8 +1854,8 @@
       "BM61": 1    // Predictive insights
     }
   }
-}
-"q34_data_role": {
+},
+{q34_data_role": {
   "data_low": {
     "tags": {
       "data_minimal": 4,
@@ -1911,8 +1911,8 @@
       "BM14": 1    // Crowdsourcing platform (data generation)
     }
   }
-}
-"q35_ai_usage": {
+},
+{q35_ai_usage": {
   "ai_none": {
     "tags": {
       "non_ai": 5,
@@ -1968,8 +1968,8 @@
       "BM68": 1    // Research-as-a-Service with AI automation
     }
   }
-}
-"q36_data_sensitivity": {
+},
+{q36_data_sensitivity": {
   "data_public": {
     "tags": {
       "low_risk_data": 4,
@@ -2026,8 +2026,8 @@
       "BM31": 1    // AI-as-a-Service (secure environments)
     }
   }
-}
-"q37_evidence_strength": {
+},
+{q37_evidence_strength": {
   "evidence_idea": {
     "tags": {
       "early_stage": 5,
@@ -2083,8 +2083,8 @@
       "BM52": 1    // Marketplace with active liquidity
     }
   }
-}
-"q38_funding_model": {
+},
+{q38_funding_model": {
   "fund_onceoff": {
     "tags": {
       "capex": 5,
@@ -2140,8 +2140,8 @@
       "BM15": 1    // Ecosystem orchestration with shared impact metrics
     }
   }
-}
-"q39_cost_structure": {
+},
+{q39_cost_structure": {
   "cost_people": {
     "tags": {
       "labour_intensive": 5,
@@ -2197,8 +2197,8 @@
       "BM37": 1    // ESCO with infrastructure
     }
   }
-}
-"q40_partnership_role": {
+},
+{q40_partnership_role": {
   "partner_low": {
     "tags": {
       "independent_delivery": 4,
@@ -2253,8 +2253,8 @@
       "BM03": 1    // Multi-sided platform
     }
   }
-}
-"q41_regulation_level": {
+},
+{q41_regulation_level": {
   "reg_light": {
     "tags": {
       "low_regulation": 4,
@@ -2311,8 +2311,8 @@
       "BM03": 1    // Multi-sided platform with regulated actors
     }
   }
-}
-"q42_impact_focus": {
+},
+{q42_impact_focus": {
   "impact_none": {
     "tags": {
       "commercial_primary": 4
@@ -2367,8 +2367,8 @@
       "BM14": 1    // Data collaborative with societal purpose
     }
   }
-}
-"q43_risk_sharing": {
+},
+{q43_risk_sharing": {
   "riskshare_none": {
     "tags": {
       "fixed_pricing": 4,
@@ -2424,8 +2424,8 @@
       "BM56": 1    // Social enterprise with risk buffers
     }
   }
-}
-"q44_funding_source": {
+},
+{q44_funding_source": {
   "fund_own": {
     "tags": {
       "self_funded": 4,
@@ -2482,8 +2482,8 @@
       "BM52": 1    // Marketplace with buyer financing options
     }
   }
-}
-"q45_long_term_vision": {
+},
+{q45_long_term_vision": {
   "vision_build_sell": {
     "tags": {
       "exit_driven": 5,
@@ -2540,4 +2540,4 @@
     }
   }
 }
-}
+}}
