@@ -1,0 +1,62 @@
+{
+  "A_SOFTWARE": [
+    {
+      "id": "S1",
+      "text": "Do you want recurring subscription revenue?",
+      "options": ["Yes", "No", "Not sure"]
+    },
+    {
+      "id": "S2",
+      "text": "Is your main value data/insights rather than functionality?",
+      "options": ["Yes, mostly data", "Mixed", "Mostly functionality"]
+    }
+  ],
+  "A_PLATFORM": [
+    {
+      "id": "P1",
+      "text": "Who are you primarily connecting?",
+      "options": ["Buyers and sellers", "Experts and clients", "Community members", "Other"]
+    },
+    {
+      "id": "P2",
+      "text": "Where do you mainly earn revenue?",
+      "options": ["Transaction fees", "Membership", "Advertising/sponsorship", "Data or tools"]
+    }
+  ],
+  "A_HARDWARE": [
+    {
+      "id": "H1",
+      "text": "Do you plan to keep ownership of the hardware and sell service/usage instead?",
+      "options": ["Yes", "No", "Maybe"]
+    },
+    {
+      "id": "H2",
+      "text": "Is long-term maintenance or monitoring part of your offer?",
+      "options": ["Yes", "No", "Not sure"]
+    }
+  ],
+  "A_IMPACT": [
+    {
+      "id": "I1",
+      "text": "Is your impact primarily environmental (e.g. carbon, waste, energy)?",
+      "options": ["Yes", "No", "Mixed social and environmental"]
+    },
+    {
+      "id": "I2",
+      "text": "Do you expect to measure and verify your impact for external stakeholders?",
+      "options": ["Yes (certified/verified)", "Informal only", "Not sure"]
+    }
+  ],
+  "A_FINANCE": [
+    {
+      "id": "F1",
+      "text": "Do you primarily enable other projects by providing capital or de-risking?",
+      "options": ["Yes", "No", "Partially"]
+    },
+    {
+      "id": "F2",
+      "text": "Will you manage a portfolio of projects or focus on single deals?",
+      "options": ["Portfolio", "Single deals", "Not sure"]
+    }
+  ]
+}
