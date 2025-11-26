@@ -12,41 +12,24 @@ st.set_page_config(
 st.markdown("""
 <style>
 .big-title {
-    font-size: 48px !important;
+    font-size: 46px !important;
     font-weight: 800 !important;
-    padding-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
 }
 .subtitle {
-    font-size: 20px !important;
-    color: #4f4f4f;
-    margin-top: 5px;
-    margin-bottom: 30px;
+    font-size: 19px !important;
+    color: #555;
+    margin-bottom: 25px;
 }
 .section-header {
-    font-size: 28px !important;
+    font-size: 26px !important;
     font-weight: 700 !important;
-    margin-top: 30px;
-    margin-bottom: 15px;
+    margin-top: 25px;
 }
-.card {
-    padding: 22px;
-    background-color: #f7f9fc;
-    border: 1px solid #dfe3e6;
-    border-radius: 12px;
-    height: 210px;
-    transition: all 0.2s ease-in-out;
-}
-.card:hover {
-    background-color: #eef2f5;
-    border-color: #cfd5da;
-}
-.card h3 {
-    margin-top: 0px;
-    font-weight: 700;
-}
-.card p {
-    color: #555;
+.body-text {
+    font-size: 17px !important;
+    color: #444;
+    line-height: 1.6;
 }
 .footer {
     margin-top: 40px;
@@ -62,109 +45,89 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+
 # ---------------------------
 # HEADER
 # ---------------------------
 st.markdown('<div class="big-title">Innovation Mentor Platform</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle">A guided system for innovators, startups, and evaluators — helping structure proposals, sharpen thinking, and strengthen commercialisation pathways.</div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="subtitle">A lightweight, structured, and evolving support tool to help innovators strengthen proposals and navigate commercialisation.</div>',
+    unsafe_allow_html=True
+)
 
 st.markdown("---")
 
 # ---------------------------
-# QUICK ACCESS MODULES
-# ---------------------------
-st.markdown('<div class="section-header">Core Modules</div>', unsafe_allow_html=True)
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.markdown("""
-    <div class="card">
-        <h3>TRL Assessment</h3>
-        <p>Determine your Technology Readiness Level accurately across all nine stages.</p>
-        <a href="./01_TRL_Assessment">Open →</a>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col2:
-    st.markdown("""
-    <div class="card">
-        <h3>Business Model Selector</h3>
-        <p>Evaluate 70+ business models and discover the best fit for your innovation.</p>
-        <a href="./02_Business_Model">Open →</a>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col3:
-    st.markdown("""
-    <div class="card">
-        <h3>Financial Projections</h3>
-        <p>Explore scenarios, revenue models, cost structures, and your commercial runway.</p>
-        <a href="./03_Financial_Projection">Open →</a>
-    </div>
-    """, unsafe_allow_html=True)
-
-
-col4, col5, col6 = st.columns(3)
-
-with col4:
-    st.markdown("""
-    <div class="card">
-        <h3>IP Management</h3>
-        <p>Document novel components, protectable elements, and IP improvement history.</p>
-        <a href="./04_IP_Management">Open →</a>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col5:
-    st.markdown("""
-    <div class="card">
-        <h3>Commercialisation Strategy</h3>
-        <p>Define your value proposition, target markets, pricing logic, and pathways.</p>
-        <a href="./05_Commercialisation_Strategy">Open →</a>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col6:
-    st.markdown("""
-    <div class="card">
-        <h3>Risk Dashboard</h3>
-        <p>Identify technical, financial, operational, and market risks early.</p>
-        <a href="./06_Risk_Dashboard">Open →</a>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("---")
-
-# ---------------------------
-# ABOUT SECTION
+# ABOUT THE PLATFORM
 # ---------------------------
 st.markdown('<div class="section-header">About This Platform</div>', unsafe_allow_html=True)
 
-st.write("""
-The Innovation Mentor is built to support innovators, startups, researchers, and evaluators by offering a clean, structured approach to:
+st.markdown("""
+<div class="body-text">
+The Innovation Mentor Platform is designed to help innovators, entrepreneurs, researchers, and portfolio managers think more clearly and make better decisions.
+It provides structured guidance across the core areas required for strong innovation proposals and early-stage commercialisation.
 
-- Technology readiness
-- Business model alignment
-- Commercialisation strategy
-- Financial projections
-- Risk identification
-- Intellectual property thinking
+This is an evolving tool, currently in **MVP testing**, and features will continue to improve over time.
+</div>
+""", unsafe_allow_html=True)
 
-It reduces uncertainty, improves clarity, and helps transform technical ideas into investable opportunities.
+# ---------------------------
+# MODULE EXPLANATIONS
+# ---------------------------
+st.markdown('<div class="section-header">What Each Module Does</div>', unsafe_allow_html=True)
+
+st.markdown("""
+### TRL Assessment  
+A structured tool to help you identify your correct Technology Readiness Level (TRL) based on international TRL definitions.  
+It ensures proposers and evaluators speak the same language about technical maturity.
+
+### Business Model Selector  
+A guided journey that analyses your innovation and identifies the best-aligned business models.  
+Using structured logic and data, it evaluates over 70 business model patterns to help shape your route to market.
+
+### Financial Projections  
+Simple, early-stage financial thinking. Helps you explore revenue potential, basic cost structures, and realistic growth scenarios.
+
+### IP Management  
+A place to record your intellectual property foundations, improvements, protection strategies, and novelty claims.
+
+### Commercialisation Strategy  
+Helps you define your target market, value proposition, pricing approach, distribution channels, and competitive logic.
+
+### Risk Dashboard  
+Structured analysis of technical, operational, financial, and market risks — and possible mitigation strategies.
+
+---
+
+These modules are meant to support clarity and improve the quality of proposals and innovation decisions.
+They are not a final authority, but a **thinking partner** in your innovation journey.
 """)
 
 st.markdown("---")
 
 # ---------------------------
-# LEGAL DISCLAIMER SECTION
+# MVP NOTE
+# ---------------------------
+st.markdown('<div class="section-header">MVP Status</div>', unsafe_allow_html=True)
+
+st.markdown("""
+<div class="body-text">
+This platform is currently operating as an **MVP (Minimum Viable Product)**.
+Features, scoring logic, and guidance systems will be enhanced in future iterations as real-world usage data,
+user feedback, and validation insights are incorporated.
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("---")
+
+# ---------------------------
+# LEGAL DISCLAIMER
 # ---------------------------
 st.markdown("""
 <div class="footer">
 <b>Disclaimer:</b><br>
-This tool provides guidance to support innovators but does not replace expert legal, financial, IP, or regulatory advice. 
-All decisions based on the outputs of this platform remain the responsibility of the user. 
-Please refer to the <a href="./Legal_Section">Legal & Compliance Section</a> for full details.
+This platform provides structured guidance only. It is not a substitute for legal, financial, regulatory, or IP advice.
+All decisions made using this platform remain the responsibility of the user.
+Refer to the <a href="./Legal_Section">Legal & Compliance Section</a> for full details.
 </div>
 """, unsafe_allow_html=True)
-
