@@ -42,26 +42,4 @@ if st.button("Compute Top Business Models"):
         st.write(f"{bm}: {score:.4f}")
 
 
-This version already works even if the AI embeddings are empty — you can later plug in real embeddings.
 
-🎯 WHAT YOU MUST COPY–PASTE (SUMMARY)
-Copy these EXACTLY:
-Folders
-/config
-/data
-/engine
-
-Files
-config/scoring_config.json
-config/ai_config.json
-config/business_model_questions.py    ← your existing file
-
-data/business_models.json
-data/bm_rule_weights.json
-data/bm_model_vectors.json
-
-engine/rules_engine.py
-engine/ai_engine.py
-engine/scorer.py
-
-app.py
