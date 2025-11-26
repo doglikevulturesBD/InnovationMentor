@@ -68,7 +68,8 @@ st.markdown("---")
 
 
 # ---------------------------------------------------------------------
-3. OPTIONAL AI INPUT
+# ---------------------------------------------------------------------
+# 3. OPTIONAL AI INPUT (NOW INTEGRATED WITH QUESTIONNAIRE)
 # ---------------------------------------------------------------------
 st.markdown("### Step 2: Optional AI Assistance")
 
@@ -78,20 +79,16 @@ extra_text = st.text_area(
     key="bm_ai_extra_text"
 )
 
-# --- BUILD AI INPUT FROM QUESTIONNAIRE ANSWERS + OPTIONAL FREE TEXT ---
+# --- Build AI text from feature codes + optional free text ---
+combined_tokens = list(selected_features)  # copy of selected features
 
-# 1) Start with the selected feature codes from the questionnaire
-#    Example: ["CUST_B2B", "DIST_ONLINE", "REV_SUBSCRIPTION", ...]
-combined_tokens = list(selected_features)  # make a copy, just to be safe
-
-# 2) Optionally add the extra free-text, if the user typed anything
 extra_clean = extra_text.strip()
 if extra_clean:
     combined_tokens.append(extra_clean)
 
-# 3) Join everything into a single string for the AI embedder
-#    Example: "CUST_B2B DIST_ONLINE REV_SUBSCRIPTION ... plus any free text"
+# Final AI text input (space-separated tokens)
 full_text = " ".join(combined_tokens)
+
 
 
 # ---------------------------------------------------------------------
