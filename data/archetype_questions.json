@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "key": "delivery",
+    "text": "How do you deliver value?",
+    "options": [
+      "Product",
+      "Software",
+      "Hybrid (product + software)",
+      "Service",
+      "Platform/Marketplace"
+    ]
+  },
+  {
+    "id": 2,
+    "key": "scale",
+    "text": "What level of scale do you want?",
+    "options": [
+      "Local",
+      "National",
+      "International",
+      "Digital-scale",
+      "Ecosystem-level"
+    ]
+  },
+  {
+    "id": 3,
+    "key": "relationship",
+    "text": "What type of customer relationship fits your innovation?",
+    "options": [
+      "One-off",
+      "Repeat purchases",
+      "Subscription",
+      "High-touch long-term",
+      "Community/network"
+    ]
+  },
+  {
+    "id": 4,
+    "key": "revenue",
+    "text": "How do you prefer to earn revenue?",
+    "options": [
+      "Selling a product",
+      "Services",
+      "Licensing/IP",
+      "Usage-based",
+      "Marketplace/commission"
+    ]
+  },
+  {
+    "id": 5,
+    "key": "rnd_intensity",
+    "text": "How R&D-intensive is your innovation?",
+    "options": [
+      "Very low",
+      "Low",
+      "Medium",
+      "High",
+      "Deep-tech"
+    ]
+  },
+  {
+    "id": 6,
+    "key": "value_chain",
+    "text": "Where do you operate in the value chain?",
+    "options": [
+      "End-product creator",
+      "Component/tool supplier",
+      "Enabler (API/platform/licensing)",
+      "Partner across the chain",
+      "Orchestrator of ecosystem"
+    ]
+  },
+  {
+    "id": 7,
+    "key": "assets",
+    "text": "How asset-heavy is your innovation?",
+    "options": [
+      "Very low",
+      "Low",
+      "Medium",
+      "High",
+      "Very high"
+    ]
+  },
+  {
+    "id": 8,
+    "key": "regulation",
+    "text": "How regulated is your space?",
+    "options": [
+      "Not regulated",
+      "Light",
+      "Moderate",
+      "High",
+      "Extreme (medical, energy, finance)"
+    ]
+  }
+]
