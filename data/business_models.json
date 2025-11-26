@@ -3,421 +3,564 @@
     "id": "BM01",
     "name": "SaaS Subscription",
     "description": "Recurring-access software or analytics platform with tiered pricing.",
-    "tags": ["software", "recurring", "low_capex", "B2B"]
+    "tags": ["software", "recurring", "low_capex", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM02",
     "name": "Freemium Conversion",
     "description": "Offer a free basic version and convert premium users through added features.",
-    "tags": ["software", "recurring", "growth", "digital"]
+    "tags": ["software", "recurring", "growth", "digital"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM03",
     "name": "Marketplace Platform",
     "description": "Connect buyers and sellers through a digital marketplace earning commissions.",
-    "tags": ["platform", "transaction", "digital", "B2C", "B2B"]
+    "tags": ["platform", "transaction", "digital", "B2C", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM04",
     "name": "Data-as-a-Service",
     "description": "Aggregate, enrich, and sell datasets or insights via subscription or API.",
-    "tags": ["data", "recurring", "AI", "digital"]
+    "tags": ["data", "recurring", "AI", "digital"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM05",
     "name": "API Monetization",
     "description": "Expose core functionality through APIs and charge per call or tier.",
-    "tags": ["software", "usage", "developer", "digital"]
+    "tags": ["software", "usage", "developer", "digital"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM06",
     "name": "Hardware-as-a-Service",
     "description": "Offer physical equipment bundled with monitoring and recurring service fees.",
-    "tags": ["hardware", "recurring", "B2B", "IoT"]
+    "tags": ["hardware", "recurring", "B2B", "IoT"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM07",
     "name": "Product Leasing",
     "description": "Lease equipment or assets instead of selling outright.",
-    "tags": ["leasing", "recurring", "high_capex", "B2B"]
+    "tags": ["leasing", "recurring", "high_capex", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM08",
     "name": "Usage-Based Billing",
     "description": "Charge customers per unit consumed (e.g., kWh, hour, transaction).",
-    "tags": ["usage", "recurring", "services"]
+    "tags": ["usage", "recurring", "services"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM09",
     "name": "Franchise Expansion",
     "description": "Replicate a proven model through franchisees under a unified brand.",
-    "tags": ["IP", "B2C", "distribution", "scaling"]
+    "tags": ["IP", "B2C", "distribution", "scaling"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM10",
     "name": "Technology Licensing",
     "description": "License intellectual property to manufacturers or integrators.",
-    "tags": ["IP", "enterprise", "low_capex", "royalties"]
+    "tags": ["IP", "enterprise", "low_capex", "royalties"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM11",
     "name": "Consulting-to-Product Ladder",
     "description": "Start with bespoke services and evolve to a repeatable product.",
-    "tags": ["services", "learning", "B2B"]
+    "tags": ["services", "learning", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM12",
     "name": "Managed Services",
     "description": "Operate and maintain client infrastructure for a monthly fee.",
-    "tags": ["services", "recurring", "B2B", "operations"]
+    "tags": ["services", "recurring", "B2B", "operations"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM13",
     "name": "Pay-per-Outcome",
     "description": "Charge customers only when measurable results are achieved.",
-    "tags": ["impact", "innovation", "B2B", "performance"]
+    "tags": ["impact", "innovation", "B2B", "performance"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM14",
     "name": "Crowdsourcing Platform",
     "description": "Leverage community input or labor for innovation or microtasks.",
-    "tags": ["platform", "innovation", "crowd", "digital"]
+    "tags": ["platform", "innovation", "crowd", "digital"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM15",
     "name": "Ecosystem Orchestrator",
     "description": "Provide core infrastructure allowing partners to co-create value.",
-    "tags": ["platform", "B2B", "partnerships", "innovation"]
+    "tags": ["platform", "B2B", "partnerships", "innovation"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM16",
     "name": "Circular Economy",
     "description": "Design for reuse, refurbishment, and recycling to capture residual value.",
-    "tags": ["sustainability", "manufacturing", "impact", "green"]
+    "tags": ["sustainability", "manufacturing", "impact", "green"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM17",
     "name": "Carbon Credit Generator",
     "description": "Earn or sell verified carbon offsets through sustainability projects.",
-    "tags": ["impact", "green", "finance", "innovation"]
+    "tags": ["impact", "green", "finance", "innovation"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM18",
     "name": "Community Enterprise",
     "description": "Locally owned venture reinvesting profits into community development.",
-    "tags": ["impact", "local", "cooperative"]
+    "tags": ["impact", "local", "cooperative"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM19",
     "name": "Hybrid Grant-to-Market",
     "description": "Combine early research grants with later-stage revenue sharing.",
-    "tags": ["early_stage", "finance", "hybrid"]
+    "tags": ["early_stage", "finance", "hybrid"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM20",
     "name": "Subscription Box / Kit",
     "description": "Deliver curated products on a recurring subscription basis.",
-    "tags": ["B2C", "recurring", "retail"]
+    "tags": ["B2C", "recurring", "retail"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM21",
     "name": "White-Label Manufacturing",
     "description": "Produce goods for other brands to repackage and sell.",
-    "tags": ["manufacturing", "B2B", "low_margin"]
+    "tags": ["manufacturing", "B2B", "low_margin"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM22",
     "name": "Original Equipment Manufacturer (OEM)",
     "description": "Integrate products into other manufacturers’ systems.",
-    "tags": ["manufacturing", "B2B", "infrastructure"]
+    "tags": ["manufacturing", "B2B", "infrastructure"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM23",
     "name": "Aftermarket Services",
     "description": "Offer maintenance, upgrades, and consumables post-sale.",
-    "tags": ["services", "recurring", "B2B"]
+    "tags": ["services", "recurring", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM24",
     "name": "Open-Source Core",
     "description": "Free core offering, monetized through premium add-ons and support.",
-    "tags": ["software", "innovation", "community", "recurring"]
+    "tags": ["software", "innovation", "community", "recurring"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM25",
     "name": "Platform-as-a-Service",
     "description": "Provide development and deployment infrastructure as a service.",
-    "tags": ["software", "recurring", "developer", "cloud"]
-  },
-  {
+    "tags": ["software", "recurring", "developer", "cloud"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
+  }
+,
+    {
     "id": "BM26",
     "name": "Product-Led Growth",
     "description": "Drive adoption through self-service product experience before sales.",
-    "tags": ["software", "growth", "digital"]
+    "tags": ["software", "growth", "digital"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM27",
     "name": "Open Innovation Network",
     "description": "Collaborate across partners and startups for shared R&D outcomes.",
-    "tags": ["innovation", "early_stage", "B2B"]
+    "tags": ["innovation", "early_stage", "B2B"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM28",
     "name": "Spin-out Venture",
     "description": "Form a new company to commercialize internal research results.",
-    "tags": ["early_stage", "innovation", "IP"]
+    "tags": ["early_stage", "innovation", "IP"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM29",
     "name": "Technology Transfer Office Model",
     "description": "License, incubate, and spin out institutional research IP.",
-    "tags": ["IP", "research", "university", "B2B"]
+    "tags": ["IP", "research", "university", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM30",
     "name": "Incubator / Accelerator",
     "description": "Support multiple startups in exchange for equity or fees.",
-    "tags": ["innovation", "finance", "services", "ecosystem"]
+    "tags": ["innovation", "finance", "services", "ecosystem"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM31",
     "name": "AI-as-a-Service",
     "description": "Offer AI or machine-learning models via subscription or API access.",
-    "tags": ["AI", "software", "recurring", "cloud"]
+    "tags": ["AI", "software", "recurring", "cloud"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM32",
     "name": "Digital Twin Solutions",
     "description": "Create virtual replicas of assets or processes sold as a monitoring or optimization service.",
-    "tags": ["digital", "IoT", "B2B", "recurring"]
+    "tags": ["digital", "IoT", "B2B", "recurring"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM33",
     "name": "Blockchain Tokenization",
     "description": "Use blockchain tokens to represent ownership or usage rights for assets or services.",
-    "tags": ["blockchain", "finance", "innovation", "digital"]
+    "tags": ["blockchain", "finance", "innovation", "digital"],
+    "maturity_level": "emerging",
+    "success_score": 0.55
   },
   {
     "id": "BM34",
     "name": "Decentralized Marketplace",
     "description": "Peer-to-peer exchange of goods or services using smart contracts.",
-    "tags": ["blockchain", "platform", "transaction", "innovation"]
+    "tags": ["blockchain", "platform", "transaction", "innovation"],
+    "maturity_level": "emerging",
+    "success_score": 0.55
   },
   {
     "id": "BM35",
     "name": "Tokenized Impact Credits",
     "description": "Issue tradeable tokens linked to verified impact outcomes (carbon, social, or biodiversity).",
-    "tags": ["impact", "blockchain", "finance", "green"]
+    "tags": ["impact", "blockchain", "finance", "green"],
+    "maturity_level": "emerging",
+    "success_score": 0.55
   },
   {
     "id": "BM36",
     "name": "Energy-as-a-Service",
     "description": "Provide energy infrastructure, operation, and optimization with pay-per-use billing.",
-    "tags": ["infrastructure", "recurring", "green", "B2B"]
+    "tags": ["infrastructure", "recurring", "green", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM37",
     "name": "ESCO (Energy Service Company)",
     "description": "Finance and implement efficiency projects, repaid from cost savings.",
-    "tags": ["finance", "green", "performance", "B2B"]
+    "tags": ["finance", "green", "performance", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM38",
     "name": "BOOT / PPP Concession",
     "description": "Build-Own-Operate-Transfer model for infrastructure with long-term returns.",
-    "tags": ["infrastructure", "finance", "high_capex", "public"]
+    "tags": ["infrastructure", "finance", "high_capex", "public"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM39",
     "name": "Blended Finance Platform",
     "description": "Combine grants, equity, and loans to de-risk early-stage innovation.",
-    "tags": ["finance", "impact", "hybrid"]
+    "tags": ["finance", "impact", "hybrid"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM40",
     "name": "Green Bond / Climate Fund",
     "description": "Raise sustainability-linked finance instruments for project portfolios.",
-    "tags": ["finance", "impact", "green"]
+    "tags": ["finance", "impact", "green"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM41",
     "name": "Impact-Linked Loan",
     "description": "Loan with interest rates that decrease when social or environmental targets are met.",
-    "tags": ["finance", "impact", "innovation"]
+    "tags": ["finance", "impact", "innovation"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM42",
     "name": "Circular Supply Chain",
     "description": "Use materials-back loops where suppliers recover or refurbish used goods.",
-    "tags": ["manufacturing", "sustainability", "green", "B2B"]
+    "tags": ["manufacturing", "sustainability", "green", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM43",
     "name": "Re-commerce / Second-Life Market",
     "description": "Refurbish, remanufacture, and resell returned or used products.",
-    "tags": ["sustainability", "retail", "impact", "innovation"]
+    "tags": ["sustainability", "retail", "impact", "innovation"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM44",
     "name": "Digital Manufacturing Network",
     "description": "Cloud-connected production network offering on-demand fabrication.",
-    "tags": ["manufacturing", "digital", "platform", "B2B"]
+    "tags": ["manufacturing", "digital", "platform", "B2B"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM45",
     "name": "Additive Manufacturing Services",
     "description": "3D-printing components for clients using digital inventory and design files.",
-    "tags": ["manufacturing", "innovation", "B2B"]
+    "tags": ["manufacturing", "innovation", "B2B"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM46",
     "name": "Servitization",
     "description": "Shift from selling equipment to selling uptime or outcomes (e.g., power-by-the-hour).",
-    "tags": ["services", "recurring", "innovation", "B2B"]
+    "tags": ["services", "recurring", "innovation", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM47",
     "name": "Digital Subscription Community",
     "description": "Members pay recurring fees for access to expert content, tools, or support.",
-    "tags": ["community", "recurring", "digital", "B2C"]
+    "tags": ["community", "recurring", "digital", "B2C"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM48",
     "name": "Creator Economy Platform",
     "description": "Enable creators to monetize audience engagement or digital assets.",
-    "tags": ["platform", "digital", "innovation", "B2C"]
+    "tags": ["platform", "digital", "innovation", "B2C"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM49",
     "name": "Crowdfunding Equity Model",
     "description": "Raise small investments from many individuals in exchange for equity or perks.",
-    "tags": ["finance", "platform", "innovation", "early_stage"]
+    "tags": ["finance", "platform", "innovation", "early_stage"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM50",
     "name": "Pay-What-You-Want",
     "description": "Let customers decide price, building loyalty and data for upselling.",
-    "tags": ["retail", "innovation", "marketing"]
-  },
-  {
+    "tags": ["retail", "innovation", "marketing"],
+    "maturity_level": "established",
+    "success_score": 0.75
+  }
+,
+    {
     "id": "BM51",
     "name": "Dynamic Pricing Engine",
     "description": "Adjust pricing automatically using demand, time, or AI predictions.",
-    "tags": ["AI", "pricing", "innovation", "B2C"]
+    "tags": ["AI", "pricing", "innovation", "B2C"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM52",
     "name": "Ecosystem Membership",
     "description": "Charge annual membership for integrated ecosystem benefits and resources.",
-    "tags": ["platform", "recurring", "community", "B2B"]
+    "tags": ["platform", "recurring", "community", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM53",
     "name": "Digital Twin Maintenance Contracts",
     "description": "Bundle physical product sales with digital monitoring service contracts.",
-    "tags": ["IoT", "recurring", "hardware", "B2B"]
+    "tags": ["IoT", "recurring", "hardware", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM54",
     "name": "Usage-Based Insurance",
     "description": "Premiums dynamically adjusted based on monitored usage data.",
-    "tags": ["finance", "AI", "IoT", "innovation"]
+    "tags": ["finance", "AI", "IoT", "innovation"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM55",
     "name": "Outcome-Based Healthcare",
     "description": "Payments tied to treatment results or patient recovery outcomes.",
-    "tags": ["healthcare", "impact", "innovation", "services"]
+    "tags": ["healthcare", "impact", "innovation", "services"],
+    "maturity_level": "emerging",
+    "success_score": 0.55
   },
   {
     "id": "BM56",
     "name": "Social Enterprise Hybrid",
     "description": "Combine profit motives with social impact goals and reinvestment.",
-    "tags": ["impact", "hybrid", "local", "innovation"]
+    "tags": ["impact", "hybrid", "local", "innovation"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM57",
     "name": "Gamified Engagement",
     "description": "Use points, rewards, or challenges to increase customer retention.",
-    "tags": ["digital", "marketing", "innovation"]
+    "tags": ["digital", "marketing", "innovation"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM58",
     "name": "AI-Generated Content Service",
     "description": "Provide automated writing, design, or video creation as a service.",
-    "tags": ["AI", "software", "digital", "recurring"]
+    "tags": ["AI", "software", "digital", "recurring"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM59",
     "name": "Micro-franchise Network",
     "description": "Create distributed small-scale franchises with shared branding and tools.",
-    "tags": ["franchise", "local", "distribution", "impact"]
+    "tags": ["franchise", "local", "distribution", "impact"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM60",
     "name": "Subscription Repair & Maintenance",
     "description": "Offer ongoing maintenance plans for consumer or industrial goods.",
-    "tags": ["services", "recurring", "B2C", "B2B"]
+    "tags": ["services", "recurring", "B2C", "B2B"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM61",
     "name": "Predictive Analytics-as-a-Service",
     "description": "Sell predictive insights using proprietary AI models or datasets.",
-    "tags": ["AI", "data", "recurring", "B2B"]
+    "tags": ["AI", "data", "recurring", "B2B"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM62",
     "name": "Digital-Physical Hybrid Retail",
     "description": "Integrate e-commerce with immersive physical experiences or AR try-ons.",
-    "tags": ["retail", "digital", "innovation", "B2C"]
+    "tags": ["retail", "digital", "innovation", "B2C"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM63",
     "name": "Tokenized Loyalty Program",
     "description": "Reward customers with tradeable digital tokens redeemable across partners.",
-    "tags": ["blockchain", "marketing", "innovation", "digital"]
+    "tags": ["blockchain", "marketing", "innovation", "digital"],
+    "maturity_level": "emerging",
+    "success_score": 0.55
   },
   {
     "id": "BM64",
     "name": "AI-Driven Personalization",
     "description": "Offer hyper-personalized products or content recommendations using AI.",
-    "tags": ["AI", "software", "marketing", "digital"]
+    "tags": ["AI", "software", "marketing", "digital"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM65",
     "name": "Virtual Experience Economy",
     "description": "Monetize immersive VR/AR experiences for education or entertainment.",
-    "tags": ["VR", "digital", "innovation", "B2C"]
+    "tags": ["VR", "digital", "innovation", "B2C"],
+    "maturity_level": "emerging",
+    "success_score": 0.55
   },
   {
     "id": "BM66",
     "name": "Knowledge Marketplace",
     "description": "Enable experts to monetize their insights and micro-consulting sessions.",
-    "tags": ["platform", "services", "B2B", "digital"]
+    "tags": ["platform", "services", "B2B", "digital"],
+    "maturity_level": "dominant",
+    "success_score": 0.90
   },
   {
     "id": "BM67",
     "name": "Platform Cooperative",
     "description": "Community-owned digital platform sharing value among contributors.",
-    "tags": ["impact", "community", "platform", "innovation"]
+    "tags": ["impact", "community", "platform", "innovation"],
+    "maturity_level": "emerging",
+    "success_score": 0.55
   },
   {
     "id": "BM68",
     "name": "AI-Assisted Research Lab",
     "description": "Provide automated research, simulation, and experiment-as-a-service tools.",
-    "tags": ["AI", "early_stage", "innovation", "research"]
+    "tags": ["AI", "early_stage", "innovation", "research"],
+    "maturity_level": "emerging",
+    "success_score": 0.55
   },
   {
     "id": "BM69",
     "name": "Intellectual Property Marketplace",
     "description": "Match IP holders with licensees through verified digital transactions.",
-    "tags": ["IP", "platform", "innovation", "finance"]
+    "tags": ["IP", "platform", "innovation", "finance"],
+    "maturity_level": "established",
+    "success_score": 0.75
   },
   {
     "id": "BM70",
     "name": "Ecosystem Data Cooperative",
     "description": "Aggregate and monetize anonymized data shared by ecosystem members.",
-    "tags": ["data", "platform", "innovation", "B2B"]
+    "tags": ["data", "platform", "innovation", "B2B"],
+    "maturity_level": "emerging",
+    "success_score": 0.55
   }
+
 ]
 
