@@ -1,71 +1,71 @@
 {
   "questions": [
     {
-      "id": 1,
+      "id": "Q1",
       "question": "What best describes your innovation?",
-      "options": [
-        {"text": "A new product or device", "adds": ["Patent", "Design"]},
-        {"text": "A new process or method", "adds": ["Patent"]},
-        {"text": "A brand name, logo, or slogan", "adds": ["Trademark"]},
-        {"text": "A creative work (book, software, art, video, etc.)", "adds": ["Copyright"]},
-        {"text": "A formula or information kept secret", "adds": ["Trade Secret"]}
-      ]
+      "options": {
+        "A new product or device": {"Patent": 3, "Design": 2, "Trademark": 0, "Copyright": 0, "Trade Secret": 1},
+        "A new technical process or method": {"Patent": 3, "Design": 0, "Trademark": 0, "Copyright": 0, "Trade Secret": 1},
+        "A unique brand name / logo": {"Patent": 0, "Design": 0, "Trademark": 3, "Copyright": 0, "Trade Secret": 0},
+        "A creative work (software, content, art)": {"Patent": 0, "Design": 0, "Trademark": 0, "Copyright": 3, "Trade Secret": 1},
+        "A confidential formula / method": {"Patent": -1, "Design": 0, "Trademark": 0, "Copyright": 0, "Trade Secret": 3}
+      }
     },
     {
-      "id": 2,
-      "question": "Does your innovation have a unique functional or technical feature?",
-      "options": [
-        {"text": "Yes, it performs a new or improved function", "adds": ["Patent"]},
-        {"text": "No, it’s more about design or brand", "adds": []}
-      ]
+      "id": "Q2",
+      "question": "Does it have a unique technical or functional feature?",
+      "options": {
+        "Yes": {"Patent": 3, "Design": 0, "Trademark": 0, "Copyright": 0, "Trade Secret": 1},
+        "No": {"Patent": -2, "Design": 2, "Trademark": 1, "Copyright": 1, "Trade Secret": 0}
+      }
     },
     {
-      "id": 3,
-      "question": "Is the appearance or shape of the product important to its value?",
-      "options": [
-        {"text": "Yes", "adds": ["Design"]},
-        {"text": "No", "adds": []}
-      ]
+      "id": "Q3",
+      "question": "Is the appearance or shape crucial to customer value?",
+      "options": {
+        "Yes": {"Patent": 0, "Design": 3, "Trademark": 1, "Copyright": 0, "Trade Secret": 0},
+        "No": {"Patent": 1, "Design": 0, "Trademark": 0, "Copyright": 0, "Trade Secret": 0}
+      }
     },
     {
-      "id": 4,
-      "question": "Will you publicly share or market your innovation soon?",
-      "options": [
-        {"text": "Yes", "adds": ["Trademark", "Copyright"]},
-        {"text": "No, I plan to keep it confidential", "adds": ["Trade Secret"]}
-      ]
+      "id": "Q4",
+      "question": "Will you publicly disclose or sell this soon?",
+      "options": {
+        "Yes": {"Patent": 1, "Design": 1, "Trademark": 2, "Copyright": 2, "Trade Secret": -2},
+        "No, keeping it confidential": {"Patent": 0, "Design": 0, "Trademark": 0, "Copyright": 0, "Trade Secret": 3}
+      }
     },
     {
-      "id": 5,
-      "question": "Does it have a distinctive name or logo?",
-      "options": [
-        {"text": "Yes", "adds": ["Trademark"]},
-        {"text": "No", "adds": []}
-      ]
+      "id": "Q5",
+      "question": "Is there a name, slogan or logo you want to protect?",
+      "options": {
+        "Yes": {"Patent": 0, "Design": 0, "Trademark": 3, "Copyright": 1, "Trade Secret": 0},
+        "No": {"Patent": 0, "Design": 0, "Trademark": -1, "Copyright": 0, "Trade Secret": 0}
+      }
     },
     {
-      "id": 6,
-      "question": "Was it created through original authorship?",
-      "options": [
-        {"text": "Yes", "adds": ["Copyright"]},
-        {"text": "No", "adds": []}
-      ]
+      "id": "Q6",
+      "question": "Was this created through original authorship?",
+      "options": {
+        "Yes": {"Patent": 0, "Design": 0, "Trademark": 0, "Copyright": 3, "Trade Secret": 1},
+        "No": {"Patent": 0, "Design": 0, "Trademark": 0, "Copyright": -1, "Trade Secret": 0}
+      }
     },
     {
-      "id": 7,
-      "question": "Do you rely on secrecy for competitive advantage?",
-      "options": [
-        {"text": "Yes", "adds": ["Trade Secret"]},
-        {"text": "No", "adds": []}
-      ]
+      "id": "Q7",
+      "question": "Is confidentiality essential for competitive advantage?",
+      "options": {
+        "Yes": {"Patent": -1, "Design": 0, "Trademark": 0, "Copyright": 0, "Trade Secret": 3},
+        "No": {"Patent": 1, "Design": 1, "Trademark": 1, "Copyright": 1, "Trade Secret": -2}
+      }
     },
     {
-      "id": 8,
-      "question": "Would you want protection in other countries?",
-      "options": [
-        {"text": "Yes", "adds": ["Patent", "Trademark", "Design"]},
-        {"text": "No", "adds": []}
-      ]
+      "id": "Q8",
+      "question": "Do you need international protection?",
+      "options": {
+        "Yes": {"Patent": 2, "Design": 2, "Trademark": 2, "Copyright": 1, "Trade Secret": 0},
+        "No": {"Patent": 0, "Design": 0, "Trademark": 0, "Copyright": 0, "Trade Secret": 0}
+      }
     }
   ]
 }
