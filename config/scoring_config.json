@@ -1,1 +1,7 @@
+{
+  "rule_normalization": true,
+  "question_importance_default": 1.0,
+  "ai_boost_strength": 0.2
+}
+
 
