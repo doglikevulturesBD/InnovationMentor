@@ -1,0 +1,2428 @@
+{
+  "q1_customer_type": {
+    "customer_consumers": {
+      "tags": {
+        "B2C": 3
+      },
+      "models": {
+        "BM20": 1,
+        "BM47": 1,
+        "BM62": 1,
+        "BM65": 1
+      }
+    },
+    "customer_businesses": {
+      "tags": {
+        "B2B": 4
+      },
+      "models": {
+        "BM01": 2,
+        "BM12": 2,
+        "BM31": 2,
+        "BM46": 2,
+        "BM61": 2
+      }
+    },
+    "customer_government": {
+      "tags": {
+        "public": 4
+      },
+      "models": {
+        "BM38": 3,
+        "BM41": 2,
+        "BM30": 1,
+        "BM42": 1
+      }
+    },
+    "customer_mixed": {
+      "tags": {
+        "platform": 4,
+        "ecosystem": 3
+      },
+      "models": {
+        "BM03": 2,
+        "BM14": 2,
+        "BM15": 2,
+        "BM52": 1,
+        "BM70": 1
+      }
+    }
+  },
+  "q2_customer_size": {
+    "custsize_individual": {
+      "tags": {
+        "B2C": 3
+      },
+      "models": {
+        "BM20": 1,
+        "BM47": 1,
+        "BM62": 1,
+        "BM65": 1
+      }
+    },
+    "custsize_sme": {
+      "tags": {
+        "B2B": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM12": 2,
+        "BM46": 1,
+        "BM25": 1,
+        "BM31": 1
+      }
+    },
+    "custsize_corporate": {
+      "tags": {
+        "enterprise": 4
+      },
+      "models": {
+        "BM06": 2,
+        "BM37": 2,
+        "BM38": 3,
+        "BM53": 2,
+        "BM22": 1
+      }
+    },
+    "custsize_community": {
+      "tags": {
+        "impact": 3,
+        "local": 2
+      },
+      "models": {
+        "BM18": 2,
+        "BM56": 1,
+        "BM59": 1,
+        "BM67": 2
+      }
+    }
+  },
+  "q3_market_type": {
+    "market_emerging": {
+      "tags": {
+        "emerging": 4,
+        "innovation": 3
+      },
+      "models": {
+        "BM03": 2,
+        "BM14": 2,
+        "BM31": 1,
+        "BM52": 1,
+        "BM65": 1
+      }
+    },
+    "market_growing": {
+      "tags": {
+        "growth": 3
+      },
+      "models": {
+        "BM01": 1,
+        "BM12": 1,
+        "BM25": 1,
+        "BM47": 1,
+        "BM20": 1
+      }
+    },
+    "market_mature": {
+      "tags": {
+        "mature": 4,
+        "competitive": 2
+      },
+      "models": {
+        "BM06": 1,
+        "BM37": 2,
+        "BM38": 1,
+        "BM53": 1,
+        "BM22": 1
+      }
+    },
+    "market_niche": {
+      "tags": {
+        "niche": 4,
+        "specialised": 3
+      },
+      "models": {
+        "BM15": 2,
+        "BM41": 1,
+        "BM30": 1,
+        "BM62": 1,
+        "BM70": 1
+      }
+    }
+  },
+  "q4_purchase_frequency": {
+    "freq_oneoff": {
+      "tags": {
+        "oneoff": 4,
+        "project_based": 3
+      },
+      "models": {
+        "BM06": 1,
+        "BM22": 1,
+        "BM30": 1,
+        "BM41": 1,
+        "BM53": 1
+      }
+    },
+    "freq_occasional": {
+      "tags": {
+        "low_frequency": 3
+      },
+      "models": {
+        "BM18": 1,
+        "BM56": 1,
+        "BM59": 1,
+        "BM20": 1,
+        "BM47": 1
+      }
+    },
+    "freq_regular": {
+      "tags": {
+        "recurring": 4
+      },
+      "models": {
+        "BM01": 2,
+        "BM12": 2,
+        "BM31": 1,
+        "BM46": 1,
+        "BM25": 1
+      }
+    },
+    "freq_continuous": {
+      "tags": {
+        "continuous": 4,
+        "high_usage": 3
+      },
+      "models": {
+        "BM03": 2,
+        "BM14": 2,
+        "BM65": 1,
+        "BM62": 1,
+        "BM70": 1
+      }
+    }
+  },
+  "q5_decision_maker": {
+    "decider_end_user": {
+      "tags": {
+        "B2C": 3,
+        "self_serve": 2
+      },
+      "models": {
+        "BM20": 1,
+        "BM47": 1,
+        "BM62": 1,
+        "BM65": 1
+      }
+    },
+    "decider_technical": {
+      "tags": {
+        "technical_buyer": 4
+      },
+      "models": {
+        "BM01": 2,
+        "BM12": 2,
+        "BM31": 1,
+        "BM46": 1,
+        "BM53": 2
+      }
+    },
+    "decider_executive": {
+      "tags": {
+        "enterprise": 4,
+        "strategic": 3
+      },
+      "models": {
+        "BM06": 2,
+        "BM37": 2,
+        "BM38": 2,
+        "BM14": 1,
+        "BM03": 1
+      }
+    },
+    "decider_procurement": {
+      "tags": {
+        "tender": 4,
+        "public": 3
+      },
+      "models": {
+        "BM38": 3,
+        "BM41": 2,
+        "BM30": 1,
+        "BM42": 1,
+        "BM22": 1
+      }
+    }
+  },
+  "q6_sales_cycle": {
+    "cycle_instant": {
+      "tags": {
+        "self_serve": 4,
+        "B2C": 3
+      },
+      "models": {
+        "BM20": 1,
+        "BM47": 1,
+        "BM62": 1,
+        "BM65": 1
+      }
+    },
+    "cycle_short": {
+      "tags": {
+        "low_touch": 3,
+        "SME": 2
+      },
+      "models": {
+        "BM01": 1,
+        "BM12": 1,
+        "BM25": 1,
+        "BM46": 1,
+        "BM18": 1
+      }
+    },
+    "cycle_medium": {
+      "tags": {
+        "B2B": 4,
+        "consultative": 3
+      },
+      "models": {
+        "BM31": 2,
+        "BM14": 1,
+        "BM03": 1,
+        "BM56": 1,
+        "BM59": 1
+      }
+    },
+    "cycle_long": {
+      "tags": {
+        "enterprise": 4,
+        "tender": 3,
+        "CapEx": 3
+      },
+      "models": {
+        "BM38": 3,
+        "BM37": 2,
+        "BM41": 2,
+        "BM53": 1,
+        "BM22": 1
+      }
+    }
+  },
+  "q7_problem_type": {
+    "value_cost_reduction": {
+      "tags": {
+        "efficiency": 4,
+        "ops_optimisation": 3
+      },
+      "models": {
+        "BM37": 2,
+        "BM12": 2,
+        "BM46": 1,
+        "BM31": 1,
+        "BM61": 1
+      }
+    },
+    "value_risk_compliance": {
+      "tags": {
+        "risk": 4,
+        "regulation": 4,
+        "compliance": 3
+      },
+      "models": {
+        "BM41": 2,
+        "BM54": 1,
+        "BM10": 1,
+        "BM68": 1,
+        "BM42": 1
+      }
+    },
+    "value_convenience": {
+      "tags": {
+        "UX": 3,
+        "customer_experience": 3,
+        "engagement": 2
+      },
+      "models": {
+        "BM20": 1,
+        "BM47": 1,
+        "BM57": 1,
+        "BM62": 1,
+        "BM65": 1
+      }
+    },
+    "value_revenue_growth": {
+      "tags": {
+        "growth": 4,
+        "scaling": 3,
+        "commercial": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM03": 2,
+        "BM14": 1,
+        "BM15": 1,
+        "BM49": 1
+      }
+    }
+  },
+  "q8_value_delivery": {
+    "delivery_digital": {
+      "tags": {
+        "software": 5,
+        "digital": 4,
+        "scalable": 3
+      },
+      "models": {
+        "BM01": 3,
+        "BM04": 2,
+        "BM25": 2,
+        "BM31": 2,
+        "BM58": 1
+      }
+    },
+    "delivery_physical": {
+      "tags": {
+        "hardware": 5,
+        "manufacturing": 3,
+        "capex": 2
+      },
+      "models": {
+        "BM06": 2,
+        "BM22": 2,
+        "BM45": 1,
+        "BM53": 1,
+        "BM42": 1
+      }
+    },
+    "delivery_service": {
+      "tags": {
+        "services": 5,
+        "expertise": 3,
+        "consulting": 3
+      },
+      "models": {
+        "BM11": 2,
+        "BM12": 2,
+        "BM30": 1,
+        "BM43": 1,
+        "BM55": 1
+      }
+    },
+    "delivery_platform": {
+      "tags": {
+        "platform": 5,
+        "network_effects": 4,
+        "ecosystem": 3
+      },
+      "models": {
+        "BM03": 3,
+        "BM14": 2,
+        "BM15": 2,
+        "BM52": 1,
+        "BM70": 1
+      }
+    }
+  },
+  "q9_customisation_level": {
+    "custom_low": {
+      "tags": {
+        "standardised": 5,
+        "scalable": 3,
+        "mass_market": 2
+      },
+      "models": {
+        "BM01": 2,
+        "BM20": 1,
+        "BM25": 1,
+        "BM47": 1,
+        "BM62": 1
+      }
+    },
+    "custom_medium": {
+      "tags": {
+        "configurable": 4,
+        "repeatable": 3
+      },
+      "models": {
+        "BM06": 1,
+        "BM12": 1,
+        "BM31": 1,
+        "BM53": 1,
+        "BM64": 1
+      }
+    },
+    "custom_high": {
+      "tags": {
+        "customised": 5,
+        "enterprise": 3,
+        "integration": 3
+      },
+      "models": {
+        "BM11": 2,
+        "BM37": 1,
+        "BM38": 1,
+        "BM22": 1,
+        "BM46": 1
+      }
+    },
+    "custom_project": {
+      "tags": {
+        "bespoke": 5,
+        "project_based": 4,
+        "services": 3
+      },
+      "models": {
+        "BM30": 2,
+        "BM55": 1,
+        "BM68": 1,
+        "BM14": 1,
+        "BM43": 1
+      }
+    }
+  },
+  "q10_outcome_type": {
+    "outcome_efficiency": {
+      "tags": {
+        "efficiency": 5,
+        "automation": 4,
+        "cost_reduction": 3
+      },
+      "models": {
+        "BM31": 2,
+        "BM37": 2,
+        "BM12": 1,
+        "BM46": 1,
+        "BM61": 1
+      }
+    },
+    "outcome_insight": {
+      "tags": {
+        "analytics": 5,
+        "insight": 4,
+        "data_driven": 3
+      },
+      "models": {
+        "BM04": 2,
+        "BM61": 2,
+        "BM31": 1,
+        "BM53": 1,
+        "BM68": 1
+      }
+    },
+    "outcome_experience": {
+      "tags": {
+        "UX": 4,
+        "engagement": 4,
+        "customer_experience": 3
+      },
+      "models": {
+        "BM57": 2,
+        "BM20": 1,
+        "BM47": 1,
+        "BM62": 1,
+        "BM65": 1
+      }
+    },
+    "outcome_reliability": {
+      "tags": {
+        "reliability": 5,
+        "uptime": 4,
+        "mission_critical": 3
+      },
+      "models": {
+        "BM53": 2,
+        "BM12": 1,
+        "BM46": 1,
+        "BM22": 1,
+        "BM38": 1
+      }
+    }
+  },
+  "q11_switching_costs": {
+    "switch_low": {
+      "tags": {
+        "low_lockin": 5,
+        "commodity": 3
+      },
+      "models": {
+        "BM20": 1,
+        "BM50": 1,
+        "BM57": 1,
+        "BM62": 1,
+        "BM47": 1
+      }
+    },
+    "switch_medium": {
+      "tags": {
+        "moderate_lockin": 4,
+        "convenience_based": 2
+      },
+      "models": {
+        "BM01": 1,
+        "BM11": 1,
+        "BM25": 1,
+        "BM31": 1,
+        "BM64": 1
+      }
+    },
+    "switch_high_process": {
+      "tags": {
+        "data_lockin": 5,
+        "process_integration": 4,
+        "enterprise_dependence": 3
+      },
+      "models": {
+        "BM04": 2,
+        "BM31": 2,
+        "BM53": 1,
+        "BM61": 1,
+        "BM32": 1
+      }
+    },
+    "switch_high_contract": {
+      "tags": {
+        "contractual_lockin": 5,
+        "infrastructure_lockin": 4
+      },
+      "models": {
+        "BM37": 2,
+        "BM38": 2,
+        "BM46": 1,
+        "BM06": 1,
+        "BM22": 1
+      }
+    }
+  },
+  "q12_urgency": {
+    "urgency_low": {
+      "tags": {
+        "low_priority": 5,
+        "optional": 3
+      },
+      "models": {
+        "BM20": 1,
+        "BM47": 1,
+        "BM57": 1,
+        "BM50": 1,
+        "BM62": 1
+      }
+    },
+    "urgency_medium": {
+      "tags": {
+        "moderate_priority": 4,
+        "improvement": 3
+      },
+      "models": {
+        "BM01": 1,
+        "BM25": 1,
+        "BM11": 1,
+        "BM31": 1,
+        "BM64": 1
+      }
+    },
+    "urgency_high": {
+      "tags": {
+        "urgent": 5,
+        "pain_point": 4
+      },
+      "models": {
+        "BM37": 2,
+        "BM12": 1,
+        "BM61": 1,
+        "BM55": 1,
+        "BM43": 1
+      }
+    },
+    "urgency_mission": {
+      "tags": {
+        "mission_critical": 5,
+        "infrastructure": 4,
+        "compliance": 3
+      },
+      "models": {
+        "BM38": 2,
+        "BM53": 1,
+        "BM22": 1,
+        "BM41": 1,
+        "BM46": 1
+      }
+    }
+  },
+  "q13_solution_form": {
+    "solution_software": {
+      "tags": {
+        "software": 5,
+        "digital": 4,
+        "scalable": 3
+      },
+      "models": {
+        "BM01": 3,
+        "BM25": 2,
+        "BM31": 2,
+        "BM58": 1,
+        "BM64": 1
+      }
+    },
+    "solution_soft_hard": {
+      "tags": {
+        "hardware": 4,
+        "software": 3,
+        "integration": 3,
+        "IoT": 2
+      },
+      "models": {
+        "BM06": 2,
+        "BM32": 2,
+        "BM53": 1,
+        "BM45": 1,
+        "BM36": 1
+      }
+    },
+    "solution_hardware": {
+      "tags": {
+        "hardware": 5,
+        "manufacturing": 4,
+        "capex": 3
+      },
+      "models": {
+        "BM22": 2,
+        "BM45": 2,
+        "BM21": 1,
+        "BM42": 1,
+        "BM59": 1
+      }
+    },
+    "solution_service_only": {
+      "tags": {
+        "services": 5,
+        "expertise": 4,
+        "human_capital": 3
+      },
+      "models": {
+        "BM11": 2,
+        "BM12": 2,
+        "BM30": 1,
+        "BM55": 1,
+        "BM68": 1
+      }
+    }
+  },
+  "q14_physical_complexity": {
+    "hw_simple": {
+      "tags": {
+        "hardware_simple": 5,
+        "low_capex": 3,
+        "light_integration": 2
+      },
+      "models": {
+        "BM45": 2,
+        "BM20": 1,
+        "BM59": 1,
+        "BM21": 1,
+        "BM06": 1
+      }
+    },
+    "hw_complex": {
+      "tags": {
+        "hardware_complex": 5,
+        "manufacturing": 4,
+        "engineering_intensive": 3
+      },
+      "models": {
+        "BM22": 2,
+        "BM53": 2,
+        "BM32": 1,
+        "BM36": 1,
+        "BM46": 1
+      }
+    },
+    "hw_infrastructure": {
+      "tags": {
+        "infrastructure": 5,
+        "large_capex": 5,
+        "long_lifecycle": 4
+      },
+      "models": {
+        "BM38": 3,
+        "BM37": 2,
+        "BM36": 1,
+        "BM42": 1,
+        "BM53": 1
+      }
+    }
+  },
+  "q15_lifecycle": {
+    "lifecycle_short": {
+      "tags": {
+        "short_lifecycle": 5,
+        "fast_turnover": 4,
+        "low_capex": 3
+      },
+      "models": {
+        "BM20": 1,
+        "BM57": 1,
+        "BM50": 1,
+        "BM62": 1,
+        "BM45": 1
+      }
+    },
+    "lifecycle_medium": {
+      "tags": {
+        "medium_lifecycle": 5,
+        "replaceable": 3
+      },
+      "models": {
+        "BM06": 1,
+        "BM31": 1,
+        "BM25": 1,
+        "BM53": 1,
+        "BM22": 1
+      }
+    },
+    "lifecycle_long": {
+      "tags": {
+        "long_lifecycle": 5,
+        "asset_heavy": 4,
+        "infrastructure": 3
+      },
+      "models": {
+        "BM38": 2,
+        "BM37": 2,
+        "BM36": 1,
+        "BM42": 1,
+        "BM46": 1
+      }
+    },
+    "lifecycle_continuous": {
+      "tags": {
+        "continuous_service": 5,
+        "evergreen": 4,
+        "recurring": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM12": 2,
+        "BM31": 1,
+        "BM47": 1,
+        "BM58": 1
+      }
+    }
+  },
+  "q16_dependency_on_install": {
+    "install_none": {
+      "tags": {
+        "self_serve": 5,
+        "low_touch": 4,
+        "digital": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM20": 1,
+        "BM47": 1,
+        "BM58": 1,
+        "BM64": 1
+      }
+    },
+    "install_light": {
+      "tags": {
+        "light_setup": 5,
+        "configuration": 3
+      },
+      "models": {
+        "BM25": 1,
+        "BM31": 1,
+        "BM06": 1,
+        "BM32": 1,
+        "BM53": 1
+      }
+    },
+    "install_complex": {
+      "tags": {
+        "complex_integration": 5,
+        "IT_OT": 4,
+        "enterprise": 3
+      },
+      "models": {
+        "BM04": 2,
+        "BM31": 2,
+        "BM53": 1,
+        "BM22": 1,
+        "BM61": 1
+      }
+    },
+    "install_onsite": {
+      "tags": {
+        "onsite_delivery": 5,
+        "project_based": 4,
+        "infrastructure": 3
+      },
+      "models": {
+        "BM37": 2,
+        "BM38": 2,
+        "BM46": 1,
+        "BM12": 1,
+        "BM36": 1
+      }
+    }
+  },
+  "q17_standardisation": {
+    "standard_full": {
+      "tags": {
+        "scalable": 4,
+        "repeatable": 3
+      },
+      "models": {
+        "BM01": 3,
+        "BM25": 2,
+        "BM47": 1,
+        "BM31": 2
+      }
+    },
+    "standard_high": {
+      "tags": {
+        "productised_service": 3,
+        "repeatable": 2
+      },
+      "models": {
+        "BM12": 2,
+        "BM46": 2,
+        "BM53": 1,
+        "BM59": 1
+      }
+    },
+    "standard_mixed": {
+      "tags": {
+        "hybrid_delivery": 3,
+        "semi_bespoke": 2
+      },
+      "models": {
+        "BM14": 2,
+        "BM03": 2,
+        "BM52": 1,
+        "BM22": 1
+      }
+    },
+    "standard_low": {
+      "tags": {
+        "bespoke": 4,
+        "project_based": 3
+      },
+      "models": {
+        "BM06": 2,
+        "BM37": 2,
+        "BM41": 2,
+        "BM18": 1
+      }
+    }
+  },
+  "q18_revenue_pattern": {
+    "rev_oneoff": {
+      "tags": {
+        "transactional": 4,
+        "low_recurring": 3
+      },
+      "models": {
+        "BM20": 2,
+        "BM62": 1,
+        "BM46": 1,
+        "BM06": 1
+      }
+    },
+    "rev_subscription": {
+      "tags": {
+        "recurring": 5,
+        "predictable_revenue": 3
+      },
+      "models": {
+        "BM01": 3,
+        "BM25": 2,
+        "BM47": 3,
+        "BM31": 2,
+        "BM53": 1
+      }
+    },
+    "rev_usage": {
+      "tags": {
+        "usage_metered": 4,
+        "scalable": 2
+      },
+      "models": {
+        "BM12": 2,
+        "BM37": 2,
+        "BM52": 2,
+        "BM03": 1,
+        "BM06": 1
+      }
+    },
+    "rev_performance": {
+      "tags": {
+        "risksharing": 5,
+        "outcome_based": 4
+      },
+      "models": {
+        "BM37": 3,
+        "BM41": 3,
+        "BM43": 2,
+        "BM30": 1,
+        "BM22": 1
+      }
+    }
+  },
+  "q19_price_point": {
+    "price_micro": {
+      "tags": {
+        "low_ticket": 4,
+        "high_volume": 3,
+        "b2c": 2
+      },
+      "models": {
+        "BM20": 2,
+        "BM47": 2,
+        "BM62": 2,
+        "BM65": 1
+      }
+    },
+    "price_low": {
+      "tags": {
+        "affordable": 3,
+        "sme_accessible": 2
+      },
+      "models": {
+        "BM01": 1,
+        "BM12": 1,
+        "BM59": 2,
+        "BM18": 1,
+        "BM46": 1
+      }
+    },
+    "price_medium": {
+      "tags": {
+        "mid_ticket": 4,
+        "enterprise_light": 2
+      },
+      "models": {
+        "BM25": 2,
+        "BM31": 2,
+        "BM53": 2,
+        "BM03": 1,
+        "BM52": 1
+      }
+    },
+    "price_high": {
+      "tags": {
+        "enterprise": 5,
+        "capex_heavy": 3
+      },
+      "models": {
+        "BM06": 2,
+        "BM37": 3,
+        "BM41": 3,
+        "BM38": 2,
+        "BM22": 1
+      }
+    }
+  },
+  "q20_payment_timing": {
+    "pay_upfront": {
+      "tags": {
+        "cashflow_positive": 4,
+        "transactional": 3
+      },
+      "models": {
+        "BM20": 2,
+        "BM62": 2,
+        "BM06": 1,
+        "BM65": 1
+      }
+    },
+    "pay_milestone": {
+      "tags": {
+        "project_based": 4,
+        "b2b_service": 3
+      },
+      "models": {
+        "BM12": 2,
+        "BM46": 2,
+        "BM41": 3,
+        "BM38": 2,
+        "BM22": 1
+      }
+    },
+    "pay_after": {
+      "tags": {
+        "risksharing": 4,
+        "performance_linked": 3
+      },
+      "models": {
+        "BM37": 3,
+        "BM41": 3,
+        "BM43": 2,
+        "BM30": 1,
+        "BM22": 1
+      }
+    },
+    "pay_ongoing": {
+      "tags": {
+        "recurring": 5,
+        "predictable_revenue": 4
+      },
+      "models": {
+        "BM01": 3,
+        "BM47": 3,
+        "BM25": 2,
+        "BM31": 2,
+        "BM53": 1
+      }
+    }
+  },
+  "q21_revenue_diversity": {
+    "revstream_single": {
+      "tags": {
+        "focused_model": 4,
+        "simple_revenue": 3
+      },
+      "models": {
+        "BM01": 3,
+        "BM47": 2,
+        "BM20": 1,
+        "BM31": 1
+      }
+    },
+    "revstream_few": {
+      "tags": {
+        "hybrid_revenue": 4,
+        "service_plus_product": 2
+      },
+      "models": {
+        "BM12": 2,
+        "BM46": 2,
+        "BM25": 2,
+        "BM53": 1,
+        "BM06": 1
+      }
+    },
+    "revstream_many": {
+      "tags": {
+        "multisided": 5,
+        "platform": 4,
+        "diverse_revenue": 4
+      },
+      "models": {
+        "BM03": 3,
+        "BM14": 2,
+        "BM52": 2,
+        "BM59": 1,
+        "BM67": 1
+      }
+    },
+    "revstream_unknown": {
+      "tags": {
+        "early_stage": 3,
+        "undefined_revenue": 2
+      },
+      "models": {
+        "BM62": 1,
+        "BM65": 1,
+        "BM18": 1,
+        "BM70": 1
+      }
+    }
+  },
+  "q22_price_sensitivity": {
+    "sensitivity_high": {
+      "tags": {
+        "price_sensitive": 4,
+        "b2c_massmarket": 3
+      },
+      "models": {
+        "BM20": 2,
+        "BM62": 2,
+        "BM47": 1,
+        "BM18": 1
+      }
+    },
+    "sensitivity_medium": {
+      "tags": {
+        "sme_friendly": 3,
+        "balanced_value": 2
+      },
+      "models": {
+        "BM01": 2,
+        "BM12": 2,
+        "BM46": 1,
+        "BM59": 1,
+        "BM25": 1
+      }
+    },
+    "sensitivity_low": {
+      "tags": {
+        "enterprise_value": 5,
+        "premium": 3
+      },
+      "models": {
+        "BM31": 2,
+        "BM53": 2,
+        "BM06": 1,
+        "BM22": 1,
+        "BM37": 1
+      }
+    },
+    "sensitivity_regulated": {
+      "tags": {
+        "regulated": 5,
+        "public_sector": 3
+      },
+      "models": {
+        "BM41": 3,
+        "BM38": 2,
+        "BM30": 1,
+        "BM43": 1
+      }
+    }
+  },
+  "q23_financing_needed": {
+    "finance_none": {
+      "tags": {
+        "simple_sale": 4,
+        "low_capex": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM20": 1,
+        "BM47": 1,
+        "BM57": 1,
+        "BM58": 1
+      }
+    },
+    "finance_optional": {
+      "tags": {
+        "flexible_finance": 3,
+        "b2b": 2
+      },
+      "models": {
+        "BM12": 2,
+        "BM06": 2,
+        "BM46": 1,
+        "BM25": 1,
+        "BM22": 1
+      }
+    },
+    "finance_core": {
+      "tags": {
+        "high_capex": 5,
+        "recurring_assets": 3,
+        "ownership_models": 4
+      },
+      "models": {
+        "BM07": 3,
+        "BM36": 3,
+        "BM37": 3,
+        "BM53": 2,
+        "BM60": 1
+      }
+    },
+    "finance_riskshare": {
+      "tags": {
+        "performance_based": 4,
+        "impact_finance": 3
+      },
+      "models": {
+        "BM13": 3,
+        "BM41": 2,
+        "BM17": 1,
+        "BM39": 1,
+        "BM49": 1
+      }
+    }
+  },
+  "q24_channel_type": {
+    "channel_online": {
+      "tags": {
+        "digital": 4,
+        "low_cost_acquisition": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM20": 2,
+        "BM47": 2,
+        "BM62": 2,
+        "BM58": 1
+      }
+    },
+    "channel_direct_offline": {
+      "tags": {
+        "field_sales": 4,
+        "relationship_based": 3
+      },
+      "models": {
+        "BM12": 2,
+        "BM06": 2,
+        "BM22": 1,
+        "BM53": 1,
+        "BM46": 1
+      }
+    },
+    "channel_partners": {
+      "tags": {
+        "distribution": 4,
+        "partner_networks": 3
+      },
+      "models": {
+        "BM21": 2,
+        "BM59": 2,
+        "BM52": 1,
+        "BM15": 1,
+        "BM18": 1
+      }
+    },
+    "channel_marketplaces": {
+      "tags": {
+        "platform": 4,
+        "two_sided": 3
+      },
+      "models": {
+        "BM03": 3,
+        "BM14": 2,
+        "BM48": 2,
+        "BM49": 1,
+        "BM63": 1
+      }
+    }
+  },
+  "q25_sales_model": {
+    "sales_selfserve": {
+      "tags": {
+        "low_touch": 4,
+        "digital_acquisition": 3
+      },
+      "models": {
+        "BM01": 3,
+        "BM47": 2,
+        "BM20": 1,
+        "BM58": 1,
+        "BM31": 1
+      }
+    },
+    "sales_inside": {
+      "tags": {
+        "light_sales": 3,
+        "scalable_b2b": 2
+      },
+      "models": {
+        "BM12": 2,
+        "BM25": 2,
+        "BM46": 1,
+        "BM61": 1,
+        "BM26": 1
+      }
+    },
+    "sales_field": {
+      "tags": {
+        "enterprise_sales": 4,
+        "high_touch": 3
+      },
+      "models": {
+        "BM06": 2,
+        "BM53": 2,
+        "BM37": 2,
+        "BM22": 1,
+        "BM32": 1
+      }
+    },
+    "sales_tender": {
+      "tags": {
+        "public_sector": 5,
+        "regulated": 4
+      },
+      "models": {
+        "BM38": 3,
+        "BM41": 2,
+        "BM30": 1,
+        "BM42": 1,
+        "BM17": 1
+      }
+    }
+  },
+  "q26_geography": {
+    "geo_local": {
+      "tags": {
+        "local": 4,
+        "community": 3
+      },
+      "models": {
+        "BM18": 2,
+        "BM59": 2,
+        "BM56": 2,
+        "BM21": 1,
+        "BM67": 1
+      }
+    },
+    "geo_national": {
+      "tags": {
+        "scaling_domestic": 4,
+        "b2b": 2
+      },
+      "models": {
+        "BM01": 2,
+        "BM12": 2,
+        "BM06": 1,
+        "BM20": 1,
+        "BM46": 1
+      }
+    },
+    "geo_regional": {
+      "tags": {
+        "cross_border": 4,
+        "partner_networks": 3
+      },
+      "models": {
+        "BM03": 2,
+        "BM25": 2,
+        "BM49": 1,
+        "BM39": 1,
+        "BM52": 1
+      }
+    },
+    "geo_global": {
+      "tags": {
+        "global_scaling": 5,
+        "digital_scalable": 4
+      },
+      "models": {
+        "BM31": 2,
+        "BM04": 2,
+        "BM68": 1,
+        "BM63": 1,
+        "BM65": 1
+      }
+    }
+  },
+  "q27_distribution_assets": {
+    "dist_asset_light": {
+      "tags": {
+        "asset_light": 5,
+        "outsourced_logistics": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM20": 2,
+        "BM47": 1,
+        "BM58": 1,
+        "BM62": 1
+      }
+    },
+    "dist_asset_medium": {
+      "tags": {
+        "moderate_assets": 3,
+        "small_fleet": 2
+      },
+      "models": {
+        "BM21": 2,
+        "BM59": 2,
+        "BM18": 1,
+        "BM23": 1,
+        "BM46": 1
+      }
+    },
+    "dist_asset_heavy": {
+      "tags": {
+        "asset_heavy": 5,
+        "infrastructure": 4
+      },
+      "models": {
+        "BM38": 3,
+        "BM36": 2,
+        "BM37": 2,
+        "BM45": 1,
+        "BM53": 1
+      }
+    },
+    "dist_digital_only": {
+      "tags": {
+        "pure_digital": 5,
+        "zero_distribution_cost": 4
+      },
+      "models": {
+        "BM03": 2,
+        "BM04": 2,
+        "BM31": 2,
+        "BM58": 1,
+        "BM63": 1
+      }
+    }
+  },
+  "q28_customer_contact": {
+    "contact_rare": {
+      "tags": {
+        "low_touch": 4,
+        "automated_support": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM20": 1,
+        "BM57": 1,
+        "BM47": 1,
+        "BM58": 1
+      }
+    },
+    "contact_periodic": {
+      "tags": {
+        "medium_touch": 3,
+        "customer_success": 2
+      },
+      "models": {
+        "BM12": 2,
+        "BM25": 1,
+        "BM46": 1,
+        "BM61": 1,
+        "BM26": 1
+      }
+    },
+    "contact_regular": {
+      "tags": {
+        "relationship_based": 4,
+        "service_intensive": 3
+      },
+      "models": {
+        "BM06": 2,
+        "BM23": 2,
+        "BM53": 2,
+        "BM60": 1,
+        "BM32": 1
+      }
+    },
+    "contact_continuous": {
+      "tags": {
+        "high_touch": 5,
+        "realtime_service": 4
+      },
+      "models": {
+        "BM36": 3,
+        "BM37": 2,
+        "BM13": 1,
+        "BM55": 1,
+        "BM53": 1
+      }
+    }
+  },
+  "q29_asset_intensity": {
+    "asset_light": {
+      "tags": {
+        "asset_light": 5,
+        "scalable": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM31": 2,
+        "BM04": 1,
+        "BM47": 1,
+        "BM57": 1
+      }
+    },
+    "asset_medium": {
+      "tags": {
+        "moderate_assets": 4,
+        "equipment_required": 2
+      },
+      "models": {
+        "BM06": 2,
+        "BM23": 2,
+        "BM21": 2,
+        "BM59": 1,
+        "BM46": 1
+      }
+    },
+    "asset_heavy": {
+      "tags": {
+        "high_capex": 5,
+        "infrastructure": 4
+      },
+      "models": {
+        "BM38": 3,
+        "BM36": 3,
+        "BM37": 2,
+        "BM53": 1,
+        "BM45": 1
+      }
+    },
+    "asset_ip_data": {
+      "tags": {
+        "ip_core": 5,
+        "data_driven": 4
+      },
+      "models": {
+        "BM68": 2,
+        "BM61": 2,
+        "BM70": 2,
+        "BM69": 1,
+        "BM04": 1
+      }
+    }
+  },
+  "q30_operational_complexity": {
+    "ops_simple": {
+      "tags": {
+        "low_complexity": 4,
+        "scalable": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM31": 2,
+        "BM57": 1,
+        "BM47": 1,
+        "BM20": 1
+      }
+    },
+    "ops_medium": {
+      "tags": {
+        "moderate_complexity": 3,
+        "coordination": 2
+      },
+      "models": {
+        "BM12": 2,
+        "BM25": 2,
+        "BM23": 1,
+        "BM46": 1,
+        "BM21": 1
+      }
+    },
+    "ops_complex": {
+      "tags": {
+        "high_complexity": 5,
+        "multi_actor": 4
+      },
+      "models": {
+        "BM15": 2,
+        "BM36": 2,
+        "BM37": 2,
+        "BM38": 2,
+        "BM32": 1
+      }
+    },
+    "ops_project": {
+      "tags": {
+        "project_based": 5,
+        "custom_delivery": 3
+      },
+      "models": {
+        "BM11": 2,
+        "BM30": 2,
+        "BM53": 1,
+        "BM22": 1,
+        "BM68": 1
+      }
+    }
+  },
+  "q31_capacity_constraint": {
+    "cap_people": {
+      "tags": {
+        "people_intensive": 5,
+        "non_scalable": 3
+      },
+      "models": {
+        "BM11": 2,
+        "BM30": 2,
+        "BM68": 2,
+        "BM55": 1,
+        "BM23": 1
+      }
+    },
+    "cap_equipment": {
+      "tags": {
+        "equipment_bottleneck": 5,
+        "capex_sensitive": 3
+      },
+      "models": {
+        "BM06": 2,
+        "BM21": 2,
+        "BM45": 1,
+        "BM59": 1,
+        "BM46": 1
+      }
+    },
+    "cap_compute": {
+      "tags": {
+        "compute_intensive": 5,
+        "ai_scaling": 4
+      },
+      "models": {
+        "BM31": 2,
+        "BM61": 2,
+        "BM04": 1,
+        "BM68": 1,
+        "BM58": 1
+      }
+    },
+    "cap_regulation": {
+      "tags": {
+        "regulated": 5,
+        "compliance_bottleneck": 4
+      },
+      "models": {
+        "BM38": 3,
+        "BM37": 2,
+        "BM41": 1,
+        "BM17": 1,
+        "BM55": 1
+      }
+    }
+  },
+  "q32_scaling_mode": {
+    "scale_people": {
+      "tags": {
+        "people_scaled": 4,
+        "service_intensive": 3
+      },
+      "models": {
+        "BM11": 2,
+        "BM30": 2,
+        "BM55": 1,
+        "BM23": 1,
+        "BM59": 1
+      }
+    },
+    "scale_assets": {
+      "tags": {
+        "asset_expansion": 5,
+        "capex_growth": 4
+      },
+      "models": {
+        "BM06": 2,
+        "BM36": 2,
+        "BM37": 2,
+        "BM38": 1,
+        "BM45": 1
+      }
+    },
+    "scale_software": {
+      "tags": {
+        "software_scaling": 5,
+        "low_marginal_cost": 4
+      },
+      "models": {
+        "BM01": 2,
+        "BM31": 2,
+        "BM04": 2,
+        "BM47": 1,
+        "BM58": 1
+      }
+    },
+    "scale_network": {
+      "tags": {
+        "network_effects": 5,
+        "platform": 4
+      },
+      "models": {
+        "BM03": 3,
+        "BM14": 2,
+        "BM15": 2,
+        "BM63": 1,
+        "BM52": 1
+      }
+    }
+  },
+  "q33_servicedelivery_model": {
+    "delivery_121": {
+      "tags": {
+        "one_to_one": 5,
+        "high_touch": 3
+      },
+      "models": {
+        "BM11": 2,
+        "BM55": 2,
+        "BM23": 1,
+        "BM59": 1,
+        "BM53": 1
+      }
+    },
+    "delivery_1many": {
+      "tags": {
+        "one_to_many": 5,
+        "scalable_service": 3
+      },
+      "models": {
+        "BM12": 2,
+        "BM47": 2,
+        "BM61": 1,
+        "BM46": 1,
+        "BM25": 1
+      }
+    },
+    "delivery_manymany": {
+      "tags": {
+        "network_based": 5,
+        "platform_model": 4
+      },
+      "models": {
+        "BM03": 3,
+        "BM14": 2,
+        "BM15": 2,
+        "BM52": 1,
+        "BM67": 1
+      }
+    },
+    "delivery_automated": {
+      "tags": {
+        "automated": 5,
+        "low_touch": 4,
+        "software_driven": 4
+      },
+      "models": {
+        "BM01": 2,
+        "BM31": 2,
+        "BM04": 2,
+        "BM58": 1,
+        "BM61": 1
+      }
+    }
+  },
+  "q34_data_role": {
+    "data_low": {
+      "tags": {
+        "data_minimal": 4,
+        "non_technical": 3
+      },
+      "models": {
+        "BM20": 1,
+        "BM18": 1,
+        "BM56": 1,
+        "BM59": 1,
+        "BM50": 1
+      }
+    },
+    "data_support": {
+      "tags": {
+        "data_supporting": 4,
+        "ops_optimisation": 2
+      },
+      "models": {
+        "BM12": 2,
+        "BM23": 1,
+        "BM46": 1,
+        "BM37": 1,
+        "BM53": 1
+      }
+    },
+    "data_core": {
+      "tags": {
+        "data_central": 5,
+        "analytics_driven": 4
+      },
+      "models": {
+        "BM01": 2,
+        "BM61": 2,
+        "BM31": 2,
+        "BM04": 2,
+        "BM32": 1
+      }
+    },
+    "data_monetised": {
+      "tags": {
+        "data_monetised": 5,
+        "platform_data": 4
+      },
+      "models": {
+        "BM70": 2,
+        "BM04": 2,
+        "BM69": 2,
+        "BM35": 1,
+        "BM14": 1
+      }
+    }
+  },
+  "q35_ai_usage": {
+    "ai_none": {
+      "tags": {
+        "non_ai": 5,
+        "manual_ops": 3
+      },
+      "models": {
+        "BM18": 1,
+        "BM56": 1,
+        "BM20": 1,
+        "BM23": 1,
+        "BM59": 1
+      }
+    },
+    "ai_internal": {
+      "tags": {
+        "ai_internal": 5,
+        "ops_optimisation": 3
+      },
+      "models": {
+        "BM12": 2,
+        "BM46": 1,
+        "BM37": 1,
+        "BM61": 1,
+        "BM53": 1
+      }
+    },
+    "ai_core_value": {
+      "tags": {
+        "ai_central": 5,
+        "software_ai": 4
+      },
+      "models": {
+        "BM01": 2,
+        "BM31": 2,
+        "BM61": 2,
+        "BM32": 1,
+        "BM68": 1
+      }
+    },
+    "ai_sold": {
+      "tags": {
+        "ai_product": 5,
+        "ai_commercial": 4
+      },
+      "models": {
+        "BM31": 3,
+        "BM58": 2,
+        "BM61": 1,
+        "BM04": 1,
+        "BM68": 1
+      }
+    }
+  },
+  "q36_data_sensitivity": {
+    "data_public": {
+      "tags": {
+        "low_risk_data": 4,
+        "open_data": 3
+      },
+      "models": {
+        "BM34": 2,
+        "BM04": 1,
+        "BM20": 1,
+        "BM59": 1,
+        "BM56": 1
+      }
+    },
+    "data_internal": {
+      "tags": {
+        "ops_data": 4,
+        "moderate_risk": 3
+      },
+      "models": {
+        "BM12": 2,
+        "BM46": 1,
+        "BM53": 2,
+        "BM61": 1,
+        "BM32": 1
+      }
+    },
+    "data_sensitive": {
+      "tags": {
+        "sensitive_data": 5,
+        "compliance": 4
+      },
+      "models": {
+        "BM41": 2,
+        "BM42": 2,
+        "BM31": 1,
+        "BM38": 1,
+        "BM15": 1
+      }
+    },
+    "data_restricted": {
+      "tags": {
+        "highly_sensitive_data": 5,
+        "secure_data": 5,
+        "gov_compliance": 4
+      },
+      "models": {
+        "BM42": 3,
+        "BM41": 3,
+        "BM38": 2,
+        "BM06": 1,
+        "BM31": 1
+      }
+    }
+  },
+  "q37_evidence_strength": {
+    "evidence_idea": {
+      "tags": {
+        "early_stage": 5,
+        "validation_needed": 4
+      },
+      "models": {
+        "BM14": 2,
+        "BM56": 1,
+        "BM18": 1,
+        "BM68": 1,
+        "BM03": 1
+      }
+    },
+    "evidence_prototype": {
+      "tags": {
+        "prototype_stage": 5,
+        "trl_3_4": 4
+      },
+      "models": {
+        "BM25": 2,
+        "BM32": 1,
+        "BM06": 1,
+        "BM61": 1,
+        "BM31": 1
+      }
+    },
+    "evidence_pilot": {
+      "tags": {
+        "pilot_stage": 5,
+        "trl_5_6": 4
+      },
+      "models": {
+        "BM37": 2,
+        "BM46": 2,
+        "BM53": 1,
+        "BM12": 1,
+        "BM38": 1
+      }
+    },
+    "evidence_orpmrr": {
+      "tags": {
+        "traction": 5,
+        "investment_ready": 4
+      },
+      "models": {
+        "BM01": 2,
+        "BM47": 2,
+        "BM20": 1,
+        "BM31": 1,
+        "BM52": 1
+      }
+    }
+  },
+  "q38_funding_model": {
+    "fund_onceoff": {
+      "tags": {
+        "capex": 5,
+        "project_sales": 4
+      },
+      "models": {
+        "BM06": 2,
+        "BM23": 2,
+        "BM38": 2,
+        "BM53": 1,
+        "BM46": 1
+      }
+    },
+    "fund_subscription": {
+      "tags": {
+        "recurring_revenue": 5,
+        "saas": 4
+      },
+      "models": {
+        "BM01": 3,
+        "BM47": 2,
+        "BM20": 1,
+        "BM31": 1,
+        "BM62": 1
+      }
+    },
+    "fund_usage_based": {
+      "tags": {
+        "metered": 5,
+        "billing_flex": 4
+      },
+      "models": {
+        "BM25": 2,
+        "BM31": 2,
+        "BM37": 1,
+        "BM52": 1,
+        "BM04": 1
+      }
+    },
+    "fund_outcomes": {
+      "tags": {
+        "performance_based": 5,
+        "shared_savings": 4
+      },
+      "models": {
+        "BM37": 3,
+        "BM46": 2,
+        "BM53": 1,
+        "BM42": 1,
+        "BM15": 1
+      }
+    }
+  },
+  "q39_cost_structure": {
+    "cost_people": {
+      "tags": {
+        "labour_intensive": 5,
+        "services_heavy": 4
+      },
+      "models": {
+        "BM12": 2,
+        "BM56": 2,
+        "BM18": 1,
+        "BM68": 1,
+        "BM46": 1
+      }
+    },
+    "cost_tech": {
+      "tags": {
+        "software_costs": 5,
+        "scalable_digital": 4
+      },
+      "models": {
+        "BM01": 3,
+        "BM31": 2,
+        "BM47": 1,
+        "BM32": 1,
+        "BM52": 1
+      }
+    },
+    "cost_hardware": {
+      "tags": {
+        "hardware_intensive": 5,
+        "capex_heavy": 4
+      },
+      "models": {
+        "BM06": 3,
+        "BM53": 2,
+        "BM23": 2,
+        "BM46": 1,
+        "BM37": 1
+      }
+    },
+    "cost_infra": {
+      "tags": {
+        "infrastructure_heavy": 5,
+        "long_term_assets": 4
+      },
+      "models": {
+        "BM38": 3,
+        "BM41": 2,
+        "BM15": 1,
+        "BM42": 1,
+        "BM37": 1
+      }
+    }
+  },
+  "q40_partnership_role": {
+    "partner_low": {
+      "tags": {
+        "independent_delivery": 4,
+        "asset_light": 2
+      },
+      "models": {
+        "BM01": 2,
+        "BM20": 1,
+        "BM47": 1,
+        "BM31": 1
+      }
+    },
+    "partner_sales": {
+      "tags": {
+        "channel_partners": 4,
+        "distribution": 3
+      },
+      "models": {
+        "BM25": 2,
+        "BM52": 2,
+        "BM46": 1,
+        "BM23": 1,
+        "BM59": 1
+      }
+    },
+    "partner_ops": {
+      "tags": {
+        "operations_partners": 5,
+        "delivery_network": 4
+      },
+      "models": {
+        "BM12": 3,
+        "BM37": 2,
+        "BM06": 1,
+        "BM56": 1,
+        "BM18": 1
+      }
+    },
+    "partner_ecosystem": {
+      "tags": {
+        "ecosystem": 5,
+        "platform_model": 5
+      },
+      "models": {
+        "BM15": 3,
+        "BM67": 2,
+        "BM70": 2,
+        "BM14": 1,
+        "BM03": 1
+      }
+    }
+  },
+  "q41_regulation_level": {
+    "reg_light": {
+      "tags": {
+        "low_regulation": 4,
+        "speed_to_market": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM20": 1,
+        "BM47": 1,
+        "BM62": 1,
+        "BM31": 1
+      }
+    },
+    "reg_medium": {
+      "tags": {
+        "moderate_regulation": 4,
+        "compliance_required": 2
+      },
+      "models": {
+        "BM12": 2,
+        "BM06": 1,
+        "BM46": 1,
+        "BM25": 1,
+        "BM23": 1
+      }
+    },
+    "reg_high": {
+      "tags": {
+        "high_regulation": 5,
+        "permits": 4,
+        "risk_management": 3
+      },
+      "models": {
+        "BM38": 3,
+        "BM37": 2,
+        "BM53": 2,
+        "BM42": 2,
+        "BM30": 1
+      }
+    },
+    "reg_compliance_service": {
+      "tags": {
+        "compliance_as_value": 5,
+        "regtech": 4
+      },
+      "models": {
+        "BM41": 3,
+        "BM31": 1,
+        "BM52": 1,
+        "BM14": 1,
+        "BM03": 1
+      }
+    }
+  },
+  "q42_impact_focus": {
+    "impact_none": {
+      "tags": {
+        "commercial_primary": 4
+      },
+      "models": {
+        "BM01": 2,
+        "BM31": 1,
+        "BM20": 1,
+        "BM62": 1,
+        "BM47": 1
+      }
+    },
+    "impact_secondary": {
+      "tags": {
+        "esg_aligned": 3,
+        "responsible_business": 2
+      },
+      "models": {
+        "BM12": 2,
+        "BM46": 1,
+        "BM25": 1,
+        "BM37": 1,
+        "BM23": 1
+      }
+    },
+    "impact_core": {
+      "tags": {
+        "impact_driven": 5,
+        "climate_social": 4
+      },
+      "models": {
+        "BM18": 3,
+        "BM56": 3,
+        "BM37": 2,
+        "BM59": 1,
+        "BM67": 1
+      }
+    },
+    "impact_crosssubsidy": {
+      "tags": {
+        "inclusive_model": 5,
+        "tiered_pricing": 4
+      },
+      "models": {
+        "BM59": 3,
+        "BM56": 3,
+        "BM18": 2,
+        "BM70": 1,
+        "BM14": 1
+      }
+    }
+  },
+  "q43_risk_sharing": {
+    "riskshare_none": {
+      "tags": {
+        "fixed_pricing": 4,
+        "low_risk_exchange": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM20": 1,
+        "BM47": 1,
+        "BM62": 1,
+        "BM31": 1
+      }
+    },
+    "riskshare_partial": {
+      "tags": {
+        "shared_risk": 4,
+        "performance_alignment": 3
+      },
+      "models": {
+        "BM12": 2,
+        "BM46": 2,
+        "BM25": 1,
+        "BM23": 1,
+        "BM37": 1
+      }
+    },
+    "riskshare_high": {
+      "tags": {
+        "performance_based": 5,
+        "pay_for_outcomes": 5
+      },
+      "models": {
+        "BM37": 3,
+        "BM38": 2,
+        "BM41": 2,
+        "BM53": 1,
+        "BM70": 1
+      }
+    },
+    "riskshare_insurance": {
+      "tags": {
+        "embedded_insurance": 5,
+        "risk_pooling": 4
+      },
+      "models": {
+        "BM42": 3,
+        "BM41": 2,
+        "BM37": 1,
+        "BM18": 1,
+        "BM56": 1
+      }
+    }
+  },
+  "q44_funding_source": {
+    "fund_own": {
+      "tags": {
+        "self_funded": 4,
+        "low_frictionsale": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM20": 1,
+        "BM47": 1,
+        "BM62": 1,
+        "BM23": 1
+      }
+    },
+    "fund_donor": {
+      "tags": {
+        "donor_financed": 5,
+        "impact_funding": 4
+      },
+      "models": {
+        "BM18": 3,
+        "BM56": 3,
+        "BM59": 2,
+        "BM67": 1,
+        "BM70": 1
+      }
+    },
+    "fund_finance": {
+      "tags": {
+        "project_finance": 5,
+        "capex_heavy": 4
+      },
+      "models": {
+        "BM38": 3,
+        "BM37": 2,
+        "BM06": 2,
+        "BM53": 2,
+        "BM25": 1
+      }
+    },
+    "fund_embedded": {
+      "tags": {
+        "embedded_finance": 5,
+        "risk_underwriting": 4,
+        "customer_enablement": 3
+      },
+      "models": {
+        "BM42": 3,
+        "BM37": 2,
+        "BM25": 2,
+        "BM46": 1,
+        "BM52": 1
+      }
+    }
+  },
+  "q45_long_term_vision": {
+    "vision_build_sell": {
+      "tags": {
+        "exit_driven": 5,
+        "scalable": 3
+      },
+      "models": {
+        "BM01": 2,
+        "BM31": 2,
+        "BM47": 1,
+        "BM62": 1,
+        "BM20": 1
+      }
+    },
+    "vision_platform": {
+      "tags": {
+        "ecosystem_play": 5,
+        "network_effects": 4
+      },
+      "models": {
+        "BM15": 3,
+        "BM03": 2,
+        "BM67": 2,
+        "BM70": 1,
+        "BM52": 1
+      }
+    },
+    "vision_ip_portfolio": {
+      "tags": {
+        "ip_strength": 5,
+        "licensing_potential": 4
+      },
+      "models": {
+        "BM41": 3,
+        "BM22": 2,
+        "BM53": 2,
+        "BM14": 1,
+        "BM25": 1
+      }
+    },
+    "vision_asset_owner": {
+      "tags": {
+        "asset_owner": 5,
+        "long_term_infrastructure": 4
+      },
+      "models": {
+        "BM38": 3,
+        "BM37": 2,
+        "BM06": 2,
+        "BM53": 1,
+        "BM18": 1
+      }
+    }
+  }
+}
