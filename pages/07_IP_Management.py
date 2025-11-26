@@ -1,8 +1,8 @@
-# ============================================
+# ============================================================
 # INNOVATION MENTOR APP
-# PAGE: 05_IP_Management.py
-# MVP — Compatible with simple JSON structure
-# ============================================
+# PAGE: 07_IP_Management.py
+# COMPLETE & POLISHED EDITION
+# ============================================================
 
 import streamlit as st
 import json
@@ -12,107 +12,151 @@ from pathlib import Path
 # PAGE CONFIG
 # ----------------------------
 st.set_page_config(page_title="IP Management", layout="wide")
+
 st.title("🔐 Intellectual Property (IP) Management Assistant")
-st.caption("A guided tool to help you identify the most suitable IP protection pathway for your innovation.")
-
+st.caption("A guided tool to help innovators determine the best IP protection strategy.")
 st.markdown("""
-This assistant evaluates **what type of intellectual property protection** is best suited for your innovation.
-
-Answer the questions below to receive a **recommended IP strategy** with detailed explanations.
+This tool evaluates the nature of your innovation and recommends the most suitable form 
+of intellectual property protection.  
+Answer the short questionnaire below to receive your personalised IP pathway.
 
 ---
 """)
 
 # ----------------------------
-# LOAD QUESTIONS
+# LOAD QUESTIONNAIRE JSON
 # ----------------------------
 q_path = Path("data/ip_questionnaire.json")
 if not q_path.exists():
-    st.error("❌ Missing: `ip_questionnaire.json`")
+    st.error("❌ Missing file: `ip_questionnaire.json` in /data")
     st.stop()
 
-with open(q_path, "r", encoding="utf-8") as f:
-    questions = json.load(f)["questions"]
+try:
+    with open(q_path, "r", encoding="utf-8") as f:
+        questions = json.load(f)["questions"]
+except Exception as e:
+    st.error(f"❌ Error loading ip_questionnaire.json: {e}")
+    st.stop()
 
 # ----------------------------
-# LOAD RATIONALE
+# LOAD RATIONALE JSON
 # ----------------------------
 r_path = Path("data/ip_rationale.json")
 if not r_path.exists():
-    st.error("❌ Missing: `ip_rationale.json`")
+    st.error("❌ Missing file: `ip_rationale.json` in /data")
     st.stop()
 
-with open(r_path, "r", encoding="utf-8") as f:
-    rationale = json.load(f)
+try:
+    with open(r_path, "r", encoding="utf-8") as f:
+        rationale_data = json.load(f)
+except Exception as e:
+    st.error(f"❌ Error loading ip_rationale.json: {e}")
+    st.stop()
 
-# ----------------------------
-# INITIALISE SCORES
-# ----------------------------
-ip_types = ["Patent", "Design", "Trademark", "Copyright", "Trade Secret"]
-scores = {ip: 0 for ip in ip_types}
 
 # ----------------------------
 # RENDER QUESTIONNAIRE
 # ----------------------------
-st.subheader("🧩 Answer the following questions")
-
-answers = {}
+st.header("📋 IP Questionnaire")
 
 for q in questions:
-    st.markdown(f"**{q['question']}**")
-
-    option_labels = [opt["text"] for opt in q["options"]]
-
-    selected_label = st.radio(
-        label="",
-        options=option_labels,
-        key=f"q_{q['id']}",
-        horizontal=False
+    st.radio(
+        q["question"],
+        list(q["options"].keys()),
+        key=q["id"]
     )
 
-    # Save selected option object
-    for opt in q["options"]:
-        if opt["text"] == selected_label:
-            answers[q["id"]] = opt
-            break
 
 # ----------------------------
-# PROCESS RESULTS
+# SCORING ENGINE
 # ----------------------------
-if st.button("🔍 Analyse My IP Strategy"):
-    # Tally up IP scores
-    for qid, opt in answers.items():
-        for ip in opt["adds"]:
-            scores[ip] += 1
+ip_types = ["Patent", "Design", "Trademark", "Copyright", "Trade Secret"]
+ip_scores = {ip: 0 for ip in ip_types}
 
-    # Ranking
-    ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+for q in questions:
+    user_choice = st.session_state.get(q["id"])
+    if user_choice:
+        weight_map = q["options"][user_choice]  # dict of ip → score
+        for ip_type, score in weight_map.items():
+            ip_scores[ip_type] += score
+
+# Rank the IP types
+sorted_scores = sorted(ip_scores.items(), key=lambda x: x[1], reverse=True)
+
+
+# ----------------------------
+# RESULTS DISPLAY
+# ----------------------------
+st.markdown("---")
+if st.button("Show My IP Recommendation", use_container_width=True):
+
+    primary_ip, primary_score = sorted_scores[0]
+    secondary_ip, secondary_score = sorted_scores[1]
 
     # ----------------------------
-    # OUTPUT RESULTS
+    # MAIN RECOMMENDATIONS
     # ----------------------------
-    st.markdown("---")
-    st.header("🏆 Recommended IP Protection")
-
-    top_ip, top_score = ranked[0]
-
-    st.markdown(f"""
-    ### ⭐ **Primary Recommendation: {top_ip}**
-    {rationale[top_ip]["summary"]}
-    """)
-
-    st.markdown("### 🥈 Other relevant options")
-    for ip, score in ranked[1:3]:
-        st.markdown(f"**{ip}** — {rationale[ip]['short']}")
+    st.success(f"🏆 Primary Recommendation: **{primary_ip}** (score {primary_score})")
+    st.info(f"✨ Secondary Consideration: **{secondary_ip}** (score {secondary_score})")
 
     st.markdown("---")
 
-    with st.expander("📘 Full IP Guide"):
-        for ip in ip_types:
-            st.markdown(f"""
-            #### **{ip}**
-            {rationale[ip]["details"]}
-            """)
+    # ----------------------------
+    # DETAILS FOR PRIMARY IP TYPE
+    # ----------------------------
+    ip_info = rationale_data.get(primary_ip, {})
 
-    # Debug scores (optional)
-    # st.write(scores)
+    st.write("### 📘 Description")
+    st.write(ip_info.get("description", "No description found."))
+
+    st.write("### 🧭 Recommended Next Steps")
+    for step in ip_info.get("next_steps", []):
+        st.write(f"- {step}")
+
+    st.write("### 💰 Approximate Cost")
+    st.write(ip_info.get("approx_cost", "No cost information available."))
+
+    st.markdown("---")
+
+    # ----------------------------
+    # RISK WARNINGS
+    # ----------------------------
+    st.write("### ⚠️ Key Risks & Limitations")
+
+    risk_map = {
+        "Patent": [
+            "Public disclosure before filing destroys novelty.",
+            "International filings become expensive very quickly.",
+            "Maintenance fees are required to keep protection active."
+        ],
+        "Design": [
+            "Protects only appearance, not function.",
+            "Disclosure before filing destroys novelty."
+        ],
+        "Trademark": [
+            "Generic or descriptive names cannot be registered.",
+            "Conflicts with existing trademarks can block approval."
+        ],
+        "Copyright": [
+            "Protects expression, not ideas or concepts.",
+            "Code algorithms are not protected — only written form."
+        ],
+        "Trade Secret": [
+            "Protection ends immediately if secrecy is lost.",
+            "Difficult to enforce without strong internal processes."
+        ]
+    }
+
+    for risk in risk_map.get(primary_ip, []):
+        st.write(f"- {risk}")
+
+    st.markdown("---")
+
+    # ----------------------------
+    # DISCLAIMER
+    # ----------------------------
+    st.info(
+        "This tool provides early-stage guidance only. For formal legal advice, "
+        "consult a registered IP attorney or IP specialist."
+    )
+
