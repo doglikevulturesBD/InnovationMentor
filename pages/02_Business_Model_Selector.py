@@ -1,158 +1,153 @@
-import json
 import streamlit as st
-import pandas as pd
-
-from config.business_model_questions import QUESTION_DEFS
-from utils.bm_rule_engine import load_weights, calculate_rule_scores
-from utils.bm_ai_engine import ai_scores_for_models
-from utils.bm_fusion import fuse_scores
-
-
-st.set_page_config(
-    page_title="Business Model Selector",
-    page_icon="🧩",
-    layout="wide"
+from utils.data_loader import (
+    load_business_models,
+    load_archetype_questions,
+    load_archetypes,
+    load_secondary_questions,
 )
 
-st.title("Business Model Selector")
-st.markdown(
-    """
-    This engine uses a structured 45-question diagnostic + an optional AI layer  
-    to rank **70 business models** for your innovation.  
-    """
-)
+st.set_page_config(page_title="Business Model Guide", layout="wide")
 
-# ---------------------------------------------------------------------
-# 1. LOAD BUSINESS MODELS JSON
-# ---------------------------------------------------------------------
+st.title("Innovation Mentor — Business Model Guide")
 
-with open("data/business_models.json", "r") as f:
-    RAW_MODELS = json.load(f)
+# --- Load data ---
+business_models = load_business_models()
+questions = load_archetype_questions()
+archetypes = load_archetypes()
+secondary_q = load_secondary_questions()
 
-# Convert list → dict by ID
-BM_DEFS = {m["id"]: m for m in RAW_MODELS}
-
-MODEL_IDS = list(BM_DEFS.keys())
-
-
-# ---------------------------------------------------------------------
-# 2. RENDER QUESTIONNAIRE
-# ---------------------------------------------------------------------
-st.markdown("### Step 1: Answer the Business Model Questionnaire")
+# --- Stage 1: Archetype questions ---
+st.header("Step 1 — Your Strategic Fingerprint")
 
 answers = {}
-selected_features = []
 
-for q in QUESTION_DEFS:
+for q in questions:
+    answers[q["key"]] = st.selectbox(
+        q["text"],
+        q["options"],
+        key=f"arch_{q['id']}"
+    )
 
-    # Conditional visibility rules
-    if "visible_if" in q:
-        cond = q["visible_if"]
-        controlling_qid = list(cond.keys())[0]
-        allowed_values = cond[controlling_qid]
+st.write("Raw answers (for debugging):", answers)
 
-        if controlling_qid not in answers:
-            continue
+# --- Simple heuristic: guess primary archetype based on answers ---
+def infer_archetype(answers_dict):
+    """
+    Very simple rule-based mapping for now.
+    Later we can replace this with a nicer scoring system.
+    """
+    score = {a["id"]: 0 for a in archetypes}
 
-        if answers[controlling_qid] not in allowed_values:
-            continue
+    # Delivery style (Q1)
+    delivery = answers_dict.get("delivery", "").lower()
+    if "software" in delivery or "hybrid" in delivery:
+        score["A_SOFTWARE"] += 2
+    if "platform" in delivery:
+        score["A_PLATFORM"] += 2
+    if "product" in delivery or "hybrid" in delivery:
+        score["A_HARDWARE"] += 1
+    if "service" in delivery:
+        score["A_IMPACT"] += 0.5  # could also map to services later
 
-    labels = list(q["options"].keys())
-    selected_label = st.selectbox(q["label"], labels, key=q["id"])
+    # Scale (Q2)
+    scale = answers_dict.get("scale", "").lower()
+    if "digital" in scale or "ecosystem" in scale or "international" in scale:
+        score["A_SOFTWARE"] += 1
+        score["A_PLATFORM"] += 1
+    if "local" in scale or "national" in scale:
+        score["A_IMPACT"] += 0.5
+        score["A_HARDWARE"] += 0.5
 
-    feature_code = q["options"][selected_label]
-    answers[q["id"]] = feature_code
-    selected_features.append(feature_code)
+    # Revenue preference (Q4)
+    revenue = answers_dict.get("revenue", "").lower()
+    if "licensing" in revenue:
+        score["A_SOFTWARE"] += 1
+        score["A_FINANCE"] += 0.5
+    if "marketplace" in revenue:
+        score["A_PLATFORM"] += 1.5
+    if "usage" in revenue:
+        score["A_SOFTWARE"] += 0.5
+        score["A_HARDWARE"] += 0.5
+        score["A_FINANCE"] += 0.5
 
-st.markdown("---")
+    # R&D intensity (Q5)
+    rnd = answers_dict.get("rnd_intensity", "").lower()
+    if "high" in rnd or "deep" in rnd:
+        score["A_SOFTWARE"] += 0.5
+        score["A_IMPACT"] += 0.5
+        score["A_HARDWARE"] += 0.5
 
+    # Regulation (Q8)
+    reg = answers_dict.get("regulation", "").lower()
+    if "high" in reg or "extreme" in reg:
+        score["A_IMPACT"] += 1
+        score["A_FINANCE"] += 1
 
-# ---------------------------------------------------------------------
-# ---------------------------------------------------------------------
-# 3. OPTIONAL AI INPUT (NOW INTEGRATED WITH QUESTIONNAIRE)
-# ---------------------------------------------------------------------
-st.markdown("### Step 2: Optional AI Assistance")
+    # pick best
+    best_id = max(score, key=score.get)
+    best = next(a for a in archetypes if a["id"] == best_id)
+    return best, score
 
-extra_text = st.text_area(
-    "Add any free-text description to help the AI refine recommendations.",
-    placeholder="Describe your innovation, customer, problem, TRL, value, etc.",
-    key="bm_ai_extra_text"
-)
+if st.button("Analyse my archetype"):
+    primary, scores = infer_archetype(answers)
+    st.subheader("Your primary archetype")
+    st.markdown(f"**{primary['name']}**")
+    st.write(primary["description"])
+    st.write("Debug scores:", scores)
 
-# --- Build AI text from feature codes + optional free text ---
-combined_tokens = list(selected_features)  # copy of selected features
+    # --- Stage 2: Show secondary questions for that archetype ---
+    st.header("Step 2 — Fine-tune within this archetype")
 
-extra_clean = extra_text.strip()
-if extra_clean:
-    combined_tokens.append(extra_clean)
+    sec_set = secondary_q.get(primary["id"], [])
+    sec_answers = {}
+    for q in sec_set:
+        sec_answers[q["id"]] = st.selectbox(
+            q["text"],
+            q["options"],
+            key=f"sec_{q['id']}"
+        )
 
-# Final AI text input (space-separated tokens)
-full_text = " ".join(combined_tokens)
+    st.write("Secondary answers (debug):", sec_answers)
 
+    # --- Stage 3: Show matching business models list (first version: just filter by tags) ---
+    st.header("Recommended business models in this space")
 
+    core_tags = set(primary["core_tags"])
 
-# ---------------------------------------------------------------------
-# 4. GENERATE RESULTS
-# ---------------------------------------------------------------------
-if st.button("Generate Business Model Recommendations"):
+    # simple score: overlap of core_tags with BM tags
+    scored = []
+    for bm in business_models:
+        overlap = core_tags.intersection(set(bm["tags"]))
+        score = len(overlap)
+        scored.append((score, bm))
 
-    if not selected_features:
-        st.warning("Please complete the questionnaire first.")
-        st.stop()
+    # sort by score desc
+    scored.sort(key=lambda x: x[0], reverse=True)
 
-    # Load weight matrix
-    weights = load_weights("data/bm_rule_weights.json")
+    top_models = [bm for s, bm in scored if s > 0]
 
-    # RULE-ONLY SCORES
-    rule_scores = calculate_rule_scores(selected_features, weights)
+    if not top_models:
+        st.info("No strong matches yet — your archetype is quite niche. We can later improve the mapping.")
+    else:
+        st.markdown("These are the **closest fits** based on your archetype. You can read them all and then pick your Top 3.")
 
-    # AI SCORES (zero if no embeddings configured)
-    ai_scores = ai_scores_for_models(full_text, MODEL_IDS)
+        names_for_multiselect = [f"{bm['id']} — {bm['name']}" for bm in top_models]
 
-    # Combine rule-based + AI weights (default 70/30)
-    final_scores = fuse_scores(rule_scores, ai_scores, rule_weight=0.7)
+        chosen = st.multiselect(
+            "Choose up to 3 models that feel right for your innovation:",
+            options=names_for_multiselect,
+            max_selections=3
+        )
 
-    # Sort models
-    ranked = sorted(final_scores.items(), key=lambda x: x[1], reverse=True)
-    top3 = [m for m, _ in ranked[:3]]
+        # show details for all models
+        for score_val, bm in scored:
+            if score_val <= 0:
+                continue
+            with st.expander(f"{bm['id']} — {bm['name']}"):
+                st.write(bm["description"])
+                st.write("Tags:", ", ".join(bm["tags"]))
+                st.caption(f"Archetype match score (rough): {score_val}")
 
-    # Save to session state
-    st.session_state["top3_models"] = top3
-    st.session_state["business_model_scores"] = final_scores
-
-    st.success("Top 3 business models identified!")
-    st.markdown("## Top 3 Recommended Models")
-
-    for model_id in top3:
-        info = BM_DEFS.get(model_id, {})
-        st.subheader(f"• {info.get('name', model_id)}")
-        st.write(info.get("description", ""))
-
-    # Full ranking table
-    with st.expander("Show complete rankings"):
-        rows = []
-        for model_id, score in ranked:
-            info = BM_DEFS.get(model_id, {})
-            rows.append({
-                "ID": model_id,
-                "Name": info.get("name", model_id),
-                "Hybrid Score": round(score, 4)
-            })
-        df = pd.DataFrame(rows)
-        st.dataframe(df, use_container_width=True)
-
-
-# -----------------------------------------------
-# 5. SHOW CURRENT RESULTS IF PAGE REFRESHES
-# -----------------------------------------------
-elif "top3_models" in st.session_state:
-    st.markdown("## Current Top 3 Models")
-
-    for model_id in st.session_state["top3_models"]:
-        info = BM_DEFS.get(model_id, {})
-        st.subheader(f"• {info.get('name', model_id)}")
-        st.write(info.get("description", ""))
-
-
-
-
+        if chosen:
+            st.success("Saved your Top 3 choices.")
+            st.session_state["top3_models"] = chosen
