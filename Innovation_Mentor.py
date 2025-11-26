@@ -1,4 +1,4 @@
-FILE: app.py
+
 import streamlit as st
 from config.business_model_questions import QUESTION_DEFS
 from engine.scorer import rank_business_models
