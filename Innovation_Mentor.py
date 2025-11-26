@@ -128,6 +128,6 @@ st.markdown("""
 <b>Disclaimer:</b><br>
 This platform provides structured guidance only. It is not a substitute for legal, financial, regulatory, or IP advice.
 All decisions made using this platform remain the responsibility of the user.
-Refer to the <a href="./Legal_Section">Legal & Compliance Section</a> for full details.
+Refer to the <a href="./Legal_and_Compliance">Legal & Compliance Section</a> for full details.
 </div>
 """, unsafe_allow_html=True)
