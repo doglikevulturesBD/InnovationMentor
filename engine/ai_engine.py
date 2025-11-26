@@ -1,27 +1,44 @@
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
 import json
+import os
 
+# ----------------------------------------
+# Load vectors for business models
+# ----------------------------------------
 def load_model_vectors(path="data/bm_model_vectors.json"):
-    with open(path) as f:
+    if not os.path.exists(path):
+        return {}
+    with open(path, "r") as f:
         return json.load(f)
 
 
-def compute_ai_boost(tag_vectors, model_vectors, boost_strength=0.2):
-    """
-    Compute the soft AI boost based on user tag embeddings.
-    tag_vectors = list of embedded vectors (numpy arrays)
-    """
-    if not tag_vectors:
-        return {bm: 0.0 for bm in model_vectors.keys()}
+# ----------------------------------------
+# PURE NUMPY COSINE SIMILARITY
+# ----------------------------------------
+def cosine_sim(a, b):
+    a = np.array(a)
+    b = np.array(b)
 
-    user_vec = np.mean(np.array(tag_vectors), axis=0).reshape(1, -1)
+    if np.linalg.norm(a) == 0 or np.linalg.norm(b) == 0:
+        return 0.0
+
+    return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b)))
+
+
+# ----------------------------------------
+# Compute AI boost using user embedding
+# ----------------------------------------
+def compute_ai_boost(user_vector, model_vectors):
+    """
+    user_vector: list[float]
+    model_vectors: dict[BM_NAME → vector]
+    """
+
+    if user_vector is None or len(model_vectors) == 0:
+        return {k: 0.0 for k in model_vectors.keys()}
 
     boosts = {}
     for bm, vec in model_vectors.items():
-        model_vec = np.array(vec).reshape(1, -1)
-        sim = cosine_similarity(user_vec, model_vec)[0][0]
-        boosts[bm] = sim * boost_strength
+        boosts[bm] = cosine_sim(user_vector, vec)
 
     return boosts
-
