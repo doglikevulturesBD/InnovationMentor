@@ -1,7 +1,7 @@
 # ============================================
 # INNOVATION MENTOR APP
 # PAGE: 05_IP_Management.py
-# MVP — Polished Edition (Working Version)
+# MVP — Compatible with simple JSON structure
 # ============================================
 
 import streamlit as st
@@ -16,10 +16,9 @@ st.title("🔐 Intellectual Property (IP) Management Assistant")
 st.caption("A guided tool to help you identify the most suitable IP protection pathway for your innovation.")
 
 st.markdown("""
-This assistant evaluates **what type of intellectual property protection** is best suited for your innovation based on its 
-characteristics, novelty, branding needs, and confidentiality aspects.
+This assistant evaluates **what type of intellectual property protection** is best suited for your innovation.
 
-Answer the questions below to receive a **recommended IP protection strategy** along with explanations and next steps.
+Answer the questions below to receive a **recommended IP strategy** with detailed explanations.
 
 ---
 """)
@@ -29,7 +28,7 @@ Answer the questions below to receive a **recommended IP protection strategy** a
 # ----------------------------
 q_path = Path("data/ip_questionnaire.json")
 if not q_path.exists():
-    st.error("❌ Missing file: `ip_questionnaire.json` in /data")
+    st.error("❌ Missing: `ip_questionnaire.json`")
     st.stop()
 
 with open(q_path, "r", encoding="utf-8") as f:
@@ -40,92 +39,80 @@ with open(q_path, "r", encoding="utf-8") as f:
 # ----------------------------
 r_path = Path("data/ip_rationale.json")
 if not r_path.exists():
-    st.error("❌ Missing file: `ip_rationale.json` in /data")
+    st.error("❌ Missing: `ip_rationale.json`")
     st.stop()
 
 with open(r_path, "r", encoding="utf-8") as f:
-    rationale_data = json.load(f)
+    rationale = json.load(f)
 
 # ----------------------------
 # INITIALISE SCORES
 # ----------------------------
 ip_types = ["Patent", "Design", "Trademark", "Copyright", "Trade Secret"]
-ip_scores = {ip: 0 for ip in ip_types}
-
+scores = {ip: 0 for ip in ip_types}
 
 # ----------------------------
 # RENDER QUESTIONNAIRE
 # ----------------------------
 st.subheader("🧩 Answer the following questions")
 
-responses = {}
+answers = {}
 
 for q in questions:
-    qid = q["id"]
-    text = q["question"]
-    options = q["options"]
+    st.markdown(f"**{q['question']}**")
 
-    st.markdown(f"**{text}**")
+    option_labels = [opt["text"] for opt in q["options"]]
 
-    selected = st.radio(
+    selected_label = st.radio(
         label="",
-        options=list(options.keys()),
-        key=qid,
+        options=option_labels,
+        key=f"q_{q['id']}",
         horizontal=False
     )
 
-    responses[qid] = selected
-
+    # Save selected option object
+    for opt in q["options"]:
+        if opt["text"] == selected_label:
+            answers[q["id"]] = opt
+            break
 
 # ----------------------------
 # PROCESS RESULTS
 # ----------------------------
-if st.button("🔍 Analyse My IP Profile"):
+if st.button("🔍 Analyse My IP Strategy"):
+    # Tally up IP scores
+    for qid, opt in answers.items():
+        for ip in opt["adds"]:
+            scores[ip] += 1
+
+    # Ranking
+    ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+
+    # ----------------------------
+    # OUTPUT RESULTS
+    # ----------------------------
     st.markdown("---")
-
-    # Score calculation
-    for q in questions:
-        qid = q["id"]
-        selected = responses[qid]
-        effects = q["options"][selected]
-
-        # Add weights to each IP type
-        for ip_type, weight in effects.items():
-            ip_scores[ip_type] += weight
-
-    # Sort by score
-    ranked = sorted(ip_scores.items(), key=lambda x: x[1], reverse=True)
-
-    # ----------------------------
-    # DISPLAY TOP RECOMMENDATIONS
-    # ----------------------------
-    st.header("🏆 Your Recommended IP Protection Strategy")
+    st.header("🏆 Recommended IP Protection")
 
     top_ip, top_score = ranked[0]
 
     st.markdown(f"""
     ### ⭐ **Primary Recommendation: {top_ip}**
-    {rationale_data[top_ip]["summary"]}
+    {rationale[top_ip]["summary"]}
     """)
 
-    # Optional: show top 3
-    st.markdown("### 🥈 Other strong matches")
+    st.markdown("### 🥈 Other relevant options")
     for ip, score in ranked[1:3]:
-        st.markdown(f"- **{ip}** — {rationale_data[ip]['short']}")
+        st.markdown(f"**{ip}** — {rationale[ip]['short']}")
 
     st.markdown("---")
 
-    # ----------------------------
-    # DISPLAY FULL BREAKDOWN
-    # ----------------------------
-    with st.expander("📘 Full Explanations of All IP Types", expanded=False):
+    with st.expander("📘 Full IP Guide"):
         for ip in ip_types:
             st.markdown(f"""
             #### **{ip}**
-            {rationale_data[ip]["details"]}
+            {rationale[ip]["details"]}
             """)
 
-    # ----------------------------
-    # RAW SCORE DEBUG (optional)
-    # ----------------------------
-    # st.write("Raw scores:", ip_scores)
+    # Debug scores (optional)
+    # st.write(scores)
