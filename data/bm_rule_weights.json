@@ -1,4 +1,4 @@
-"q1_customer_type": {
+{"q1_customer_type": {
   "customer_consumers": {
     "tags": {
       "B2C": 3
@@ -2540,4 +2540,4 @@
     }
   }
 }
-
+}
