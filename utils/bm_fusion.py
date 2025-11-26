@@ -1,24 +1,14 @@
-# utils/bm_fusion.py
-
-from typing import Dict
-
-
-def fuse_scores(
-    rule_scores: Dict[str, float],
-    ai_scores: Dict[str, float],
-    rule_weight: float = 0.7,
-) -> Dict[str, float]:
+def fuse_scores(rule_scores, ai_scores, rule_weight=0.7):
     """
-    Hybrid score = rule_weight * rule_score + (1 - rule_weight) * ai_score
+    Combines rule-based + AI scores into hybrid.
     """
-    final: Dict[str, float] = {}
-    models = set(rule_scores.keys()) | set(ai_scores.keys())
-    ai_weight = 1.0 - rule_weight
+    final = {}
 
-    for m in models:
-        r = rule_scores.get(m, 0.0)
-        a = ai_scores.get(m, 0.0)
-        final[m] = rule_weight * r + ai_weight * a
+    for model_id in rule_scores:
+        r = rule_scores.get(model_id, 0)
+        a = ai_scores.get(model_id, 0)
+        final[model_id] = r * rule_weight + a * (1 - rule_weight)
 
     return final
+
 
