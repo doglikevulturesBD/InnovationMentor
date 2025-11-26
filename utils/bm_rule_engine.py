@@ -1,26 +1,25 @@
-# utils/bm_rule_engine.py
-
 import json
-from typing import Dict, List
 
-
-def load_weights(path: str = "config/business_model_weights.json") -> Dict:
+def load_weights(path):
     with open(path, "r") as f:
         return json.load(f)
 
 
-def calculate_rule_scores(
-    selected_features: List[str],
-    weights: Dict[str, Dict[str, int]],
-) -> Dict[str, float]:
+def calculate_rule_scores(features, weights):
     """
-    selected_features: list of feature keys chosen via questionnaire
-    weights: {model_name: {feature_key: weight, ...}}
+    features: list of selected feature codes e.g. ["customer_businesses"]
+    weights: dict mapping q_id → option → {tags, models}
     """
-    scores = {model: 0.0 for model in weights.keys()}
-    for model, feature_weights in weights.items():
-        for feat in selected_features:
-            if feat in feature_weights:
-                scores[model] += feature_weights[feat]
-    return scores
+    model_scores = {}
+
+    for feature in features:
+        for qid, options in weights.items():
+            if feature in options:
+                entry = options[feature]
+
+                for model_id, val in entry.get("models", {}).items():
+                    model_scores[model_id] = model_scores.get(model_id, 0) + val
+
+    return model_scores
+
 
