@@ -91,33 +91,41 @@ else:
             st.rerun()
 
     # -------------------------------
-    # Step 3: Ranking
+   # -------------------------------
+# Step 3: Ranking
+# -------------------------------
+if st.session_state["secondary_done"]:
+    st.subheader("3. Recommended Business Models")
+
+    # ---- Score models ----
+    results = []
+    for model in BUSINESS_MODELS:
+        score = score_model(model, archetype_tags)
+        results.append((model, score))
+
+    results = sorted(results, key=lambda x: x[1], reverse=True)
+    top5 = results[:5]
+
     # -------------------------------
-    if st.session_state["secondary_done"]:
-        st.subheader("3. Recommended Business Models")
+    # Display Top 5 WITH full explanation
+    # -------------------------------
+    st.markdown("## 🔥 Top 5 Best-Fit Models")
 
-        results = []
-        for model in BUSINESS_MODELS:
-            score = score_model(model, archetype_tags)
-            results.append((model, score))
+    for bm, score in top5:
+        st.markdown(f"### {bm['name']} — **Score: {score:.2f}**")
+        st.markdown(f"**Description:** {bm['description']}")
+        st.markdown(
+            f"**Fit Quality:** Shares {len(set(bm['tags']) & set(archetype_tags))} strategic traits with your archetype."
+        )
+        st.markdown(f"**Success Rate:** {int(bm['success_score'] * 100)}%")
+        st.markdown(f"**Maturity:** {bm['maturity_level'].title()}")
+        st.markdown("---")
 
-        results = sorted(results, key=lambda x: x[1], reverse=True)
-        top5 = results[:5]
-
-        # ---- Display Top 5 ---
-        for bm, score in top5:
-            st.markdown(f"### {bm['name']}  — **Score: {score:.2f}**")
-            st.markdown(f"**Description:** {bm['description']}")
-            st.markdown(
-                f"**Fit quality:** Shares {len(set(bm['tags']) & set(archetype_tags))} strategic traits with your archetype."
-            )
-            st.markdown(f"**Success Rate:** {int(bm['success_score'] * 100)}%")
-            st.markdown(f"**Maturity:** {bm['maturity_level'].title()}")
-            st.markdown("---")
-
-        # ---- Show all models (Clean UI) ---
-        with st.expander("See all 70 business models"):
-            for bm in BUSINESS_MODELS:
-                st.markdown(f"#### {bm['name']}")
-                st.markdown(bm["description"])
-                st.caption(f"Tags: {', '.join(bm['tags'])}")
+    # -------------------------------
+    # Full list of all models (unchanged)
+    # -------------------------------
+    with st.expander("See all 70 business models"):
+        for bm in BUSINESS_MODELS:
+            st.markdown(f"#### {bm['name']}")
+            st.markdown(bm["description"])
+            st.caption(f"Tags: {', '.join(bm['tags'])}")
